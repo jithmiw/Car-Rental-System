@@ -32,7 +32,10 @@
                         <a class="nav-link active text-black fw-semibold" aria-current="page" href="">Reservations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="">My Account</a>
+                        <!-- My Profile Button trigger modal -->
+                        <a class="nav-link active text-black fw-semibold" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            My Profile
+                        </a>
                     </li>
                     <li class="nav-item">
                         <!-- Logout Button trigger modal -->
@@ -58,6 +61,62 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark">Logout</button>
                     <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sign Up Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex flex-column">
+                        <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">My Profile</h1>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="inputName">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputAddress" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="inputAddress">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="inputEmail">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="contactNo" class="form-label">Contact No</label>
+                            <input type="text" class="form-control" id="contactNo">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputNicNo" class="form-label">NIC No</label>
+                            <input type="text" class="form-control" id="inputNicNo">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputRegDate" class="form-label">Register Date</label>
+                            <input type="date" class="form-control disabled" id="inputRegDate" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="inputUsername">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="inputPassword">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="licenseFile" class="form-label">License Image</label>
+                            <input class="form-control" type="file" id="licenseFile">
+                        </div>
+                        <div class="modal-footer col-12 me-auto">
+                            <button type="submit" class="btn btn-dark">UPDATE</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -106,17 +165,17 @@
                         <a href="#" class="btn btn-outline-dark">DETAILS</a>
 
                         <!-- Reservation Button trigger modal -->
-                        <button type="button" class="btn btn-dark fw-semibold" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button type="button" class="btn btn-dark fw-semibold" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
                             MAKE RESERVATION
                         </button>
 
                         <!-- Reservation Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <div class="d-flex flex-column">
-                                            <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">Rent It Out</h1>
+                                            <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel1">Rent It Out</h1>
                                         </div>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
