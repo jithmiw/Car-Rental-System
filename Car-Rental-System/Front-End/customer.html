@@ -105,7 +105,60 @@
                     </div>
                     <div class="d-flex flex-row justify-content-evenly mb-3">
                         <a href="#" class="btn btn-outline-dark">DETAILS</a>
-                        <a href="#" class="btn btn-dark">MAKE RESERVATION</a>
+
+                        <!-- Reservation Button trigger modal -->
+                        <button type="button" class="btn btn-dark fw-semibold" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            MAKE RESERVATION
+                        </button>
+
+                        <!-- Reservation Modal -->
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="d-flex flex-column">
+                                            <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">Rent It Out</h1>
+                                        </div>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="pick-up-date1" class="form-label">Pick-up Date</label>
+                                                <input type="Date" class="form-control" id="pick-up-date1">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="return-date1" class="form-label">Return Date</label>
+                                                <input type="Date" class="form-control" id="return-date1">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="pick-up-time1" class="form-label">Pick-up Time</label>
+                                                <input type="Time" class="form-control" id="pick-up-time1">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="return-time1" class="form-label">Return Time</label>
+                                                <input type="Time" class="form-control" id="return-time1">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="pick-up-venue" class="form-label">Pick-up Venue</label>
+                                                <input type="text" class="form-control" id="pick-up-venue">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="bank-slip" class="form-label">Bank Slip Image</label>
+                                                <input type="file" class="form-control" id="bank-slip">
+                                            </div>
+                                            <div class="form-check" style="margin-left: 8px">
+                                                <input class="form-check-input" type="checkbox" value="" id="addDriver">
+                                                <label class="form-check-label" for="addDriver">Add Driver</label>
+                                            </div>
+                                            <div class="modal-footer col-12 me-auto">
+                                                <button type="submit" class="btn btn-dark">RENT NOW</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
