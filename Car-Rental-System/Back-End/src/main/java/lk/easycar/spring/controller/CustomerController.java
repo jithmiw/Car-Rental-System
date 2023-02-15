@@ -12,6 +12,6 @@ public class CustomerController {
     @PostMapping
     public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO dto) {
         System.out.println(dto.toString());
-        return new ResponseUtil("OK", "Successfully Added", null);
+        return new ResponseUtil(200, "Successfully Added", null);
     }
 }
