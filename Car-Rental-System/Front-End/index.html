@@ -60,6 +60,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <!--LOGIN FORM-->
                     <form>
                         <div class="mb-3">
                             <label for="enterUsername" class="form-label">Username</label>
@@ -89,38 +90,39 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="row g-3">
+                    <!--SIGN UP FORM-->
+                    <form id="customerForm" class="row g-3">
                         <div class="col-md-6">
                             <label for="inputName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="inputName">
+                            <input type="text" class="form-control" id="inputName" name="customer_name">
                         </div>
                         <div class="col-md-6">
                             <label for="inputAddress" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="inputAddress">
+                            <input type="text" class="form-control" id="inputAddress" name="address">
                         </div>
                         <div class="col-md-6">
                             <label for="inputEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputEmail">
+                            <input type="email" class="form-control" id="inputEmail" name="email">
                         </div>
                         <div class="col-md-6">
                             <label for="contactNo" class="form-label">Contact No</label>
-                            <input type="text" class="form-control" id="contactNo">
+                            <input type="text" class="form-control" id="contactNo" name="contact_no">
                         </div>
                         <div class="col-md-6">
                             <label for="inputNicNo" class="form-label">NIC No</label>
-                            <input type="text" class="form-control" id="inputNicNo">
+                            <input type="text" class="form-control" id="inputNicNo" name="nic_no">
                         </div>
                         <div class="col-md-6">
                             <label for="inputLicenseNo" class="form-label">License No</label>
-                            <input type="text" class="form-control" id="inputLicenseNo">
+                            <input type="text" class="form-control" id="inputLicenseNo" name="license_no">
                         </div>
                         <div class="col-md-6">
                             <label for="inputUsername" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="inputUsername">
+                            <input type="text" class="form-control" id="inputUsername" name="username">
                         </div>
                         <div class="col-md-6">
                             <label for="inputPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword">
+                            <input type="password" class="form-control" id="inputPassword" name="password">
                         </div>
                         <div class="col-md-6">
                             <label for="nicFile" class="form-label">NIC Image</label>
@@ -132,10 +134,10 @@
                         </div>
                         <div class="col-md-6">
                             <label for="inputRegDate" class="form-label">Register Date</label>
-                            <input type="date" class="form-control" id="inputRegDate" readonly>
+                            <input type="date" class="form-control" id="inputRegDate" name="register_date">
                         </div>
                         <div class="modal-footer col-12 me-auto pe-2">
-                            <button type="submit" class="btn btn-dark me-0">SIGN UP</button>
+                            <button id="saveCustomer" type="button" class="btn btn-dark me-0">SIGN UP</button>
                         </div>
                     </form>
                 </div>
@@ -161,6 +163,8 @@
         </div>
     </section>
 </main>
+<script src="assets/js/jquery-3.6.1.min.js"></script>
 <script src="./assets/js/bootstrap.min.js"></script>
+<script src="./assets/js/ui-js/index.js"></script>
 </body>
 </html>
