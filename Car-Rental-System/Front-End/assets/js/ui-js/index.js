@@ -1,3 +1,10 @@
+var now = new Date();
+var day = ("0" + now.getDate()).slice(-2);
+var month = ("0" + (now.getMonth() + 1)).slice(-2);
+var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+$('#inputRegDate').val(today);
+
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
 // button events
@@ -45,4 +52,9 @@ function uploadFiles() {
             console.log(err);
         }
     });
+    clearSignUpForm();
+}
+
+function clearSignUpForm(){
+    $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , #inputPassword, #nicFile, #licenseFile').val("");
 }
