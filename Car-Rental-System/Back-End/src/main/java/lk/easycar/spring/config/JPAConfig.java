@@ -22,5 +22,43 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement //AOP Usage
 @EnableJpaRepositories(basePackageClasses = {CustomerRepo.class})
+@PropertySource("classpath:application.properties")
 public class JPAConfig {
+
+    @Autowired
+    private Environment env;
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource ds, JpaVendorAdapter va) {
+        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+        factoryBean.setPackagesToScan(env.getRequiredProperty("pro.entity"));
+        factoryBean.setDataSource(ds);
+        factoryBean.setJpaVendorAdapter(va);
+        return factoryBean;
+    }
+
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource ds = new DriverManagerDataSource();
+        ds.setDriverClassName(env.getRequiredProperty("pro.driver"));
+        ds.setUrl(env.getRequiredProperty("pro.url"));
+        ds.setUsername(env.getRequiredProperty("pro.username"));
+        ds.setPassword(env.getRequiredProperty("pro.password"));
+        return ds;
+    }
+
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter() {
+        HibernateJpaVendorAdapter va = new HibernateJpaVendorAdapter();
+        va.setDatabasePlatform(env.getRequiredProperty("pro.dial"));
+        va.setDatabase(Database.MYSQL);
+        va.setGenerateDdl(true);
+        va.setShowSql(true);
+        return va;
+    }
+
+    @Bean
+    public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+        return new JpaTransactionManager(emf);
+    }
 }

@@ -1,6 +1,5 @@
 package lk.easycar.spring.entity;
 
-import lk.easycar.spring.dto.RentalDetail;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +30,6 @@ public class Customer {
     private String password;
     private Date register_date;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RentalDetail> rentalDetails;
 }

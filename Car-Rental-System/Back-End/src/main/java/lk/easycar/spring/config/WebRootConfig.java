@@ -1,6 +1,6 @@
 package lk.easycar.spring.config;
 
-import lk.easycar.spring.repo.impl.CustomerServiceImpl;
+import lk.easycar.spring.service.impl.CustomerServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
