@@ -15,16 +15,16 @@ import javax.transaction.Transactional;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    private CustomerRepo repo;
+    private CustomerRepo customerRepo;
     @Autowired
     private ModelMapper mapper;
 
     @Override
     public void saveCustomer(CustomerDTO dto) {
-        if (repo.existsById(dto.getNic_no())) {
-            throw new RuntimeException("Customer Already exists. Please enter another id..");
+        if (customerRepo.existsById(dto.getNic_no())) {
+            throw new RuntimeException("Customer Already Registered.");
         }
         Customer customer = mapper.map(dto, Customer.class);
-        repo.save(customer);
+        customerRepo.save(customer);
     }
 }
