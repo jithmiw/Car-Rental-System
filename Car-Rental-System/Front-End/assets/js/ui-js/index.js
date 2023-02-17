@@ -1,6 +1,13 @@
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
-// button events
+const password = $('#inputPassword');
+
+$('#toggleSignupPassword').click(function () {
+    const type = password.attr('type') === 'password' ? 'text' : 'password';
+    password.prop('type', type);
+    $(this).toggleClass('bi-eye');
+});
+
 // add customer
 $('#saveCustomer').click(function () {
     let formData = $('#customerForm').serialize();
@@ -11,6 +18,7 @@ $('#saveCustomer').click(function () {
         dataType: "json",
         success: function (res) {
             console.log(res);
+            uploadFiles();
             openCustomerHome(res.data);
         },
         error: function (error) {
@@ -18,11 +26,10 @@ $('#saveCustomer').click(function () {
             alert(JSON.parse(error.responseText).message);
         }
     });
-    uploadFiles();
 });
 
 function uploadFiles() {
-    var data = new FormData();
+    let data = new FormData();
     let nicFile = $("#nicFile")[0].files[0];
     let nicFileName = nicFile.name;
     let licenseFile = $("#licenseFile")[0].files[0];
@@ -39,7 +46,7 @@ function uploadFiles() {
         processData: false,
         data: data,
         success: function (res) {
-            // alert(res.message);
+            console.log(res.message);
         },
         error: function (err) {
             console.log(err);

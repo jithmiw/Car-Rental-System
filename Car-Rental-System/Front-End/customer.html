@@ -10,6 +10,7 @@
     <title>Easy Car Rental | My Account</title>
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
 <header>
@@ -79,44 +80,47 @@
                     <form class="row g-3">
                         <div class="col-md-6">
                             <label for="updateName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="updateName">
+                            <input type="text" class="form-control" id="updateName" name="customer_name" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="updateAddress" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="updateAddress">
+                            <input type="text" class="form-control" id="updateAddress" name="address">
                         </div>
                         <div class="col-md-6">
                             <label for="updateEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="updateEmail">
+                            <input type="email" class="form-control" id="updateEmail" name="email">
                         </div>
                         <div class="col-md-6">
-                            <label for="contactNo" class="form-label">Contact No</label>
-                            <input type="text" class="form-control" id="contactNo">
+                            <label for="updateContactNo" class="form-label">Contact No</label>
+                            <input type="text" class="form-control" id="updateContactNo" name="contact_no">
                         </div>
                         <div class="col-md-6">
                             <label for="updateNicNo" class="form-label">NIC No</label>
-                            <input type="text" class="form-control" id="updateNicNo">
+                            <input type="text" class="form-control" id="updateNicNo" name="nic-no" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="updateLicenseNo" class="form-label">License No</label>
-                            <input type="text" class="form-control" id="updateLicenseNo">
+                            <input type="text" class="form-control" id="updateLicenseNo" name="license_no">
                         </div>
                         <div class="col-md-6">
                             <label for="updateUsername" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="updateUsername">
+                            <input type="text" class="form-control" id="updateUsername" name="username">
                         </div>
                         <div class="col-md-6">
                             <label for="updatePassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="updatePassword">
+                            <div class="d-flex flex-row align-items-center">
+                                <input type="password" class="form-control me-2" id="updatePassword" name="password">
+                                <i class="bi bi-eye-slash" id="toggleUpdatePassword" style="cursor: pointer"></i>
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <label for="updateLicenseFile" class="form-label">License Image</label>
                             <input class="form-control" type="file" id="updateLicenseFile">
                         </div>
-                        <div class="col-md-6">
-                            <label for="updateRegDate" class="form-label">Register Date</label>
-                            <input type="date" class="form-control" id="updateRegDate" readonly>
-                        </div>
+<!--                        <div class="col-md-6">-->
+<!--                            <label for="updateRegDate" class="form-label">Register Date</label>-->
+<!--                            <input type="date" class="form-control" id="updateRegDate" readonly>-->
+<!--                        </div>-->
                         <div class="modal-footer col-12 me-auto pe-2">
                             <button type="button" class="btn btn-dark me-0">UPDATE</button>
                         </div>
@@ -228,5 +232,7 @@
     </section>
 </main>
 </body>
+<script src="assets/js/jquery-3.6.1.min.js"></script>
+<script src="./assets/js/ui-js/customer.js"></script>
 <script src="./assets/js/bootstrap.min.js"></script>
 </html>
