@@ -25,4 +25,5 @@ public class RentalDetailDTO {
     private String driver_status;
 
     private String customer_nic;
+    private String car_reg_no;
 }

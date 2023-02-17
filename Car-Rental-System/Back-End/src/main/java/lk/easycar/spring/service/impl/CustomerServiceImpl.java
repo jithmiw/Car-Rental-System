@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,9 +23,18 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void saveCustomer(CustomerDTO dto) {
         if (customerRepo.existsById(dto.getNic_no())) {
-            throw new RuntimeException("Customer Already Registered.");
+            throw new RuntimeException("Customer already registered");
         }
         Customer customer = mapper.map(dto, Customer.class);
         customerRepo.save(customer);
+    }
+
+    @Override
+    public CustomerDTO getCustomerDetails(String nic) {
+        if (customerRepo.existsById(nic)) {
+            return mapper.map(customerRepo.findById(nic).get(), CustomerDTO.class);
+        } else {
+            throw new RuntimeException("Something went wrong, Please try again later");
+        }
     }
 }

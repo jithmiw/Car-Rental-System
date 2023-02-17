@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 
@@ -19,6 +16,7 @@ import java.util.List;
 @Entity
 public class Customer {
     @Id
+    @Column(nullable = false)
     private String nic_no;
     private String license_no;
     private String customer_name;
@@ -28,7 +26,7 @@ public class Customer {
 
     private String username;
     private String password;
-    private Date register_date;
+    private Date reg_date;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RentalDetail> rentalDetails;

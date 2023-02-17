@@ -22,5 +22,5 @@ public class CustomerDTO {
 
     private String username;
     private String password;
-    private Date register_date;
+    private Date reg_date;
 }

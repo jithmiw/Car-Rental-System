@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -19,6 +16,7 @@ import java.sql.Time;
 @Entity
 public class RentalDetail {
     @Id
+    @Column(nullable = false)
     private String rental_id;
     private Date pick_up_date;
     private Date return_date;
@@ -30,6 +28,10 @@ public class RentalDetail {
     private String driver_status;
 
     @ManyToOne
-    @JoinColumn(name = "customer_nic")
+    @JoinColumn(name = "customer_nic", nullable = false)
     private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "car_reg_no", nullable = false)
+    private Car car;
 }
