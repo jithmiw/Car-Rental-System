@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,5 +22,5 @@ public class CustomerDTO {
 
     private String username;
     private String password;
-    private Date reg_date;
+    private LocalDate reg_date;
 }

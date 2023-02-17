@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,10 +15,10 @@ import java.sql.Time;
 public class RentalDetailDTO {
 
     private String rental_id;
-    private Date pick_up_date;
-    private Date return_date;
-    private Time pick_up_time;
-    private Time return_time;
+    private LocalDate pick_up_date;
+    private LocalDate return_date;
+    private LocalTime pick_up_time;
+    private LocalTime return_time;
     private String pick_up_venue;
     private String return_venue;
     private String rental_status;
