@@ -30,9 +30,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO getCustomerDetails(String nic) {
-        if (customerRepo.existsById(nic)) {
-            return mapper.map(customerRepo.findById(nic).get(), CustomerDTO.class);
+    public CustomerDTO getCustomerDetails(String id) {
+        if (customerRepo.existsById(id)) {
+            return mapper.map(customerRepo.findById(id).get(), CustomerDTO.class);
         } else {
             throw new RuntimeException("Something went wrong, Please try again later");
         }

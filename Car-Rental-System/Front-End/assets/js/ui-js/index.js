@@ -19,7 +19,7 @@ $('#saveCustomer').click(function () {
         success: function (res) {
             console.log(res);
             uploadFiles();
-            openCustomerHome(res.data);
+            openCustomerHome();
         },
         error: function (error) {
             console.log(JSON.parse(error.responseText));
@@ -54,7 +54,8 @@ function uploadFiles() {
     });
 }
 
-function openCustomerHome(data) {
+function openCustomerHome() {
+    localStorage.setItem("idValue", $('#inputNicNo').val());
     window.location.href = "customer.html";
 }
 

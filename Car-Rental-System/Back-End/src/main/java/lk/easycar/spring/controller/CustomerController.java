@@ -12,11 +12,23 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
 
     @Autowired
-    private CustomerService service;
+    private CustomerService customerService;
 
     @PostMapping
     public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO dto) {
-        service.saveCustomer(dto);
+        customerService.saveCustomer(dto);
         return new ResponseUtil(200, "Successfully Added", null);
+    }
+
+//    @GetMapping(path = "/customer_details/{id}")
+//    public ResponseUtil getCustomerDetails(@PathVariable String id) {
+//        CustomerDTO customerDTO = customerService.getCustomerDetails(id);
+//        return new ResponseUtil(200, "Done", customerDTO);
+//    }
+
+    @GetMapping(params = {"id"})
+    public ResponseUtil getCustomerDetails(@RequestParam String id) {
+        CustomerDTO customerDTO = customerService.getCustomerDetails(id);
+        return new ResponseUtil(200, "Done", customerDTO);
     }
 }

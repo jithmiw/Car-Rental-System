@@ -1,0 +1,22 @@
+let baseUrl = "http://localhost:8080/easycar-rental/";
+
+var id = localStorage.getItem("idValue");
+
+$('#my-profile').click(function () {
+    $.ajax({
+        url: baseUrl + "customer?id=" + id,
+        success: function (res) {
+            $("#updateName").val(res.data.customer_name);
+            $("#updateAddress").val(res.data.address);
+            $("#updateEmail").val(res.data.email);
+            $("#updateContactNo").val(res.data.contact_no);
+            $("#updateNicNo").val(res.data.nic_no);
+            $("#updateLicenseNo").val(res.data.license_no);
+            $("#updateUsername").val(res.data.username);
+            $("#updatePassword").val(res.data.password);
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+});
