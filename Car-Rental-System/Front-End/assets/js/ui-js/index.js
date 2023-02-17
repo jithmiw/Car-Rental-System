@@ -11,7 +11,7 @@ $('#saveCustomer').click(function () {
         dataType: "json",
         success: function (res) {
             console.log(res);
-            alert(res.message);
+            openCustomerHome(res.data);
         },
         error: function (error) {
             console.log(JSON.parse(error.responseText));
@@ -38,16 +38,19 @@ function uploadFiles() {
         contentType: false,
         processData: false,
         data: data,
-        success: function (resp) {
-            alert(resp.message);
+        success: function (res) {
+            // alert(res.message);
         },
         error: function (err) {
             console.log(err);
         }
     });
-    clearSignUpForm();
 }
 
-function clearSignUpForm(){
-    $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , #inputPassword, #nicFile, #licenseFile').val("");
+function openCustomerHome(data) {
+    window.location.href = "customer.html";
 }
+
+// function clearSignUpForm(){
+//     $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , #inputPassword, #nicFile, #licenseFile').val("");
+// }
