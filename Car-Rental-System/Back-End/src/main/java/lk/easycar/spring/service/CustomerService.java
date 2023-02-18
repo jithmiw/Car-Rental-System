@@ -6,4 +6,6 @@ public interface CustomerService {
     void saveCustomer(CustomerDTO dto);
 
     CustomerDTO getCustomerDetails(String nic);
+
+    CustomerDTO verifyCustomer(String username, String password);
 }

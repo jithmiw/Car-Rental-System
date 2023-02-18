@@ -62,14 +62,17 @@
                 </div>
                 <div class="modal-body">
                     <!--LOGIN FORM-->
-                    <form>
+                    <form id="loginForm">
                         <div class="mb-3">
                             <label for="enterUsername" class="form-label">Username</label>
                             <input type="text" class="form-control" id="enterUsername">
                         </div>
                         <div class="mb-3">
                             <label for="enterPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="enterPassword">
+                            <div class="d-flex flex-row align-items-center">
+                                <input type="password" class="form-control me-2" id="enterPassword">
+                                <i class="bi bi-eye-slash" id="toggleLoginPassword" style="cursor: pointer"></i>
+                            </div>
                         </div>
                         <div class="modal-footer col-12 me-auto pe-0">
                             <button type="submit" class="btn btn-dark me-0">LOGIN</button>

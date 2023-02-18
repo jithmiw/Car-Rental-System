@@ -1,12 +1,18 @@
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
-const password = $('#inputPassword');
-
 $('#toggleSignupPassword').click(function () {
-    const type = password.attr('type') === 'password' ? 'text' : 'password';
-    password.prop('type', type);
-    $(this).toggleClass('bi-eye');
+    togglePassword($('#inputPassword'));
 });
+
+$('#toggleLoginPassword').click(function () {
+    togglePassword($('#enterPassword'));
+});
+
+function togglePassword(value) {
+    const type = value.attr('type') === 'password' ? 'text' : 'password';
+    value.prop('type', type);
+    $(this).toggleClass('bi-eye');
+}
 
 // add customer
 $('#saveCustomer').click(function () {

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -17,6 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerRepo customerRepo;
+
     @Autowired
     private ModelMapper mapper;
 
@@ -35,6 +35,16 @@ public class CustomerServiceImpl implements CustomerService {
             return mapper.map(customerRepo.findById(id).get(), CustomerDTO.class);
         } else {
             throw new RuntimeException("Something went wrong, Please try again later");
+        }
+    }
+
+    @Override
+    public CustomerDTO verifyCustomer(String username, String password) {
+        Customer customer = customerRepo.findCustomerByUsernameAndPassword(username, password);
+        if (!(customer == null)) {
+            return mapper.map(customer, CustomerDTO.class);
+        } else {
+            return null;
         }
     }
 }
