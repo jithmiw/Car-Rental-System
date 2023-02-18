@@ -6,26 +6,25 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @ToString
 @Entity
-public class DriverSchedule {
+public class PaymentDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long schedule_id;
-    private LocalDate start_date;
-    private LocalTime start_time;
-    private LocalDate end_date;
-    private LocalTime end_time;
-
-    @ManyToOne
-    @JoinColumn(name = "driver_nic", nullable = false)
-    private Driver driver;
+    private String payment_id;
+    private LocalDate payment_date;
+    private BigDecimal rental_fee;
+    private BigDecimal driver_fee;
+    private BigDecimal damage_fee;
+    private BigDecimal extra_km_fee;
+    private BigDecimal returned_amount;
+    private BigDecimal total_payment;
+    private int extra_km;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "rental_id")

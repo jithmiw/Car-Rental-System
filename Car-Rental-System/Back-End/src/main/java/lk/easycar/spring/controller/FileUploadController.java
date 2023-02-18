@@ -1,9 +1,7 @@
 package lk.easycar.spring.controller;
 
 import lk.easycar.spring.util.ResponseUtil;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,7 +17,7 @@ public class FileUploadController {
 
     private static final ArrayList<String> allImages = new ArrayList<>();
 
-//    formalized end-point to upload files
+    //    formalized end-point to upload files
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil uploadFile(@RequestPart("file") MultipartFile[] files) {
         try {
@@ -35,9 +33,9 @@ public class FileUploadController {
             }
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
-            return new ResponseUtil(500, "Sign Up Failed. Please Try Again.", null );
+            return new ResponseUtil(500, "Sign Up Failed. Please Try Again.", null);
         }
-        return new ResponseUtil(200, "Signed Up Successfully.", null );
+        return new ResponseUtil(200, "Signed Up Successfully.", null);
     }
 
 //    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

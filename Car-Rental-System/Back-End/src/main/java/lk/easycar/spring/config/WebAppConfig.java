@@ -16,13 +16,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan(basePackageClasses = {CustomerController.class, AppWideExceptionHandler.class})
 public class WebAppConfig implements WebMvcConfigurer {
 
-//    configure MultipartResolver
+    //    configure MultipartResolver
     @Bean
     public MultipartResolver multipartResolver() {
         return new StandardServletMultipartResolver();
     }
 
-//    allocate the url and location for uploaded resources
+    //    allocate the url and location for uploaded resources
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/uploads/**").addResourceLocations("/uploads/");

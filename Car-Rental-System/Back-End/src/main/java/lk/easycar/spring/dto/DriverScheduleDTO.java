@@ -21,4 +21,5 @@ public class DriverScheduleDTO {
     private LocalTime end_time;
 
     private String driver_nic;
+    private RentalDetailDTO rentalDetail;
 }
