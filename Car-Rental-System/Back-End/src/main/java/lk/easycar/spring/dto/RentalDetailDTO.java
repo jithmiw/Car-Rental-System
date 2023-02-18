@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @ToString
 public class RentalDetailDTO {
 
-    private int rental_id;
+    private String rental_id;
     private LocalDate pick_up_date;
     private LocalDate return_date;
     private LocalTime pick_up_time;

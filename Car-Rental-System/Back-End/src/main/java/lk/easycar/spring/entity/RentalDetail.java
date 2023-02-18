@@ -19,8 +19,8 @@ import java.time.LocalTime;
 @Entity
 public class RentalDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int rental_id;
+    @Column(nullable = false)
+    private String rental_id;
     private LocalDate pick_up_date;
     private LocalDate return_date;
     private LocalTime pick_up_time;
