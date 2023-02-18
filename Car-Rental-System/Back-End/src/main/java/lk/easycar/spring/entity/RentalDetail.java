@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -18,8 +19,8 @@ import java.time.LocalTime;
 @Entity
 public class RentalDetail {
     @Id
-    @Column(nullable = false)
-    private String rental_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int rental_id;
     private LocalDate pick_up_date;
     private LocalDate return_date;
     private LocalTime pick_up_time;
@@ -28,6 +29,8 @@ public class RentalDetail {
     private String return_venue;
     private String rental_status;
     private String driver_status;
+    @CreationTimestamp
+    private LocalDate reserved_date;
 
     @ManyToOne
     @JoinColumn(name = "customer_nic", nullable = false)
