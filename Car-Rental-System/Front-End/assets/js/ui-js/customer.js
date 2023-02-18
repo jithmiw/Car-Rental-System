@@ -1,6 +1,16 @@
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
-var id = localStorage.getItem("idValue");
+$("#toggleUpdatePassword").click(function () {
+    togglePassword($("#updatePassword"));
+});
+
+function togglePassword(value) {
+    const type = value.attr("type") === "password" ? "text" : "password";
+    value.prop("type", type);
+    $(this).toggleClass("bi-eye");
+}
+
+let id = localStorage.getItem("idValue");
 
 $('#my-profile').click(function () {
     $.ajax({
