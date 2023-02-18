@@ -12,6 +12,65 @@
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+<header>
+    <!--NAVIGATION BAR-->
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-white">
+        <div class="container-fluid">
+            <a class="navbar-brand text-black fw-bolder">
+                <img src="assets/img/easycar-logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                Easy Car
+            </a>
+            <button class="navbar-toggler bg-black" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="#">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="">Reservations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-black fw-semibold" aria-current="page" target="" href="">Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="">Drivers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="">Payments</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Logout Button trigger modal -->
+                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                            Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Logout Modal -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="logoutModalLabel">Logout</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are sure you want to logout?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark">Logout</button>
+                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 </body>
 </html>
