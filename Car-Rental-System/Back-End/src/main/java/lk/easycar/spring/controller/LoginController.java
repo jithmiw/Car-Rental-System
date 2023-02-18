@@ -1,5 +1,6 @@
 package lk.easycar.spring.controller;
 
+import lk.easycar.spring.dto.AdminDTO;
 import lk.easycar.spring.dto.CustomerDTO;
 import lk.easycar.spring.dto.UserDTO;
 import lk.easycar.spring.service.CustomerService;
