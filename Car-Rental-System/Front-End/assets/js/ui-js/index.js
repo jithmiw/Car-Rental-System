@@ -51,8 +51,9 @@ $("#saveCustomer").click(function () {
         dataType: "json",
         success: function (res) {
             console.log(res);
-            uploadFiles();
-            openCustomerHome();
+            if (res.status === 200){
+                uploadFiles();
+            }
         },
         error: function (error) {
             console.log(JSON.parse(error.responseText));
@@ -64,12 +65,10 @@ $("#saveCustomer").click(function () {
 function uploadFiles() {
     let data = new FormData();
     let nicFile = $("#nicFile")[0].files[0];
-    let nicFileName = nicFile.name;
     let licenseFile = $("#licenseFile")[0].files[0];
-    let licenseFileName = nicFile.name;
 
-    data.append("file", nicFile, nicFileName);
-    data.append("file", licenseFile, licenseFileName);
+    data.append("file", nicFile, nicFile.name);
+    data.append("file", licenseFile, licenseFile.name);
 
     $.ajax({
         url: baseUrl + "files/upload",
@@ -80,6 +79,9 @@ function uploadFiles() {
         data: data,
         success: function (res) {
             console.log(res.message);
+            if (res.status === 200){
+                openCustomerHome();
+            }
         },
         error: function (err) {
             console.log(err);

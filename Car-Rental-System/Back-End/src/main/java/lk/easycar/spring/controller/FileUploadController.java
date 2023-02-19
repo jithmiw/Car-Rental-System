@@ -22,21 +22,17 @@ public class FileUploadController {
     @Autowired
     CarImageDetailService carImageDetailService;
 
-    private static final ArrayList<String> allImages = new ArrayList<>();
-
     //    formalized end-point to upload files
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil uploadFile(@RequestPart("file") MultipartFile[] files) {
         try {
             String projectPath = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getAbsolutePath();
             File uploadsDir = new File(projectPath + "/uploads");
-            System.out.println(projectPath);
             uploadsDir.mkdir();
+            File customersDir = new File(uploadsDir +  "/customers");
+            customersDir.mkdir();
             for (MultipartFile file : files) {
-                file.transferTo(new File(uploadsDir.getAbsolutePath() + "/" + file.getOriginalFilename()));
-
-                //save the path of the uploaded image in the database
-//                allImages.add("uploads/" + file.getOriginalFilename());
+                file.transferTo(new File(customersDir.getAbsolutePath() + "/" + file.getOriginalFilename()));
             }
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
@@ -65,9 +61,4 @@ public class FileUploadController {
         }
         return new ResponseUtil(200, "Car Added Successfully.", null);
     }
-
-//    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity getAllImagesFromDatabase() {
-//        return new ResponseEntity(allImages, HttpStatus.OK);
-//    }
 }
