@@ -96,11 +96,20 @@
                         </div>
                         <div class="col-md-6">
                             <label for="inputType" class="form-label">Type</label>
-                            <input type="text" class="form-control" id="inputType" name="type">
+                            <select id="inputType" class="form-select" name="type">
+                                <option selected>Choose Type</option>
+                                <option>General</option>
+                                <option>Premium</option>
+                                <option>Luxury</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="inputTransType" class="form-label">Transmission Type</label>
-                            <input type="text" class="form-control" id="inputTransType" name="transmission_type">
+                            <select id="inputTransType" class="form-select" name="transmission_type">
+                                <option selected>Choose Transmission Type</option>
+                                <option>Manual</option>
+                                <option>Auto</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="inputColor" class="form-label">Color</label>
@@ -112,7 +121,11 @@
                         </div>
                         <div class="col-md-6">
                             <label for="inputFuelType" class="form-label">Fuel Type</label>
-                            <input type="text" class="form-control" id="inputFuelType" name="fuel_type">
+                            <select id="inputFuelType" class="form-select" name="fuel_type">
+                                <option selected>Choose Fuel Type</option>
+                                <option>Petrol</option>
+                                <option>Diesel</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <label for="inputDailyRate" class="form-label">Daily Rate(Rs.)</label>
@@ -139,6 +152,14 @@
                             <input type="number" class="form-control" id="inputLdwPayment" name="ldw_payment">
                         </div>
                         <div class="col-md-6">
+                            <label for="inputStatus" class="form-label">Available or Not Available?</label>
+                            <select id="inputStatus" class="form-select" name="status">
+                                <option selected>Choose Available or Not Available?</option>
+                                <option>Available</option>
+                                <option>Not Available</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
                             <label for="inputFrontView" class="form-label">Front View Image</label>
                             <input class="form-control" type="file" id="inputFrontView">
                         </div>
@@ -155,9 +176,9 @@
                             <input class="form-control" type="file" id="inputInterior">
                         </div>
                         <div class="modal-footer col-12 me-auto pe-2">
-                            <button type="button" class="btn btn-dark me-0">ADD</button>
-                            <button type="button" class="btn btn-dark me-0">UPDATE</button>
-                            <button type="button" class="btn btn-dark me-0">DELETE</button>
+                            <button type="button" class="btn btn-dark">ADD</button>
+                            <button type="button" class="btn text-white" style="background-color: #7f7f7f;">UPDATE</button>
+                            <button type="button" class="btn me-0" style="background-color: #c2c2c2;">DELETE</button>
                         </div>
                     </form>
                 </div>
