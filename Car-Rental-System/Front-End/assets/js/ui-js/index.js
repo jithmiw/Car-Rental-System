@@ -82,8 +82,8 @@ function uploadFiles() {
         success: function (res) {
             console.log(res.message);
             if (res.status === 200){
-                clearSignUpForm();
                 openCustomerHome();
+                clearSignUpForm();
             }
         },
         error: function (err) {
