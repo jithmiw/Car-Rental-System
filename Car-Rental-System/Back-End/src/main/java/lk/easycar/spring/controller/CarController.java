@@ -17,6 +17,6 @@ public class CarController {
     @PostMapping
     public ResponseUtil saveCustomer(@ModelAttribute CarDTO dto) {
         carService.saveCar(dto);
-        return new ResponseUtil(200, "Successfully Added", null);
+        return new ResponseUtil(200, "Car Added Successfully", null);
     }
 }
