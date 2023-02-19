@@ -66,9 +66,11 @@ function uploadFiles() {
     let data = new FormData();
     let nicFile = $("#nicFile")[0].files[0];
     let licenseFile = $("#licenseFile")[0].files[0];
+    let nicNo = $("#inputNicNo").val();
 
     data.append("file", nicFile, nicFile.name);
     data.append("file", licenseFile, licenseFile.name);
+    data.append("customerNic", nicNo);
 
     $.ajax({
         url: baseUrl + "files/upload",
@@ -80,6 +82,7 @@ function uploadFiles() {
         success: function (res) {
             console.log(res.message);
             if (res.status === 200){
+                clearSignUpForm();
                 openCustomerHome();
             }
         },
@@ -99,6 +102,6 @@ function openCustomerHome() {
     window.location.href = "customer.html";
 }
 
-// function clearSignUpForm(){
-//     $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , #inputPassword, #nicFile, #licenseFile').val("");
-// }
+function clearSignUpForm(){
+    $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , #inputPassword, #nicFile, #licenseFile').val("");
+}

@@ -17,7 +17,7 @@ public class CustomerController {
     @PostMapping
     public ResponseUtil saveCustomer(@ModelAttribute CustomerDTO dto) {
         customerService.saveCustomer(dto);
-        return new ResponseUtil(200, "Successfully Added", null);
+        return new ResponseUtil(200, "Customer added successfully", null);
     }
 
 //    @GetMapping(path = "/customer_details/{id}")
@@ -29,6 +29,6 @@ public class CustomerController {
     @GetMapping(params = {"id"})
     public ResponseUtil getCustomerDetails(@RequestParam String id) {
         CustomerDTO customerDTO = customerService.getCustomerDetails(id);
-        return new ResponseUtil(200, "Done", customerDTO);
+        return new ResponseUtil(200, "Customer exists", customerDTO);
     }
 }

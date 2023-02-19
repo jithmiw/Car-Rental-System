@@ -29,6 +29,8 @@ public class Customer {
     private String password;
     @CreationTimestamp
     private LocalDate reg_date;
+    private String license_img;
+    private String nic_img;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RentalDetail> rentalDetails;
