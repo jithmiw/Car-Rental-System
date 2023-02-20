@@ -47,10 +47,10 @@ function loadCarImages(reg_no, newCard) {
     $.ajax({
         url: baseUrl + "carImageDetail/" + reg_no,
         success: function (res) {
-            newCard.find('#img-1').attr("src", baseUrl + res.data.image_one);
-            newCard.find('#img-2').attr("src", baseUrl + res.data.image_two);
-            newCard.find('#img-3').attr("src", baseUrl + res.data.image_three);
-            newCard.find('#img-4').attr("src", baseUrl + res.data.image_four);
+            newCard.find('.carousel-inner > div:nth-child(1) > img').attr("src", baseUrl + res.data.image_one);
+            newCard.find('.carousel-inner > div:nth-child(2) > img').attr("src", baseUrl + res.data.image_two);
+            newCard.find('.carousel-inner > div:nth-child(3) > img').attr("src", baseUrl + res.data.image_three);
+            newCard.find('.carousel-inner > div:nth-child(4) > img').attr("src", baseUrl + res.data.image_four);
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);
