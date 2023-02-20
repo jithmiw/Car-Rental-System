@@ -23,6 +23,7 @@ function getAllCars() {
 
                 var newCard = card.clone();
                 loadCarImages(c.reg_no, newCard);
+                newCard.find('.modal-title').text(brand);
                 newCard.find('.card-header').text(type);
                 newCard.find('.card-title').text(brand);
                 newCard.find('#transType').text("Transmission Type : " + transType);
@@ -47,6 +48,7 @@ function loadCarImages(reg_no, newCard) {
     $.ajax({
         url: baseUrl + "carImageDetail/" + reg_no,
         success: function (res) {
+            newCard.find('.card-img-top').attr("src", baseUrl + res.data.image_one);
             newCard.find('.carousel-inner > div:nth-child(1) > img').attr("src", baseUrl + res.data.image_one);
             newCard.find('.carousel-inner > div:nth-child(2) > img').attr("src", baseUrl + res.data.image_two);
             newCard.find('.carousel-inner > div:nth-child(3) > img').attr("src", baseUrl + res.data.image_three);
