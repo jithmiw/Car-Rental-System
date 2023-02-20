@@ -32,7 +32,7 @@
                 <span class="fs-1 fw-bold">Our Vehicle Fleet</span>
                 <span>We provide our customers with the most incredible driving emotions.</span>
             </div>
-            <div class="container-fluid d-flex flex-row flex-wrap justify-content-evenly">
+            <div id="carCards" class="container-fluid d-flex flex-row flex-wrap justify-content-evenly">
                 <div class="card mb-5" style="width: 20rem;">
                     <div class="card-header fw-bold">Luxury</div>
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -58,8 +58,18 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">BMW i8</h5>
+                        <span id="transType" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Transmission Type :</span>
+                        <span id="noOfPassengers" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Passengers :</span>
+                        <span id="fuelType" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Fuel Type :</span>
+                        <span id="freeKmDay" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Free km for a Day :</span>
+                        <span id="freeKmMonth" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Free km for a Month :</span>
                     </div>
-                    <a href="#" class="btn btn-dark m-2">DETAILS</a>
+                    <ul class="list-group list-group-flush">
+                        <li id="dailyRate" class="list-group-item bg-dark text-white">Daily Rate :</li>
+                        <li id="monthlyRate" class="list-group-item" style="background-color: #d3d3d3">Monthly Rate :</li>
+                        <li id="extraKmPrice" class="list-group-item" style="background-color: #e3e3e3">Price per Extra km :</li>
+                        <li id="ldwPayment" class="list-group-item" style="background-color: #f3f3f3">Loss Damage Waiver Payment :</li>
+                    </ul>
                 </div>
             </div>
         </div>
