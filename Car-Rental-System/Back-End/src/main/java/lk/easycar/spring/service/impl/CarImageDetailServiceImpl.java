@@ -25,4 +25,13 @@ public class CarImageDetailServiceImpl implements CarImageDetailService {
         CarImageDetail carImageDetail = mapper.map(dto, CarImageDetail.class);
         carImageDetailRepo.save(carImageDetail);
     }
+
+    @Override
+    public CarImageDetailDTO getCarImageDetailByRegNo(String reg_no) {
+        CarImageDetail carImageDetail = carImageDetailRepo.findCarImageDetailByReg_no(reg_no);
+        if (carImageDetail != null) {
+            return mapper.map(carImageDetail, CarImageDetailDTO.class);
+        }
+        return null;
+    }
 }
