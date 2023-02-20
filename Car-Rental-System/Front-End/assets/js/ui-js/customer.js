@@ -10,11 +10,11 @@ function togglePassword(value) {
     $(this).toggleClass("bi-eye");
 }
 
-let id = localStorage.getItem("idValue");
+let nic = localStorage.getItem("nicValue");
 
 $('#my-profile').click(function () {
     $.ajax({
-        url: baseUrl + "customer?id=" + id,
+        url: baseUrl + "customer/" + nic,
         success: function (res) {
             $("#updateName").val(res.data.customer_name);
             $("#updateAddress").val(res.data.address);

@@ -22,6 +22,6 @@ public class CustomerDTO {
     private String username;
     private String password;
     private LocalDate reg_date;
-    private String license_img;
     private String nic_img;
+    private String license_img;
 }

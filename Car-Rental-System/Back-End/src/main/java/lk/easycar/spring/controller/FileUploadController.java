@@ -37,7 +37,7 @@ public class FileUploadController {
             for (MultipartFile file : files) {
                 file.transferTo(new File(customersDir.getAbsolutePath() + "/" + file.getOriginalFilename()));
             }
-            CustomerDTO customer = customerService.getCustomerDetails(customerNic);
+            CustomerDTO customer = customerService.getCustomerByNic(customerNic);
             customer.setNic_img("uploads/customers/" + files[0].getOriginalFilename());
             customer.setLicense_img("uploads/customers/" + files[1].getOriginalFilename());
         } catch (URISyntaxException | IOException e) {

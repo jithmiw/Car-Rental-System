@@ -92,13 +92,13 @@ function uploadFiles() {
     });
 }
 
-function loginCustomer(id) {
-    localStorage.setItem("idValue", id);
+function loginCustomer(nic) {
+    localStorage.setItem("nicValue", nic);
     window.location.href = "customer.html";
 }
 
 function openCustomerHome() {
-    localStorage.setItem("idValue", $('#inputNicNo').val());
+    localStorage.setItem("nicValue", $('#inputNicNo').val());
     window.location.href = "customer.html";
 }
 

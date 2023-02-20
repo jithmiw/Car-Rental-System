@@ -26,9 +26,9 @@ public class CustomerController {
 //        return new ResponseUtil(200, "Done", customerDTO);
 //    }
 
-    @GetMapping(params = {"id"})
-    public ResponseUtil getCustomerDetails(@RequestParam String id) {
-        CustomerDTO customerDTO = customerService.getCustomerDetails(id);
+    @GetMapping(path = "/{nic}")
+    public ResponseUtil getCustomerByNic(@PathVariable String nic) {
+        CustomerDTO customerDTO = customerService.getCustomerByNic(nic);
         return new ResponseUtil(200, "Customer exists", customerDTO);
     }
 }
