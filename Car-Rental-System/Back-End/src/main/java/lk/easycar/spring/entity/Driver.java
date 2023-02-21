@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -31,5 +32,5 @@ public class Driver {
     private LocalDate reg_date;
 
     @OneToMany(mappedBy = "driver", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DriverSchedule> driverSchedules;
+    private List<DriverSchedule> driverSchedules = new ArrayList<>();
 }

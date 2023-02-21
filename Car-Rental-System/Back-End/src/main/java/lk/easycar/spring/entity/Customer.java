@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -33,5 +34,5 @@ public class Customer {
     private String license_img;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RentalDetail> rentalDetails;
+    private List<RentalDetail> rentalDetails = new ArrayList<>();
 }

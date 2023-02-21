@@ -51,3 +51,54 @@ function uploadCarImages() {
         }
     });
 }
+
+// update car
+$('#updateCar').click(function () {
+    let regNo = $('#inputRegNo').val();
+    let brand = $('#inputBrand').val();
+    let type = $('#inputType').val();
+    let transType = $('#inputTransType').val();
+    let color = $('#inputColor').val();
+    let passengers = $('#inputNoOfPassengers').val();
+    let fuelType = $('#inputFuelType').val();
+    let dailyRate = $('#inputDailyRate').val();
+    let monthlyRate = $('#inputMonthlyRate').val();
+    let extraKmPrice = $('#inputExtraKmPrice').val();
+    let freeKmDay = $('#inputFreeKmDay').val();
+    let freeKmMonth = $('#inputFreeKmMonth').val();
+    let ldwPayment = $('#inputLdwPayment').val();
+    let status = $('#inputStatus').val();
+
+    var carOb = {
+        reg_no: regNo,
+        brand: brand,
+        type: type,
+        transmission_type: transType,
+        color: color,
+        no_of_passengers: passengers,
+        fuel_type: fuelType,
+        daily_rate: dailyRate,
+        monthly_rate: monthlyRate,
+        free_km_day: freeKmDay,
+        free_km_month: freeKmMonth,
+        extra_km_price: extraKmPrice,
+        ldw_payment: ldwPayment,
+        status: status
+    }
+    $.ajax({
+        url: baseUrl + "car",
+        method: "put",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(carOb),
+        success: function (res) {
+            if (res.status === 200){
+                uploadCarImages();
+            }
+            alert(res.message);
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+});

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -31,5 +32,5 @@ public class Car {
     private String status;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RentalDetail> rentalDetails;
+    private List<RentalDetail> rentalDetails = new ArrayList<>();
 }
