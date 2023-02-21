@@ -3,12 +3,14 @@ let baseUrl = "http://localhost:8080/easycar-rental/";
 getAllCars();
 
 function getAllCars() {
+    let carCount = 0;
     $.ajax({
         url: baseUrl + "car",
         success: function (res) {
             var card = $(".card").clone();
             $('#carCards').empty();
             for (let c of res.data) {
+                carCount++;
                 let brand = c.brand;
                 let type = c.type;
                 let transType = c.transmission_type;
@@ -22,6 +24,11 @@ function getAllCars() {
                 let ldwPayment = c.ldw_payment;
 
                 var newCard = card.clone();
+                newCard.find('.modal').attr("id", "seeImgsModal"+carCount);
+                newCard.find('.btn-img').attr("data-bs-target", "#seeImgsModal"+carCount);
+                newCard.find('.carousel').attr("id", "carCarousel"+carCount);
+                newCard.find('.carousel-control-prev').attr("data-bs-target", "#carCarousel" + carCount);
+                newCard.find('.carousel-control-next').attr("data-bs-target", "#carCarousel" + carCount);
                 loadCarImages(c.reg_no, newCard);
                 newCard.find('.modal-title').text(brand);
                 newCard.find('.card-header').text(type);
