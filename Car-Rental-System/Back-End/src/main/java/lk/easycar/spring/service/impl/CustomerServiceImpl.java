@@ -59,8 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerRepo.findCustomerByUsernameAndPassword(username, password);
         if (!(customer == null)) {
             return mapper.map(customer, CustomerDTO.class);
-        } else {
-            return null;
         }
+        return null;
     }
 }
