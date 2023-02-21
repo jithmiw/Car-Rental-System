@@ -1,6 +1,8 @@
 package lk.easycar.spring.service.impl;
 
+import lk.easycar.spring.dto.CarDTO;
 import lk.easycar.spring.dto.CustomerDTO;
+import lk.easycar.spring.entity.Car;
 import lk.easycar.spring.entity.Customer;
 import lk.easycar.spring.repo.CustomerRepo;
 import lk.easycar.spring.service.CustomerService;
@@ -27,6 +29,22 @@ public class CustomerServiceImpl implements CustomerService {
         }
         Customer customer = mapper.map(dto, Customer.class);
         customerRepo.save(customer);
+    }
+
+    @Override
+    public void updateCustomer(CustomerDTO dto) {
+        if (!customerRepo.existsById(dto.getNic_no())) {
+            throw new RuntimeException("No such a customer, Please enter valid nic no");
+        }
+        customerRepo.save(mapper.map(dto, Customer.class));
+    }
+
+    @Override
+    public void deleteCustomer(String nic_no) {
+        if (!customerRepo.existsById(nic_no)) {
+            throw new RuntimeException("No such a customer, Please enter valid nic no");
+        }
+        customerRepo.deleteById(nic_no);
     }
 
     @Override

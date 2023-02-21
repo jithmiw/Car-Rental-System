@@ -20,11 +20,17 @@ public class CustomerController {
         return new ResponseUtil(200, "Customer added successfully", null);
     }
 
-//    @GetMapping(path = "/customer_details/{id}")
-//    public ResponseUtil getCustomerDetails(@PathVariable String id) {
-//        CustomerDTO customerDTO = customerService.getCustomerDetails(id);
-//        return new ResponseUtil(200, "Done", customerDTO);
-//    }
+    @PutMapping
+    public ResponseUtil updateCustomer(@RequestBody CustomerDTO dto) {
+        customerService.updateCustomer(dto);
+        return new ResponseUtil(200, "Nic no: " + dto.getNic_no() + " customer updated successfully", null);
+    }
+
+    @DeleteMapping(params = {"nic_no"})
+    public ResponseUtil deleteCustomer(@RequestParam String nic_no) {
+        customerService.deleteCustomer(nic_no);
+        return new ResponseUtil(200, "Nic no: " + nic_no + " customer deleted successfully", null);
+    }
 
     @GetMapping(path = "/{nic}")
     public ResponseUtil getCustomerByNic(@PathVariable String nic) {
