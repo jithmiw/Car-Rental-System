@@ -12,6 +12,7 @@ $("#saveCar").click(function () {
             console.log(res);
             if (res.status===200){
                 uploadCarImages();
+                clearManageCarsForm();
             }
             alert(res.message);
         },
@@ -94,6 +95,7 @@ $('#updateCar').click(function () {
         success: function (res) {
             if (res.status === 200){
                 uploadCarImages();
+                clearManageCarsForm();
             }
             alert(res.message);
         },
@@ -102,3 +104,26 @@ $('#updateCar').click(function () {
         }
     });
 });
+
+// delete car
+$('#deleteCar').click(function () {
+    let regNo = $('#inputRegNo').val();
+
+    $.ajax({
+        url: baseUrl + "car?reg_no=" + regNo,
+        method: "delete",
+        success: function (res) {
+            alert(res.message);
+            clearManageCarsForm()
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+});
+
+function clearManageCarsForm() {
+    $('#inputRegNo ,#inputBrand, #inputType, #inputTransType, #inputColor, #inputNoOfPassengers, #inputFuelType, ' +
+        '#inputDailyRate, #inputMonthlyRate, #inputExtraKmPrice, #inputFreeKmDay, #inputFreeKmMonth, #inputLdwPayment, ' +
+        '#inputStatus, #inputFrontView, #inputBackView, #inputSideView, #inputInterior').val("");
+}

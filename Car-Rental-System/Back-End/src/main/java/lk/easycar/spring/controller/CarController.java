@@ -20,16 +20,16 @@ public class CarController {
         return new ResponseUtil(200, "Car added successfully", null);
     }
 
-    @DeleteMapping(params = {"reg_no"})
-    public ResponseUtil deleteCar(@RequestParam String reg_no) {
-        carService.deleteCar(reg_no);
-        return new ResponseUtil(200, "Reg no: " + reg_no + " car deleted successfully", null);
-    }
-
     @PutMapping
     public ResponseUtil updateCar(@RequestBody CarDTO dto) {
         carService.updateCar(dto);
         return new ResponseUtil(200, "Reg no: " + dto.getReg_no() + " car updated successfully", null);
+    }
+
+    @DeleteMapping(params = {"reg_no"})
+    public ResponseUtil deleteCar(@RequestParam String reg_no) {
+        carService.deleteCar(reg_no);
+        return new ResponseUtil(200, "Reg no: " + reg_no + " car deleted successfully", null);
     }
 
     @GetMapping

@@ -103,5 +103,6 @@ function openCustomerHome() {
 }
 
 function clearSignUpForm(){
-    $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , #inputPassword, #nicFile, #licenseFile').val("");
+    $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , ' +
+        '#inputPassword, #nicFile, #licenseFile').val("");
 }
