@@ -28,13 +28,29 @@ public class CarServiceImpl implements CarService {
         if (carRepo.existsById(dto.getReg_no())) {
             throw new RuntimeException("Car already registered");
         }
-        Car car = mapper.map(dto, Car.class);
-        carRepo.save(car);
+        carRepo.save(mapper.map(dto, Car.class));
+    }
+
+    @Override
+    public void updateCar(CarDTO dto) {
+        if (!carRepo.existsById(dto.getReg_no())) {
+            throw new RuntimeException("No such a car, Please enter valid registration no");
+        }
+        carRepo.save(mapper.map(dto, Car.class));
+    }
+
+    @Override
+    public void deleteCar(String reg_no) {
+        if (!carRepo.existsById(reg_no)) {
+            throw new RuntimeException("No such a car, Please enter valid registration no");
+        }
+        carRepo.deleteById(reg_no);
     }
 
     @Override
     public ArrayList<CarDTO> getAllCars() {
         List<Car> all = carRepo.findAll();
-        return mapper.map(all, new TypeToken<ArrayList<CarDTO>>() {}.getType());
+        return mapper.map(all, new TypeToken<ArrayList<CarDTO>>() {
+        }.getType());
     }
 }

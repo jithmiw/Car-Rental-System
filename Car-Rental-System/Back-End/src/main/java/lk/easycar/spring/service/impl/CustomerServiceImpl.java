@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDTO getCustomerByNic(String nic) {
         Customer customer = customerRepo.findCustomerByNic_no(nic);
-        if (customer!=null){
+        if (customer != null) {
             return mapper.map(customer, CustomerDTO.class);
         }
         return null;
