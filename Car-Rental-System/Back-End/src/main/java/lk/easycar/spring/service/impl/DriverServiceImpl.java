@@ -20,6 +20,41 @@ public class DriverServiceImpl implements DriverService {
     @Autowired
     private ModelMapper mapper;
 
+
+    @Override
+    public void saveDriver(DriverDTO dto) {
+        if (driverRepo.existsById(dto.getNic_no())) {
+            throw new RuntimeException("Driver already registered");
+        }
+        Driver driver = mapper.map(dto, Driver.class);
+        driverRepo.save(driver);
+    }
+
+    @Override
+    public void updateDriver(DriverDTO dto) {
+        if (!driverRepo.existsById(dto.getNic_no())) {
+            throw new RuntimeException("No such a driver, Please enter valid nic no");
+        }
+        driverRepo.save(mapper.map(dto, Driver.class));
+    }
+
+    @Override
+    public void deleteDriver(String nic_no) {
+        if (!driverRepo.existsById(nic_no)) {
+            throw new RuntimeException("No such a driver, Please enter valid nic no");
+        }
+        driverRepo.deleteById(nic_no);
+    }
+
+    @Override
+    public DriverDTO getDriverByNic(String nic) {
+        Driver driver = driverRepo.findDriverByNic_no(nic);
+        if (driver != null) {
+            return mapper.map(driver, DriverDTO.class);
+        }
+        return null;
+    }
+
     @Override
     public DriverDTO verifyDriver(String username, String password) {
         Driver driver = driverRepo.findDriverByUsernameAndPassword(username, password);
