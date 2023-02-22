@@ -1,6 +1,7 @@
 package lk.easycar.spring.service.impl;
 
 import lk.easycar.spring.dto.CarDTO;
+import lk.easycar.spring.dto.RentalDetailDTO;
 import lk.easycar.spring.entity.Car;
 import lk.easycar.spring.entity.RentalDetail;
 import lk.easycar.spring.repo.CarRepo;
@@ -30,6 +31,23 @@ public class RentalDetailServiceImpl implements RentalDetailService {
     private ModelMapper mapper;
 
     @Override
+    public void saveRentalDetail(RentalDetailDTO dto) {
+        dto.setRental_id(generateNewRentalId());
+        dto.setRental_status("Rental");
+
+        RentalDetail rentalDetail = mapper.map(dto, RentalDetail.class);
+        if (rentalDetailRepo.existsById(rentalDetail.getRental_id())) {
+            throw new RuntimeException("Reservation " + rentalDetail.getRental_id() + " already added");
+        }
+        rentalDetailRepo.save(rentalDetail);
+
+        // update car status
+        Car car = rentalDetail.getCar();
+        car.setStatus("Reserved");
+        carRepo.save(car);
+    }
+
+    @Override
     public ArrayList<CarDTO> searchAvailableCarsForReservation(String pick_up_date, String return_date) {
         List<Car> availableCars = carRepo.findCarByStatus("Available");
         List<Car> reservedCars = carRepo.findCarByStatus("Reserved");
@@ -48,5 +66,16 @@ public class RentalDetailServiceImpl implements RentalDetailService {
             }.getType());
         }
         return null;
+    }
+
+    @Override
+    public String generateNewRentalId() {
+        String rental_id = "";
+        rental_id = rentalDetailRepo.getLastRentalId();
+        if (rental_id != null) {
+            int newRentalId = Integer.parseInt(rental_id.replace("RID-", "")) + 1;
+            return String.format("RID-%03d", newRentalId);
+        }
+        return "RID-001";
     }
 }

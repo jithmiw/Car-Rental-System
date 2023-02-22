@@ -1,11 +1,12 @@
 package lk.easycar.spring.service;
 
 import lk.easycar.spring.dto.CarDTO;
+import lk.easycar.spring.dto.RentalDetailDTO;
 
 import java.util.ArrayList;
 
 public interface RentalDetailService {
-//    void saveRentalDetail(RentalDetailDTO dto);
+    void saveRentalDetail(RentalDetailDTO dto);
 //
 //    void updateRentalDetail(RentalDetailDTO dto);
 //
@@ -14,4 +15,6 @@ public interface RentalDetailService {
 //    ArrayList<RentalDetailDTO> getAllRentalDetail();
 
     ArrayList<CarDTO> searchAvailableCarsForReservation(String pick_up_date, String return_date);
+
+    String generateNewRentalId();
 }
