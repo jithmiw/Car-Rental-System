@@ -29,6 +29,7 @@ public class RentalDetail {
     private String driver_status;
     @CreationTimestamp
     private LocalDate reserved_date;
+    private String bank_slip_img;
 
     @ManyToOne
     @JoinColumn(name = "customer_nic", nullable = false)

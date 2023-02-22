@@ -107,4 +107,22 @@ function loadCarImages(reg_no, newCard) {
 }
 
 $('#rentCar').click(function () {
+
+    let formData = $('#reservationForm').serialize();
+    $.ajax({
+        url: baseUrl + "rentalDetail",
+        method: "post",
+        data: formData,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if (res.status === 200){
+                // uploadFiles();
+            }
+        },
+        error: function (error) {
+            console.log(JSON.parse(error.responseText));
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
 });

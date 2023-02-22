@@ -5,6 +5,7 @@ import lk.easycar.spring.dto.RentalDetailDTO;
 import lk.easycar.spring.entity.Car;
 import lk.easycar.spring.entity.RentalDetail;
 import lk.easycar.spring.repo.CarRepo;
+import lk.easycar.spring.repo.DriverScheduleRepo;
 import lk.easycar.spring.repo.RentalDetailRepo;
 import lk.easycar.spring.service.RentalDetailService;
 import org.modelmapper.ModelMapper;
@@ -25,6 +26,9 @@ public class RentalDetailServiceImpl implements RentalDetailService {
     private RentalDetailRepo rentalDetailRepo;
 
     @Autowired
+    private DriverScheduleRepo driverScheduleRepo;
+
+    @Autowired
     private CarRepo carRepo;
 
     @Autowired
@@ -34,7 +38,6 @@ public class RentalDetailServiceImpl implements RentalDetailService {
     public void saveRentalDetail(RentalDetailDTO dto) {
         dto.setRental_id(generateNewRentalId());
         dto.setRental_status("Rental");
-
         RentalDetail rentalDetail = mapper.map(dto, RentalDetail.class);
         if (rentalDetailRepo.existsById(rentalDetail.getRental_id())) {
             throw new RuntimeException("Reservation " + rentalDetail.getRental_id() + " already added");

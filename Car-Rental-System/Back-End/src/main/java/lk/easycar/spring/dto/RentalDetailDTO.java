@@ -24,6 +24,7 @@ public class RentalDetailDTO {
     private String rental_status;
     private String driver_status;
     private LocalDate reserved_date;
+    private String bank_slip_img;
 
     private String customer_nic;
     private String car_reg_no;
