@@ -240,6 +240,10 @@
                                 <div class="modal-body">
                                     <form id="reservationForm" class="row g-3">
                                         <div class="col-md-6">
+                                            <label for="rental-id" class="form-label">Rental id</label>
+                                            <input type="text" class="form-control" id="rental-id" name="rental_id" readonly>
+                                        </div>
+                                        <div class="col-md-6">
                                             <label for="pick-up-date" class="form-label">Pick-up Date</label>
                                             <input type="Date" class="form-control" id="pick-up-date" name="pick_up_date">
                                         </div>
@@ -268,7 +272,7 @@
                                             <input type="file" class="form-control" id="bank-slip" name="bank_slip_img">
                                         </div>
                                         <div class="form-check" style="margin-left: 8px">
-                                            <input class="form-check-input" type="checkbox" value="" id="addDriver">
+                                            <input class="form-check-input" type="checkbox" value="" id="addDriver" name="driver_status">
                                             <label class="form-check-label" for="addDriver">Add Driver</label>
                                         </div>
                                         <div class="modal-footer col-12 me-auto pe-2">

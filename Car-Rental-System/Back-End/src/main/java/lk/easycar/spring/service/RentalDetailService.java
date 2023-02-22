@@ -17,4 +17,6 @@ public interface RentalDetailService {
     ArrayList<CarDTO> searchAvailableCarsForReservation(String pick_up_date, String return_date);
 
     String generateNewRentalId();
+
+    RentalDetailDTO getRentalDetailByRentalId(String rental_id);
 }

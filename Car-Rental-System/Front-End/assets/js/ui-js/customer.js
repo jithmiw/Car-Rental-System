@@ -106,6 +106,18 @@ function loadCarImages(reg_no, newCard) {
     });
 }
 
+$('.btn-reservation').click(function () {
+    $.ajax({
+        url: baseUrl + "rentalDetail/generateRentalId",
+        success: function (res) {
+            $("#rental-id").val(res.data.rental_id);
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+});
+
 $('#rentCar').click(function () {
 
     let formData = $('#reservationForm').serialize();
@@ -115,10 +127,10 @@ $('#rentCar').click(function () {
         data: formData,
         dataType: "json",
         success: function (res) {
-            console.log(res);
             if (res.status === 200){
-                // uploadFiles();
+                uploadFiles();
             }
+            alert(res.message);
         },
         error: function (error) {
             console.log(JSON.parse(error.responseText));
@@ -126,3 +138,33 @@ $('#rentCar').click(function () {
         }
     });
 });
+
+function uploadFiles() {
+    let data = new FormData();
+    let bankSlip = $("#bank-slip")[0].files[0];
+
+    data.append("bankSlipImage", bankSlip, bankSlip.name);
+    data.append("rentalId", $('#rental-id').val());
+
+    $.ajax({
+        url: baseUrl + "files/upload",
+        method: "post",
+        async: true,
+        contentType: false,
+        processData: false,
+        data: data,
+        success: function (res) {
+            console.log(res.message);
+            if (res.status === 200){
+                clearReservationForm();
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+function clearReservationForm(){
+    $('#pick-up-date ,#return-date, #pick-up-time, #return-time, #pick-up-venue, #return-venue, #bank-slip, #addDriver').val("");
+}

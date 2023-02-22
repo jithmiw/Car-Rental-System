@@ -2,8 +2,10 @@ package lk.easycar.spring.controller;
 
 import lk.easycar.spring.dto.CarImageDetailDTO;
 import lk.easycar.spring.dto.CustomerDTO;
+import lk.easycar.spring.dto.RentalDetailDTO;
 import lk.easycar.spring.service.CarImageDetailService;
 import lk.easycar.spring.service.CustomerService;
+import lk.easycar.spring.service.RentalDetailService;
 import lk.easycar.spring.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,6 +26,9 @@ public class FileUploadController {
 
     @Autowired
     CarImageDetailService carImageDetailService;
+
+    @Autowired
+    RentalDetailService rentalDetailService;
 
     //    formalized end-point to upload files
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -66,5 +71,24 @@ public class FileUploadController {
             return new ResponseUtil(500, "Something went wrong, Please try again later", null);
         }
         return new ResponseUtil(200, "Car added successfully", null);
+    }
+
+    @PostMapping(path = "/bankSlipImages", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil uploadBankSlipImage(@RequestPart("bankSlipImage") MultipartFile file, @RequestPart("rentalId") String rentalId) {
+        try {
+            String projectPath = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParentFile().getParentFile().getAbsolutePath();
+            File uploadsDir = new File(projectPath + "/uploads");
+            uploadsDir.mkdir();
+            File bankSlipsDir = new File(uploadsDir + "/bank-slips");
+            bankSlipsDir.mkdir();
+            file.transferTo(new File(bankSlipsDir.getAbsolutePath() + "/" + file.getOriginalFilename()));
+
+            RentalDetailDTO rentalDetail = rentalDetailService.getRentalDetailByRentalId(rentalId);
+            rentalDetail.setBank_slip_img("uploads/bank-slips/" + file.getOriginalFilename());
+        } catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+            return new ResponseUtil(500, "Something went wrong, Please try again later", null);
+        }
+        return new ResponseUtil(200, "Rental request sent successfully", null);
     }
 }

@@ -36,7 +36,6 @@ public class RentalDetailServiceImpl implements RentalDetailService {
 
     @Override
     public void saveRentalDetail(RentalDetailDTO dto) {
-        dto.setRental_id(generateNewRentalId());
         dto.setRental_status("Rental");
         RentalDetail rentalDetail = mapper.map(dto, RentalDetail.class);
         if (rentalDetailRepo.existsById(rentalDetail.getRental_id())) {
@@ -80,5 +79,11 @@ public class RentalDetailServiceImpl implements RentalDetailService {
             return String.format("RID-%03d", newRentalId);
         }
         return "RID-001";
+    }
+
+    @Override
+    public RentalDetailDTO getRentalDetailByRentalId(String rental_id) {
+        RentalDetail rentalDetail = rentalDetailRepo.findRentalDetailByRental_id(rental_id);
+        return mapper.map(rentalDetail, RentalDetailDTO.class);
     }
 }

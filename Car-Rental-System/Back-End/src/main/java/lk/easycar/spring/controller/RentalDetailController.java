@@ -23,6 +23,11 @@ public class RentalDetailController {
     @Autowired
     private DriverScheduleService driverScheduleService;
 
+    @GetMapping(path = "/generateRentalId")
+    public ResponseUtil generateRentalId() {
+        return new ResponseUtil(200, "Rental id generated", rentalDetailService.generateNewRentalId());
+    }
+
     @GetMapping(params = {"pick_up_date","return_date"})
     public ResponseUtil searchAvailableCarsForReservation(@RequestParam String pick_up_date, @RequestParam String return_date) {
         ArrayList<CarDTO> availableCars = rentalDetailService.searchAvailableCarsForReservation(pick_up_date, return_date);

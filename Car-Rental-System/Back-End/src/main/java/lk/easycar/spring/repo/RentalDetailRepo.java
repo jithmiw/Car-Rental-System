@@ -14,4 +14,7 @@ public interface RentalDetailRepo extends JpaRepository<RentalDetail, String> {
 
     @Query(value = "SELECT rental_id FROM RentalDetail ORDER BY rental_id DESC LIMIT 1", nativeQuery = true)
     String getLastRentalId();
+
+    @Query(value = "SELECT * FROM RentalDetail WHERE rental_id=?1", nativeQuery = true)
+    RentalDetail findRentalDetailByRental_id(String rental_id);
 }
