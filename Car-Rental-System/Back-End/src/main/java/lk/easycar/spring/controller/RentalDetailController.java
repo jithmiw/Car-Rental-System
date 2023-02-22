@@ -16,8 +16,8 @@ public class RentalDetailController {
     @Autowired
     private RentalDetailService rentalDetailService;
 
-    @GetMapping(path = "/{pick_up_date}/{return_date}")
-    public ResponseUtil searchAvailableCarsForReservation(@PathVariable String pick_up_date, @PathVariable String return_date) {
+    @GetMapping(params = {"pick_up_date","return_date"})
+    public ResponseUtil searchAvailableCarsForReservation(@RequestParam String pick_up_date, @RequestParam String return_date) {
         ArrayList<CarDTO> availableCars = rentalDetailService.searchAvailableCarsForReservation(pick_up_date, return_date);
         return new ResponseUtil(200, "Loaded successfully", availableCars);
     }

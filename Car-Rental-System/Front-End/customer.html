@@ -141,12 +141,12 @@
                 <form class="col g-3">
                     <h3 class="mb-3 mt-3">FIND YOUR CAR</h3>
                     <div class="row-12 mb-3">
-                        <label for="pick-up-date" class="form-label">Pick-up Date</label>
-                        <input type="date" class="form-control" id="pick-up-date">
+                        <label for="search-pick-up-date" class="form-label">Pick-up Date</label>
+                        <input type="date" class="form-control" id="search-pick-up-date">
                     </div>
                     <div class="row-12 mb-3">
-                        <label for="return-date" class="form-label">Return Date</label>
-                        <input type="date" class="form-control" id="return-date">
+                        <label for="search-return-date" class="form-label">Return Date</label>
+                        <input type="date" class="form-control" id="search-return-date">
                     </div>
 <!--                    <div class="row-12 mb-3">-->
 <!--                        <label for="pick-up-time" class="form-label">Pick-up Time</label>-->
@@ -164,7 +164,7 @@
                     <img class="img-fluid" src="assets/img/black-car.jpg" alt="car img">
                 </div>
             </div>
-            <div id="carCards" class="container-fluid d-flex flex-row flex-wrap justify-content-evenly">
+            <div id="carCards" class="container-fluid d-flex flex-row flex-wrap justify-content-evenly d-none">
                 <div class="card mb-5" style="width: 20rem;">
                     <div class="card-header fw-bold">Luxury</div>
                     <img src="assets/img/black-car.jpg" class="card-img-top" alt="car-img" style="height: 190px">
@@ -186,7 +186,7 @@
                         <!-- See images button trigger modal -->
                         <button type="button" class="btn btn-outline-secondary me-2 btn-img" data-bs-toggle="modal" data-bs-target="#seeImgsModal">SEE IMAGES</button>
                         <!-- Reservation Button trigger modal -->
-                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#reservationModal">
+                        <button type="button" class="btn btn-dark btn-reservation" data-bs-toggle="modal" data-bs-target="#reservationModal">
                             MAKE RESERVATION
                         </button>
                     </div>
@@ -238,22 +238,22 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="row g-3">
+                                    <form id="reservationForm" class="row g-3">
                                         <div class="col-md-6">
-                                            <label for="pick-up-date1" class="form-label">Pick-up Date</label>
-                                            <input type="Date" class="form-control" id="pick-up-date1">
+                                            <label for="pick-up-date" class="form-label">Pick-up Date</label>
+                                            <input type="Date" class="form-control" id="pick-up-date">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="return-date1" class="form-label">Return Date</label>
-                                            <input type="Date" class="form-control" id="return-date1">
+                                            <label for="return-date" class="form-label">Return Date</label>
+                                            <input type="Date" class="form-control" id="return-date">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="pick-up-time1" class="form-label">Pick-up Time</label>
-                                            <input type="Time" class="form-control" id="pick-up-time1">
+                                            <label for="pick-up-time" class="form-label">Pick-up Time</label>
+                                            <input type="Time" class="form-control" id="pick-up-time">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="return-time1" class="form-label">Return Time</label>
-                                            <input type="Time" class="form-control" id="return-time1">
+                                            <label for="return-time" class="form-label">Return Time</label>
+                                            <input type="Time" class="form-control" id="return-time">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="pick-up-venue" class="form-label">Pick-up Venue</label>
@@ -268,7 +268,7 @@
                                             <label class="form-check-label" for="addDriver">Add Driver</label>
                                         </div>
                                         <div class="modal-footer col-12 me-auto pe-2">
-                                            <button type="button" class="btn btn-dark me-0">MAKE RESERVATION</button>
+                                            <button id="rentCar" type="button" class="btn btn-dark me-0">MAKE RESERVATION</button>
                                         </div>
                                     </form>
                                 </div>
