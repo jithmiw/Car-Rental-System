@@ -106,17 +106,22 @@ function loadCarImages(reg_no, newCard) {
     });
 }
 
-$('.btn-reservation').click(function () {
+$(document).on('show.bs.modal', '.reservationModal', function (e) {
+    let reservationModalId = '#'+$(this).attr("id");
+    generateNewId(reservationModalId);
+});
+
+function generateNewId (reservationModalId){
     $.ajax({
         url: baseUrl + "rentalDetail/generateRentalId",
         success: function (res) {
-            $("#rental-id").val(res.data.rental_id);
+            $(reservationModalId + ' #rental-id').val(res.data);
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);
         }
     });
-});
+}
 
 $('#rentCar').click(function () {
 
