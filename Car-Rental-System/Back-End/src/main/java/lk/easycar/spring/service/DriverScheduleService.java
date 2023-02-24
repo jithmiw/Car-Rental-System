@@ -3,6 +3,7 @@ package lk.easycar.spring.service;
 import lk.easycar.spring.dto.DriverDTO;
 import lk.easycar.spring.dto.DriverScheduleDTO;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface DriverScheduleService {
@@ -14,5 +15,5 @@ public interface DriverScheduleService {
 //
 //    ArrayList<RentalDetailDTO> getAllRentalDetail();
 
-    ArrayList<DriverDTO> searchAvailableDriversForReservation(String pick_up_date, String return_date);
+    ArrayList<DriverDTO> searchAvailableDriversForReservation(LocalDate pick_up_date, LocalDate return_date);
 }

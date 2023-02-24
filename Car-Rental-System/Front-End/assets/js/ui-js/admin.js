@@ -1,5 +1,26 @@
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
+// add driver
+$("#saveDriver").click(function () {
+    let formData = $('#driverForm').serialize();
+    $.ajax({
+        url: baseUrl + "customer",
+        method: "post",
+        data: formData,
+        dataType: "json",
+        success: function (res) {
+            console.log(res);
+            if (res.status === 200){
+                uploadFiles();
+            }
+        },
+        error: function (error) {
+            console.log(JSON.parse(error.responseText));
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+});
+
 // add car
 $("#saveCar").click(function () {
     let formData = $('#carForm').serialize();

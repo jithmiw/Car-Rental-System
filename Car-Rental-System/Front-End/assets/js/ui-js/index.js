@@ -41,19 +41,16 @@ $("#loginUser").click(function () {
     });
 });
 
-// add customer
+// add driver
 $("#saveCustomer").click(function () {
     let formData = $('#customerForm').serialize();
     $.ajax({
-        url: baseUrl + "customer",
+        url: baseUrl + "driver",
         method: "post",
         data: formData,
         dataType: "json",
         success: function (res) {
-            console.log(res);
-            if (res.status === 200){
-                uploadFiles();
-            }
+            alert(res.message);
         },
         error: function (error) {
             console.log(JSON.parse(error.responseText));
@@ -61,6 +58,63 @@ $("#saveCustomer").click(function () {
         }
     });
 });
+
+// update driver
+$('#updateDriver').click(function () {
+    let name = $('#inputName').val();
+    let nicNo = $('#inputNicNo').val();
+    let address = $('#inputAddress').val();
+    let email = $('#inputEmail').val();
+    let contactNo = $('#inputContactNo').val();
+    let licenseNo = $('#inputLicenseNo').val();
+    let username = $('#inputUsername').val();
+    let password = $('#inputPassword').val();
+
+    var driverDTO = {
+        nic_no: nicNo,
+        driver_name: name,
+        license_no: licenseNo,
+        address: address,
+        contact_no: contactNo,
+        email: email,
+        username: username,
+        password: password
+    }
+    $.ajax({
+        url: baseUrl + "car",
+        method: "put",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(driverDTO),
+        success: function (res) {
+            alert(res.message);
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+});
+
+// delete driver
+$('#deleteDriver').click(function () {
+    let nicNo = $('#inputNicNo').val();
+
+    $.ajax({
+        url: baseUrl + "driver?nic_no=" + nicNo,
+        method: "delete",
+        success: function (res) {
+            alert(res.message);
+            clearManageDriversForm()
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+});
+
+function clearManageDriversForm() {
+    $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , #inputPassword').val("");
+}
 
 function uploadFiles() {
     let data = new FormData();
@@ -81,7 +135,7 @@ function uploadFiles() {
         data: data,
         success: function (res) {
             console.log(res.message);
-            if (res.status === 200){
+            if (res.status === 200) {
                 openCustomerHome();
                 clearSignUpForm();
             }
@@ -102,7 +156,7 @@ function openCustomerHome() {
     window.location.href = "customer.html";
 }
 
-function clearSignUpForm(){
+function clearSignUpForm() {
     $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , ' +
         '#inputPassword, #nicFile, #licenseFile').val("");
 }

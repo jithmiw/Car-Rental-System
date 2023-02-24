@@ -3,8 +3,10 @@ package lk.easycar.spring.service.impl;
 import lk.easycar.spring.dto.CarDTO;
 import lk.easycar.spring.dto.RentalDetailDTO;
 import lk.easycar.spring.entity.Car;
+import lk.easycar.spring.entity.Customer;
 import lk.easycar.spring.entity.RentalDetail;
 import lk.easycar.spring.repo.CarRepo;
+import lk.easycar.spring.repo.CustomerRepo;
 import lk.easycar.spring.repo.DriverScheduleRepo;
 import lk.easycar.spring.repo.RentalDetailRepo;
 import lk.easycar.spring.service.RentalDetailService;
@@ -29,6 +31,9 @@ public class RentalDetailServiceImpl implements RentalDetailService {
     private DriverScheduleRepo driverScheduleRepo;
 
     @Autowired
+    private CustomerRepo customerRepo;
+
+    @Autowired
     private CarRepo carRepo;
 
     @Autowired
@@ -36,18 +41,20 @@ public class RentalDetailServiceImpl implements RentalDetailService {
 
     @Override
     public void saveRentalDetail(RentalDetailDTO dto) {
-//        dto.setRental_status("Rental");
-        RentalDetail rentalDetail = mapper.map(dto, RentalDetail.class);
+        Customer customer = customerRepo.findById(dto.getCustomer_nic()).get();
+        Car car = carRepo.findById(dto.getCar_reg_no()).get();
+        RentalDetail rentalDetail = new RentalDetail(dto.getRental_id(), dto.getPick_up_date(), dto.getReturn_date(),
+                dto.getPick_up_time(), dto.getReturn_time(), dto.getPick_up_venue(), dto.getReturn_venue(), "Rental",
+                dto.getDriver_status(), customer, car);
         if (rentalDetailRepo.existsById(rentalDetail.getRental_id())) {
             throw new RuntimeException("Reservation " + rentalDetail.getRental_id() + " already added");
         }
-        System.out.println(dto.toString());
+        System.out.println(rentalDetail);
         rentalDetailRepo.save(rentalDetail);
 
         // update car status
-//        Car car = rentalDetail.getCar();
-//        car.setStatus("Reserved");
-//        carRepo.save(car);
+        rentalDetail.getCar().setStatus("Reserved");
+        carRepo.save(car);
     }
 
     @Override

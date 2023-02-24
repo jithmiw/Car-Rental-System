@@ -132,13 +132,17 @@ function generateNewId(reservationModalId) {
 
 function bindClickEventsToButtons() {
     $('.rentCar').on('click', function () {
-        let formData = $(this).closest("form").serialize();
-
+        let rentalDTO = {};
+        var dataArray=$(this).closest("form").serializeArray();
+        for (let i in dataArray) {
+            rentalDTO[dataArray[i].name] = dataArray[i].value;
+            console.log(dataArray[i].name);
+        }
         $.ajax({
             url: baseUrl + "rentalDetail",
             method: "post",
-            data: formData,
-            dataType: "json",
+            contentType: "application/json",
+            data: JSON.stringify(rentalDTO),
             success: function (res) {
                 console.log(res);
                 if (res.status === 200) {

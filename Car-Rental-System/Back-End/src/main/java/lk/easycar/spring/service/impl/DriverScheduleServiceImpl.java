@@ -2,6 +2,7 @@ package lk.easycar.spring.service.impl;
 
 import lk.easycar.spring.dto.DriverDTO;
 import lk.easycar.spring.dto.DriverScheduleDTO;
+import lk.easycar.spring.entity.Driver;
 import lk.easycar.spring.entity.DriverSchedule;
 import lk.easycar.spring.repo.DriverRepo;
 import lk.easycar.spring.repo.DriverScheduleRepo;
@@ -31,18 +32,21 @@ public class DriverScheduleServiceImpl implements DriverScheduleService {
 
     @Override
     public void saveDriverSchedule(DriverScheduleDTO dto) {
-
+        if (driverScheduleRepo.existsById(String.valueOf(dto.getSchedule_id()))) {
+            throw new RuntimeException("Driver Schedule " + dto.getSchedule_id() + " already added");
+        }
+        driverScheduleRepo.save(mapper.map(dto, DriverSchedule.class));
     }
 
     @Override
-    public ArrayList<DriverDTO> searchAvailableDriversForReservation(String pick_up_date, String return_date) {
+    public ArrayList<DriverDTO> searchAvailableDriversForReservation(LocalDate pick_up_date, LocalDate return_date) {
         List<DriverDTO> availableDrivers = new ArrayList<>();
         if (!(driverScheduleRepo.findAll().isEmpty())) {
             List<DriverSchedule> driverSchedules = driverScheduleRepo.findDriverScheduleByRental_status("Rental");
 
             for (DriverSchedule driverSchedule : driverSchedules) {
-                if (driverSchedule.getStart_date().isAfter(LocalDate.parse(return_date)) ||
-                        driverSchedule.getEnd_date().isBefore(LocalDate.parse(pick_up_date))) {
+                if (driverSchedule.getStart_date().isAfter(return_date) ||
+                        driverSchedule.getEnd_date().isBefore(pick_up_date)) {
                     availableDrivers.add(mapper.map(driverSchedule.getDriver(), DriverDTO.class));
                 }
             }
@@ -50,7 +54,8 @@ public class DriverScheduleServiceImpl implements DriverScheduleService {
                 return mapper.map(availableDrivers, new TypeToken<ArrayList<DriverDTO>>() {
                 }.getType());
             }
-            return null;
+            return mapper.map(driverRepo.findAll(), new TypeToken<ArrayList<DriverDTO>>() {
+            }.getType());
         }
         return mapper.map(driverRepo.findAll(), new TypeToken<ArrayList<DriverDTO>>() {
         }.getType());
