@@ -71,6 +71,7 @@ public class RentalDetailServiceImpl implements RentalDetailService {
                 }
             }
         }
+        System.out.println(availableCars);
         if (!availableCars.isEmpty()) {
             return mapper.map(availableCars, new TypeToken<ArrayList<CarDTO>>() {
             }.getType());

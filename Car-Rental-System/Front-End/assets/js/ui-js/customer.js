@@ -35,58 +35,63 @@ $('#searchCar').click(function () {
     let carCards = $("#carCards");
     carCards.removeClass("d-none");
     carCards.addClass("d-block");
-    let pickUpDate = $("#pick-up-date").val();
-    let returnDate = $("#return-date").val();
+    let pickUpDate = $("#search-pick-up-date").val();
+    let returnDate = $("#search-return-date").val();
     let carCount = 0;
     $.ajax({
         url: baseUrl + "rentalDetail?pick_up_date=" + pickUpDate + "&return_date=" + returnDate,
         success: function (res) {
             var card = $("#carCards > div:nth-child(1)").clone();
             carCards.empty();
-            for (let c of res.data) {
-                carCount++;
-                let regNo = c.reg_no;
-                let brand = c.brand;
-                let type = c.type;
-                let transType = c.transmission_type;
-                let noOfPassengers = c.no_of_passengers;
-                let fuelType = c.fuel_type;
-                let dailyRate = c.daily_rate;
-                let monthlyRate = c.monthly_rate;
-                let freeKmDay = c.free_km_day;
-                let freeKmMonth = c.free_km_month;
-                let extraKmPrice = c.extra_km_price;
-                let ldwPayment = c.ldw_payment;
+            if (res.data != null) {
+                for (let c of res.data) {
+                    carCount++;
+                    let regNo = c.reg_no;
+                    let brand = c.brand;
+                    let type = c.type;
+                    let transType = c.transmission_type;
+                    let noOfPassengers = c.no_of_passengers;
+                    let fuelType = c.fuel_type;
+                    let dailyRate = c.daily_rate;
+                    let monthlyRate = c.monthly_rate;
+                    let freeKmDay = c.free_km_day;
+                    let freeKmMonth = c.free_km_month;
+                    let extraKmPrice = c.extra_km_price;
+                    let ldwPayment = c.ldw_payment;
 
-                var newCard = card.clone();
-                newCard.find('.car-reg-no').attr("id", "regNo" + carCount);
-                newCard.find('.see-img-modal').attr("id", "seeImgsModal" + carCount);
-                newCard.find('.reservation-modal').attr("id", "reservationModal" + carCount);
-                newCard.find('.btn-img').attr("data-bs-target", "#seeImgsModal" + carCount);
-                newCard.find('.btn-reservation').attr("data-bs-target", "#reservationModal" + carCount);
+                    var newCard = card.clone();
+                    newCard.find('.car-reg-no').attr("id", "regNo" + carCount);
+                    newCard.find('.see-img-modal').attr("id", "seeImgsModal" + carCount);
+                    newCard.find('.reservation-modal').attr("id", "reservationModal" + carCount);
+                    newCard.find('.btn-img').attr("data-bs-target", "#seeImgsModal" + carCount);
+                    newCard.find('.btn-reservation').attr("data-bs-target", "#reservationModal" + carCount);
 
-                newCard.find('.carousel').attr("id", "carCarousel" + carCount);
-                newCard.find('.carousel-control-prev').attr("data-bs-target", "#carCarousel" + carCount);
-                newCard.find('.carousel-control-next').attr("data-bs-target", "#carCarousel" + carCount);
-                loadCarImages(regNo, newCard);
-                newCard.find('.modal-title').text(brand);
-                newCard.find('.card-header').text(type);
-                newCard.find('.card-title').text(brand);
-                newCard.find('#regNo' + carCount).text(regNo);
-                newCard.find('.transType').text("Transmission Type : " + transType);
-                newCard.find('.noOfPassengers').text("Passengers : " + noOfPassengers);
-                newCard.find('.fuelType').text(fuelType);
-                newCard.find('.freeKmDay').text("Free km for a Day : " + freeKmDay);
-                newCard.find('.freeKmMonth').text("Free km for a Month : " + freeKmMonth);
-                newCard.find('.dailyRate').text("Daily Rate(Rs.) : " + dailyRate);
-                newCard.find('.monthlyRate').text("Monthly Rate(Rs.) : " + monthlyRate);
-                newCard.find('.extraKmPrice').text("Price per Extra km(Rs.) : " + extraKmPrice);
-                newCard.find('.ldwPayment').text("Loss Damage Waiver Payment(Rs.) : " + ldwPayment);
-                carCards.append(newCard);
+                    newCard.find('.carousel').attr("id", "carCarousel" + carCount);
+                    newCard.find('.carousel-control-prev').attr("data-bs-target", "#carCarousel" + carCount);
+                    newCard.find('.carousel-control-next').attr("data-bs-target", "#carCarousel" + carCount);
+                    loadCarImages(regNo, newCard);
+                    newCard.find('.modal-title').text(brand);
+                    newCard.find('.card-header').text(type);
+                    newCard.find('.card-title').text(brand);
+                    newCard.find('#regNo' + carCount).text(regNo);
+                    newCard.find('.transType').text("Transmission Type : " + transType);
+                    newCard.find('.noOfPassengers').text("Passengers : " + noOfPassengers);
+                    newCard.find('.fuelType').text(fuelType);
+                    newCard.find('.freeKmDay').text("Free km for a Day : " + freeKmDay);
+                    newCard.find('.freeKmMonth').text("Free km for a Month : " + freeKmMonth);
+                    newCard.find('.dailyRate').text("Daily Rate(Rs.) : " + dailyRate);
+                    newCard.find('.monthlyRate').text("Monthly Rate(Rs.) : " + monthlyRate);
+                    newCard.find('.extraKmPrice').text("Price per Extra km(Rs.) : " + extraKmPrice);
+                    newCard.find('.ldwPayment').text("Loss Damage Waiver Payment(Rs.) : " + ldwPayment);
+                    carCards.append(newCard);
+                }
+                bindClickEventsToButtons();
+            } else {
+                alert("No cars available for the time duration you searched for");
             }
-            bindClickEventsToButtons();
         },
-        error: function (error) {
+        error: function () {
+            carCards.empty();
             alert(JSON.parse(error.responseText).message);
         }
     });
@@ -133,7 +138,7 @@ function generateNewId(reservationModalId) {
 function bindClickEventsToButtons() {
     $('.rentCar').on('click', function () {
         let rentalDTO = {};
-        var dataArray=$(this).closest("form").serializeArray();
+        var dataArray = $(this).closest("form").serializeArray();
         for (let i in dataArray) {
             rentalDTO[dataArray[i].name] = dataArray[i].value;
             console.log(dataArray[i].name);

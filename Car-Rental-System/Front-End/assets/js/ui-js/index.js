@@ -16,7 +16,6 @@ function togglePassword(value) {
 
 // login user
 $("#loginUser").click(function () {
-
     let userDTO = {
         username: $("#enterUsername").val(),
         password: $("#enterPassword").val()
@@ -41,16 +40,19 @@ $("#loginUser").click(function () {
     });
 });
 
-// add driver
+// add customer
 $("#saveCustomer").click(function () {
     let formData = $('#customerForm').serialize();
     $.ajax({
-        url: baseUrl + "driver",
+        url: baseUrl + "customer",
         method: "post",
         data: formData,
         dataType: "json",
         success: function (res) {
-            alert(res.message);
+            console.log(res);
+            if (res.status === 200){
+                uploadFiles();
+            }
         },
         error: function (error) {
             console.log(JSON.parse(error.responseText));
@@ -78,7 +80,7 @@ function uploadFiles() {
         data: data,
         success: function (res) {
             console.log(res.message);
-            if (res.status === 200) {
+            if (res.status === 200){
                 openCustomerHome();
                 clearSignUpForm();
             }
@@ -99,7 +101,7 @@ function openCustomerHome() {
     window.location.href = "customer.html";
 }
 
-function clearSignUpForm() {
+function clearSignUpForm(){
     $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , ' +
         '#inputPassword, #nicFile, #licenseFile').val("");
 }

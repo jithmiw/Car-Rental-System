@@ -4,15 +4,12 @@ let baseUrl = "http://localhost:8080/easycar-rental/";
 $("#saveDriver").click(function () {
     let formData = $('#driverForm').serialize();
     $.ajax({
-        url: baseUrl + "customer",
+        url: baseUrl + "driver",
         method: "post",
         data: formData,
         dataType: "json",
         success: function (res) {
-            console.log(res);
-            if (res.status === 200){
-                uploadFiles();
-            }
+            alert(res.message);
         },
         error: function (error) {
             console.log(JSON.parse(error.responseText));
@@ -43,7 +40,7 @@ $('#updateDriver').click(function () {
         password: password
     }
     $.ajax({
-        url: baseUrl + "car",
+        url: baseUrl + "driver",
         method: "put",
         contentType: "application/json",
         dataType: "json",
