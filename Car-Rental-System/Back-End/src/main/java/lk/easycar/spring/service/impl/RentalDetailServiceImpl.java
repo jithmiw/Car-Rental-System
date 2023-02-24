@@ -19,6 +19,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -49,7 +50,6 @@ public class RentalDetailServiceImpl implements RentalDetailService {
         if (rentalDetailRepo.existsById(rentalDetail.getRental_id())) {
             throw new RuntimeException("Reservation " + rentalDetail.getRental_id() + " already added");
         }
-        System.out.println(rentalDetail);
         rentalDetailRepo.save(rentalDetail);
 
         // update car status
@@ -65,14 +65,15 @@ public class RentalDetailServiceImpl implements RentalDetailService {
         for (Car car : reservedCars) {
             List<RentalDetail> rentalDetails = rentalDetailRepo.findRentalDetailByCar_Reg_noAndRental_status(car.getReg_no(), "Rental");
             for (RentalDetail detail : rentalDetails) {
-                if (detail.getPick_up_date().isAfter(LocalDate.parse(return_date)) ||
-                        detail.getReturn_date().isBefore(LocalDate.parse(pick_up_date))) {
-                    availableCars.add(detail.getCar());
+                if (!(detail.getPick_up_date().isAfter(LocalDate.parse(return_date)) ||
+                        detail.getReturn_date().isBefore(LocalDate.parse(pick_up_date)))) {
+                    reservedCars.remove(detail.getCar());
                 }
             }
         }
-        System.out.println(availableCars);
-        if (!availableCars.isEmpty()) {
+        availableCars.addAll(reservedCars);
+        availableCars = availableCars.stream().distinct().collect(Collectors.toList());
+        if (availableCars.size() != 0) {
             return mapper.map(availableCars, new TypeToken<ArrayList<CarDTO>>() {
             }.getType());
         }

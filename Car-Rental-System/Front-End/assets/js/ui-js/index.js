@@ -35,7 +35,7 @@ $("#loginUser").click(function () {
             }
         },
         error: function (error) {
-            console.log(JSON.parse(error.responseText));
+            alert(JSON.parse(error.responseText).message);
         }
     });
 });
@@ -55,7 +55,6 @@ $("#saveCustomer").click(function () {
             }
         },
         error: function (error) {
-            console.log(JSON.parse(error.responseText));
             alert(JSON.parse(error.responseText).message);
         }
     });

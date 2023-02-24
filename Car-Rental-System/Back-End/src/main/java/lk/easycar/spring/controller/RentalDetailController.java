@@ -30,7 +30,7 @@ public class RentalDetailController {
         return new ResponseUtil(200, "Rental id generated", rentalDetailService.generateNewRentalId());
     }
 
-    @GetMapping(params = {"pick_up_date","return_date"})
+    @GetMapping(params = {"pick_up_date", "return_date"})
     public ResponseUtil searchAvailableCarsForReservation(@RequestParam String pick_up_date, @RequestParam String return_date) {
         ArrayList<CarDTO> availableCars = rentalDetailService.searchAvailableCarsForReservation(pick_up_date, return_date);
         return new ResponseUtil(200, "Loaded successfully", availableCars);
@@ -38,7 +38,7 @@ public class RentalDetailController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil makeReservation(@RequestBody RentalDetailDTO dto) {
-        if(dto.getDriver_status().equals("Yes")){
+        if (dto.getDriver_status().equals("Yes")) {
             ArrayList<DriverDTO> drivers = driverScheduleService.searchAvailableDriversForReservation(dto.getPick_up_date(), dto.getReturn_date());
             Collections.shuffle(drivers);
             driverScheduleService.saveDriverSchedule(new DriverScheduleDTO(dto.getPick_up_date(), dto.getPick_up_time(),

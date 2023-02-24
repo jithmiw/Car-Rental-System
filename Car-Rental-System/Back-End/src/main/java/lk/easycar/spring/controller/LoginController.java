@@ -37,7 +37,7 @@ public class LoginController {
                 if (!(driverDTO == null)) {
                     return new ResponseUtil(200, "Driver", driverDTO);
                 } else {
-                    return new ResponseUtil(200, "You have entered an invalid username or password. Please try again.", null);
+                    throw new RuntimeException("You have entered an invalid username or password. Please try again.");
                 }
             } else {
                 return new ResponseUtil(200, "Admin", adminDTO);

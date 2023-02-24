@@ -31,19 +31,20 @@ $('#my-profile').click(function () {
     });
 });
 
+let carCards = $("#carCards");
+
 $('#searchCar').click(function () {
-    let carCards = $("#carCards");
-    carCards.removeClass("d-none");
-    carCards.addClass("d-block");
     let pickUpDate = $("#search-pick-up-date").val();
     let returnDate = $("#search-return-date").val();
     let carCount = 0;
     $.ajax({
         url: baseUrl + "rentalDetail?pick_up_date=" + pickUpDate + "&return_date=" + returnDate,
         success: function (res) {
-            var card = $("#carCards > div:nth-child(1)").clone();
-            carCards.empty();
             if (res.data != null) {
+                carCards.removeClass("d-none");
+                carCards.addClass("d-block");
+                var card = $("#carCards > div:nth-child(1)").clone();
+                carCards.empty();
                 for (let c of res.data) {
                     carCount++;
                     let regNo = c.reg_no;
@@ -65,7 +66,6 @@ $('#searchCar').click(function () {
                     newCard.find('.reservation-modal').attr("id", "reservationModal" + carCount);
                     newCard.find('.btn-img').attr("data-bs-target", "#seeImgsModal" + carCount);
                     newCard.find('.btn-reservation').attr("data-bs-target", "#reservationModal" + carCount);
-
                     newCard.find('.carousel').attr("id", "carCarousel" + carCount);
                     newCard.find('.carousel-control-prev').attr("data-bs-target", "#carCarousel" + carCount);
                     newCard.find('.carousel-control-next').attr("data-bs-target", "#carCarousel" + carCount);
@@ -83,16 +83,20 @@ $('#searchCar').click(function () {
                     newCard.find('.monthlyRate').text("Monthly Rate(Rs.) : " + monthlyRate);
                     newCard.find('.extraKmPrice').text("Price per Extra km(Rs.) : " + extraKmPrice);
                     newCard.find('.ldwPayment').text("Loss Damage Waiver Payment(Rs.) : " + ldwPayment);
+                    newCard.find('#reservationForm').attr("id", "#reservationForm" + carCount);
                     carCards.append(newCard);
                 }
                 bindClickEventsToButtons();
             } else {
+                carCards.removeClass("d-block");
+                carCards.addClass("d-none");
                 alert("No cars available for the time duration you searched for");
             }
         },
         error: function () {
-            carCards.empty();
-            alert(JSON.parse(error.responseText).message);
+            carCards.removeClass("d-block");
+            carCards.addClass("d-none");
+            alert("No cars available for the time duration you searched for");
         }
     });
 });
@@ -137,22 +141,20 @@ function generateNewId(reservationModalId) {
 
 function bindClickEventsToButtons() {
     $('.rentCar').on('click', function () {
+        let formId = $(this).closest("form").attr('id');
         let rentalDTO = {};
-        var dataArray = $(this).closest("form").serializeArray();
+        let dataArray = $(this).closest("form").serializeArray();
         for (let i in dataArray) {
             rentalDTO[dataArray[i].name] = dataArray[i].value;
-            console.log(dataArray[i].name);
         }
         $.ajax({
             url: baseUrl + "rentalDetail",
             method: "post",
             contentType: "application/json",
-            dataType: "json",
             data: JSON.stringify(rentalDTO),
             success: function (res) {
-                console.log(res);
                 if (res.status === 200) {
-                    // uploadFiles();
+                    uploadFiles(formId + ' .rental-id');
                 }
                 alert(res.message);
             },
@@ -164,15 +166,15 @@ function bindClickEventsToButtons() {
     });
 }
 
-function uploadFiles(formId) {
+function uploadFiles(rentalId) {
     let data = new FormData();
-    let bankSlip = $(formId + ' #bank-slip')[0].files[0];
+    let bankSlip = $('.bank-slip')[0].files[0];
 
     data.append("bankSlipImage", bankSlip, bankSlip.name);
-    data.append("rentalId", $(formId + ' #rental-id').val());
+    data.append("rentalId", $(rentalId).val());
 
     $.ajax({
-        url: baseUrl + "files/upload",
+        url: baseUrl + "files/upload/bankSlipImages",
         method: "post",
         async: true,
         contentType: false,
@@ -191,5 +193,7 @@ function uploadFiles(formId) {
 }
 
 function clearReservationForm() {
-    $('#pick-up-date ,#return-date, #pick-up-time, #return-time, #pick-up-venue, #return-venue, #bank-slip, #addDriver').val("");
+    $('#search-pick-up-date, #search-return-date').val("");
+    carCards.removeClass("d-block");
+    carCards.addClass("d-none");
 }
