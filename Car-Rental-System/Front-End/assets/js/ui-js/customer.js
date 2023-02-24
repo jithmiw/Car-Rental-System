@@ -142,6 +142,7 @@ function bindClickEventsToButtons() {
             url: baseUrl + "rentalDetail",
             method: "post",
             contentType: "application/json",
+            dataType: "json",
             data: JSON.stringify(rentalDTO),
             success: function (res) {
                 console.log(res);

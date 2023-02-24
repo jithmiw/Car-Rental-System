@@ -21,6 +21,63 @@ $("#saveDriver").click(function () {
     });
 });
 
+// update driver
+$('#updateDriver').click(function () {
+    let name = $('#inputName').val();
+    let nicNo = $('#inputNicNo').val();
+    let address = $('#inputAddress').val();
+    let email = $('#inputEmail').val();
+    let contactNo = $('#inputContactNo').val();
+    let licenseNo = $('#inputLicenseNo').val();
+    let username = $('#inputUsername').val();
+    let password = $('#inputPassword').val();
+
+    var driverDTO = {
+        nic_no: nicNo,
+        driver_name: name,
+        license_no: licenseNo,
+        address: address,
+        contact_no: contactNo,
+        email: email,
+        username: username,
+        password: password
+    }
+    $.ajax({
+        url: baseUrl + "car",
+        method: "put",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(driverDTO),
+        success: function (res) {
+            alert(res.message);
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+});
+
+// delete driver
+$('#deleteDriver').click(function () {
+    let nicNo = $('#inputNicNo').val();
+
+    $.ajax({
+        url: baseUrl + "driver?nic_no=" + nicNo,
+        method: "delete",
+        success: function (res) {
+            alert(res.message);
+            clearManageDriversForm()
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+});
+
+function clearManageDriversForm() {
+    $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , #inputPassword').val("");
+}
+
 // add car
 $("#saveCar").click(function () {
     let formData = $('#carForm').serialize();
