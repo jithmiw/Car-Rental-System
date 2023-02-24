@@ -160,27 +160,28 @@
                         <button id="searchCar" type="button" class="btn btn-dark">SEARCH</button>
                     </div>
                 </form>
-                <div>
+                <div class="ms-1">
                     <img class="img-fluid" src="assets/img/black-car.jpg" alt="car img">
                 </div>
             </div>
-            <div id="carCards" class="container-fluid d-flex flex-row flex-wrap justify-content-evenly">
+            <div id="carCards" class="container-fluid d-flex flex-row flex-wrap justify-content-evenly d-none">
                 <div class="card mb-5" style="width: 20rem;">
                     <div class="card-header fw-bold">Luxury</div>
                     <img src="assets/img/black-car.jpg" class="card-img-top" alt="car-img" style="height: 190px">
                     <div class="card-body">
                         <h5 class="card-title mb-3">BMW i8</h5>
-                        <span id="transType" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Transmission Type :</span>
-                        <span id="noOfPassengers" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Passengers :</span>
-                        <span id="fuelType" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Fuel Type :</span>
-                        <span id="freeKmDay" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Free km for a Day :</span>
-                        <span id="freeKmMonth" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Free km for a Month :</span>
+                        <span class="transType btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Transmission Type :</span>
+                        <span class="noOfPassengers btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Passengers :</span>
+                        <span class="fuelType btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Fuel Type :</span>
+                        <span class="freeKmDay btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Free km for a Day :</span>
+                        <span class="freeKmMonth btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Free km for a Month :</span>
+                        <span id="regNo" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2 d-none car-reg-no" style="font-size: 13px; cursor: text">Reg No :</span>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li id="dailyRate" class="list-group-item bg-dark text-white">Daily Rate :</li>
-                        <li id="monthlyRate" class="list-group-item" style="background-color: #d3d3d3">Monthly Rate :</li>
-                        <li id="extraKmPrice" class="list-group-item" style="background-color: #e3e3e3">Price per Extra km :</li>
-                        <li id="ldwPayment" class="list-group-item" style="background-color: #f3f3f3">Loss Damage Waiver Payment :</li>
+                        <li class="dailyRate list-group-item bg-dark text-white">Daily Rate :</li>
+                        <li class="monthlyRate list-group-item" style="background-color: #d3d3d3">Monthly Rate :</li>
+                        <li class="extraKmPrice list-group-item" style="background-color: #e3e3e3">Price per Extra km :</li>
+                        <li class="ldwPayment list-group-item" style="background-color: #f3f3f3">Loss Damage Waiver Payment :</li>
                     </ul>
                     <div class="d-flex flex-row justify-content-center m-2 mt-3">
                         <!-- See images button trigger modal -->
@@ -191,7 +192,7 @@
                         </button>
                     </div>
                     <!-- See images Modal -->
-                    <div class="modal modal-lg fade" id="seeImgsModal" tabindex="-1" aria-labelledby="seeImgsModalLabel" aria-hidden="true">
+                    <div class="modal modal-lg fade see-img-modal" id="seeImgsModal" tabindex="-1" aria-labelledby="seeImgsModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -199,7 +200,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
                                             <div class="carousel-item active">
                                                 <img src="assets/img/black-car.jpg" class="d-block w-100" alt="img-1">
@@ -228,7 +229,7 @@
                         </div>
                     </div>
                     <!-- Reservation Modal -->
-                    <div class="modal fade reservationModal" id="reservationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+                    <div class="modal fade reservationModal reservation-modal" id="reservationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -238,45 +239,57 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="reservationForm" class="row g-3">
+                                    <form class="row g-3">
                                         <div class="col-md-6">
-                                            <label for="rental-id" class="form-label">Rental id</label>
-                                            <input type="text" class="form-control" id="rental-id" name="rental_id" readonly>
+                                            <label class="form-label">Rental Id</label>
+                                            <input type="text" class="form-control rental-id" name="rental_id" readonly>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="pick-up-date" class="form-label">Pick-up Date</label>
-                                            <input type="Date" class="form-control" id="pick-up-date" name="pick_up_date">
+                                            <label class="form-label">Registration No</label>
+                                            <input type="text" class="form-control reg-no" name="car_reg_no" readonly>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="return-date" class="form-label">Return Date</label>
-                                            <input type="Date" class="form-control" id="return-date" name="return_date">
+                                            <label class="form-label">Customer Nic</label>
+                                            <input type="text" class="form-control customer-nic" name="customer_nic" readonly>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="pick-up-time" class="form-label">Pick-up Time</label>
-                                            <input type="Time" class="form-control" id="pick-up-time" name="pick_up_time">
+                                            <label class="form-label">Pick-up Date</label>
+                                            <input type="Date" class="form-control pick-up-date" name="pick_up_date">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="return-time" class="form-label">Return Time</label>
-                                            <input type="Time" class="form-control" id="return-time" name="return_time">
+                                            <label class="form-label">Return Date</label>
+                                            <input type="Date" class="form-control return-date" name="return_date">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="pick-up-venue" class="form-label">Pick-up Venue</label>
-                                            <input type="text" class="form-control" id="pick-up-venue" name="pick_up_venue">
+                                            <label class="form-label">Pick-up Time</label>
+                                            <input type="Time" class="form-control pick-up-time" name="pick_up_time">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="return-venue" class="form-label">Return Venue</label>
-                                            <input type="text" class="form-control" id="return-venue" name="return_venue">
+                                            <label class="form-label">Return Time</label>
+                                            <input type="Time" class="form-control return-time"  name="return_time">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="bank-slip" class="form-label">Bank Slip Image</label>
-                                            <input type="file" class="form-control" id="bank-slip" name="bank_slip_img">
+                                            <label class="form-label">Pick-up Venue</label>
+                                            <input type="text" class="form-control pick-up-venue" name="pick_up_venue">
                                         </div>
-                                        <div class="form-check" style="margin-left: 8px">
-                                            <input class="form-check-input" type="checkbox" value="" id="addDriver" name="driver_status">
-                                            <label class="form-check-label" for="addDriver">Add Driver</label>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Return Venue</label>
+                                            <input type="text" class="form-control return-venue" name="return_venue">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Bank Slip Image</label>
+                                            <input type="file" class="form-control bank-slip">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Add Driver or Not?</label>
+                                            <select class="form-select driver-status" name="driver_status">
+                                                <option selected>Add Driver or Not?</option>
+                                                <option>Yes</option>
+                                                <option>No</option>
+                                            </select>
                                         </div>
                                         <div class="modal-footer col-12 me-auto pe-2">
-                                            <button id="rentCar" type="button" class="btn btn-dark me-0">MAKE RESERVATION</button>
+                                            <button type="button" class="btn btn-dark me-0 rentCar">MAKE RESERVATION</button>
                                         </div>
                                     </form>
                                 </div>

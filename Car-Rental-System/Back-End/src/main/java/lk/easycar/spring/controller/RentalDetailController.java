@@ -35,11 +35,13 @@ public class RentalDetailController {
     }
 
     @PostMapping
-    public ResponseUtil makeReservation(@RequestBody RentalDetailDTO dto) {
-        ArrayList<DriverDTO> drivers = driverScheduleService.searchAvailableDriversForReservation(String.valueOf(dto.getPick_up_date()), String.valueOf(dto.getReturn_date()));
-        Collections.shuffle(drivers);
-        dto.setCustomer_nic(drivers.get(0).getNic_no());
-        rentalDetailService.saveRentalDetail(dto);
+    public ResponseUtil makeReservation(@ModelAttribute RentalDetailDTO dto) {
+        if(dto.getDriver_status().equals("Yes")){
+            ArrayList<DriverDTO> drivers = driverScheduleService.searchAvailableDriversForReservation(String.valueOf(dto.getPick_up_date()), String.valueOf(dto.getReturn_date()));
+            Collections.shuffle(drivers);
+            dto.setCustomer_nic(drivers.get(0).getNic_no());
+            rentalDetailService.saveRentalDetail(dto);
+        }
         return new ResponseUtil(200, "Rental Request sent successfully", null);
     }
 }

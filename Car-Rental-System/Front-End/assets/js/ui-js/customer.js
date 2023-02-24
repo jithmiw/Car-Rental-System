@@ -41,10 +41,11 @@ $('#searchCar').click(function () {
     $.ajax({
         url: baseUrl + "rentalDetail?pick_up_date=" + pickUpDate + "&return_date=" + returnDate,
         success: function (res) {
-            var card = $(".card").clone();
+            var card = $("#carCards > div:nth-child(1)").clone();
             carCards.empty();
             for (let c of res.data) {
                 carCount++;
+                let regNo = c.reg_no;
                 let brand = c.brand;
                 let type = c.type;
                 let transType = c.transmission_type;
@@ -58,31 +59,32 @@ $('#searchCar').click(function () {
                 let ldwPayment = c.ldw_payment;
 
                 var newCard = card.clone();
-                newCard.find('#seeImgsModal').attr("id", "seeImgsModal"+carCount);
-                newCard.find('#reservationModal').attr("id", "reservationModal"+carCount);
-                newCard.find('.btn-img').attr("data-bs-target", "#seeImgsModal"+carCount);
-                newCard.find('.btn-reservation').attr("data-bs-target", "#reservationModal"+carCount);
-                // newCard.find('#reservationForm').attr("id", "#reservationForm"+carCount);
-                // newCard.find('#rentCar').attr("id", "#rentCar"+carCount);
+                newCard.find('.car-reg-no').attr("id", "regNo" + carCount);
+                newCard.find('.see-img-modal').attr("id", "seeImgsModal" + carCount);
+                newCard.find('.reservation-modal').attr("id", "reservationModal" + carCount);
+                newCard.find('.btn-img').attr("data-bs-target", "#seeImgsModal" + carCount);
+                newCard.find('.btn-reservation').attr("data-bs-target", "#reservationModal" + carCount);
 
-                newCard.find('.carousel').attr("id", "carCarousel"+carCount);
+                newCard.find('.carousel').attr("id", "carCarousel" + carCount);
                 newCard.find('.carousel-control-prev').attr("data-bs-target", "#carCarousel" + carCount);
                 newCard.find('.carousel-control-next').attr("data-bs-target", "#carCarousel" + carCount);
-                loadCarImages(c.reg_no, newCard);
+                loadCarImages(regNo, newCard);
                 newCard.find('.modal-title').text(brand);
                 newCard.find('.card-header').text(type);
                 newCard.find('.card-title').text(brand);
-                newCard.find('#transType').text("Transmission Type : " + transType);
-                newCard.find('#noOfPassengers').text("Passengers : " + noOfPassengers);
-                newCard.find('#fuelType').text(fuelType);
-                newCard.find('#freeKmDay').text("Free km for a Day : " + freeKmDay);
-                newCard.find('#freeKmMonth').text("Free km for a Month : " + freeKmMonth);
-                newCard.find('#dailyRate').text("Daily Rate(Rs.) : " + dailyRate);
-                newCard.find('#monthlyRate').text("Monthly Rate(Rs.) : " + monthlyRate);
-                newCard.find('#extraKmPrice').text("Price per Extra km(Rs.) : " + extraKmPrice);
-                newCard.find('#ldwPayment').text("Loss Damage Waiver Payment(Rs.) : " + ldwPayment);
+                newCard.find('#regNo' + carCount).text(regNo);
+                newCard.find('.transType').text("Transmission Type : " + transType);
+                newCard.find('.noOfPassengers').text("Passengers : " + noOfPassengers);
+                newCard.find('.fuelType').text(fuelType);
+                newCard.find('.freeKmDay').text("Free km for a Day : " + freeKmDay);
+                newCard.find('.freeKmMonth').text("Free km for a Month : " + freeKmMonth);
+                newCard.find('.dailyRate').text("Daily Rate(Rs.) : " + dailyRate);
+                newCard.find('.monthlyRate').text("Monthly Rate(Rs.) : " + monthlyRate);
+                newCard.find('.extraKmPrice').text("Price per Extra km(Rs.) : " + extraKmPrice);
+                newCard.find('.ldwPayment').text("Loss Damage Waiver Payment(Rs.) : " + ldwPayment);
                 carCards.append(newCard);
             }
+            bindClickEventsToButtons();
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -107,15 +109,20 @@ function loadCarImages(reg_no, newCard) {
 }
 
 $(document).on('show.bs.modal', '.reservationModal', function (e) {
-    let reservationModalId = '#'+$(this).attr("id");
+    let reservationModalId = '#' + $(this).attr("id");
     generateNewId(reservationModalId);
+
+    let num = reservationModalId.slice(17);
+    let regNo = $('#regNo' + num).text();
+    $(reservationModalId + ' .reg-no').val(regNo);
+    $(reservationModalId + ' .customer-nic').val(nic);
 });
 
-function generateNewId (reservationModalId){
+function generateNewId(reservationModalId) {
     $.ajax({
         url: baseUrl + "rentalDetail/generateRentalId",
         success: function (res) {
-            $(reservationModalId + ' #rental-id').val(res.data);
+            $(reservationModalId + ' .rental-id').val(res.data);
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -123,33 +130,36 @@ function generateNewId (reservationModalId){
     });
 }
 
-$('#rentCar').click(function () {
+function bindClickEventsToButtons() {
+    $('.rentCar').on('click', function () {
+        let formData = $(this).closest("form").serialize();
 
-    let formData = $('#reservationForm').serialize();
-    $.ajax({
-        url: baseUrl + "rentalDetail",
-        method: "post",
-        data: formData,
-        dataType: "json",
-        success: function (res) {
-            if (res.status === 200){
-                uploadFiles();
+        $.ajax({
+            url: baseUrl + "rentalDetail",
+            method: "post",
+            data: formData,
+            dataType: "json",
+            success: function (res) {
+                console.log(res);
+                if (res.status === 200) {
+                    uploadFiles();
+                }
+                alert(res.message);
+            },
+            error: function (error) {
+                console.log(JSON.parse(error.responseText));
+                alert(JSON.parse(error.responseText).message);
             }
-            alert(res.message);
-        },
-        error: function (error) {
-            console.log(JSON.parse(error.responseText));
-            alert(JSON.parse(error.responseText).message);
-        }
+        });
     });
-});
+}
 
-function uploadFiles() {
+function uploadFiles(formId) {
     let data = new FormData();
-    let bankSlip = $("#bank-slip")[0].files[0];
+    let bankSlip = $(formId + ' #bank-slip')[0].files[0];
 
     data.append("bankSlipImage", bankSlip, bankSlip.name);
-    data.append("rentalId", $('#rental-id').val());
+    data.append("rentalId", $(formId + ' #rental-id').val());
 
     $.ajax({
         url: baseUrl + "files/upload",
@@ -160,7 +170,7 @@ function uploadFiles() {
         data: data,
         success: function (res) {
             console.log(res.message);
-            if (res.status === 200){
+            if (res.status === 200) {
                 clearReservationForm();
             }
         },
@@ -170,6 +180,6 @@ function uploadFiles() {
     });
 }
 
-function clearReservationForm(){
+function clearReservationForm() {
     $('#pick-up-date ,#return-date, #pick-up-time, #return-time, #pick-up-venue, #return-venue, #bank-slip, #addDriver').val("");
 }
