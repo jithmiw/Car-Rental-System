@@ -36,17 +36,18 @@ public class RentalDetailServiceImpl implements RentalDetailService {
 
     @Override
     public void saveRentalDetail(RentalDetailDTO dto) {
-        dto.setRental_status("Rental");
+//        dto.setRental_status("Rental");
         RentalDetail rentalDetail = mapper.map(dto, RentalDetail.class);
         if (rentalDetailRepo.existsById(rentalDetail.getRental_id())) {
             throw new RuntimeException("Reservation " + rentalDetail.getRental_id() + " already added");
         }
+        System.out.println(dto.toString());
         rentalDetailRepo.save(rentalDetail);
 
         // update car status
-        Car car = rentalDetail.getCar();
-        car.setStatus("Reserved");
-        carRepo.save(car);
+//        Car car = rentalDetail.getCar();
+//        car.setStatus("Reserved");
+//        carRepo.save(car);
     }
 
     @Override

@@ -142,7 +142,7 @@ function bindClickEventsToButtons() {
             success: function (res) {
                 console.log(res);
                 if (res.status === 200) {
-                    uploadFiles();
+                    // uploadFiles();
                 }
                 alert(res.message);
             },
