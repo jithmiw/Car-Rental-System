@@ -1,13 +1,12 @@
 package lk.easycar.spring.service;
 
 import lk.easycar.spring.dto.CarDTO;
-import lk.easycar.spring.dto.DriverScheduleDTO;
 import lk.easycar.spring.dto.RentalDetailDTO;
 
 import java.util.ArrayList;
 
 public interface RentalDetailService {
-    void saveRentalDetail(RentalDetailDTO dto, DriverScheduleDTO driverDTO);
+    void saveRentalDetail(RentalDetailDTO dto, String scheduleId);
 //
 //    void updateRentalDetail(RentalDetailDTO dto);
 //

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,7 +41,7 @@ public class RentalDetailServiceImpl implements RentalDetailService {
     private ModelMapper mapper;
 
     @Override
-    public void saveRentalDetail(RentalDetailDTO dto, DriverScheduleDTO driverDTO) {
+    public void saveRentalDetail(RentalDetailDTO dto, String scheduleId) {
         Customer customer = customerRepo.findById(dto.getCustomer_nic()).get();
         Car car = carRepo.findById(dto.getCar_reg_no()).get();
         RentalDetail rentalDetail = new RentalDetail(dto.getRental_id(), dto.getPick_up_date(), dto.getReturn_date(),
@@ -52,11 +53,13 @@ public class RentalDetailServiceImpl implements RentalDetailService {
         rentalDetailRepo.save(rentalDetail);
 
         // save rental detail
-        if (driverDTO!=null){
-            Driver driver = driverRepo.findById(dto.getCustomer_nic()).get();
-            DriverSchedule driverSchedule = new DriverSchedule(driverDTO.getSchedule_id(), driverDTO.getStart_date(), driverDTO.getStart_time(), driverDTO.getEnd_date(), driverDTO.getEnd_time(), driver, rentalDetail);
-            if (driverScheduleRepo.existsById(driverDTO.getSchedule_id())) {
-                throw new RuntimeException("Driver Schedule " + driverDTO.getSchedule_id() + " already added");
+        if (dto.getDriver_status().equals("Yes")){
+            List<Driver> drivers = driverRepo.findAll();
+            Collections.shuffle(drivers);
+            Driver driver = driverRepo.findById(drivers.get(0).getNic_no()).get();
+            DriverSchedule driverSchedule = new DriverSchedule(scheduleId, dto.getPick_up_date(), dto.getPick_up_time(), dto.getReturn_date(), dto.getReturn_time(), driver, rentalDetail);
+            if (driverScheduleRepo.existsById(scheduleId)) {
+                throw new RuntimeException("Driver Schedule " + scheduleId + " already added");
             }
             driverScheduleRepo.save(driverSchedule);
         }

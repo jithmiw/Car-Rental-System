@@ -32,7 +32,6 @@ $('#my-profile').click(function () {
 });
 
 let carCards = $("#carCards");
-
 $('#searchCar').click(function () {
     let pickUpDate = $("#search-pick-up-date").val();
     let returnDate = $("#search-return-date").val();
@@ -125,6 +124,8 @@ $(document).on('show.bs.modal', '.reservationModal', function (e) {
     let regNo = $('#regNo' + num).text();
     $(reservationModalId + ' .reg-no').val(regNo);
     $(reservationModalId + ' .customer-nic').val(nic);
+    $(reservationModalId + ' .pick-up-date').val($("#search-pick-up-date").val());
+    $(reservationModalId + ' .return-date').val($("#search-return-date").val());
 });
 
 function generateNewId(reservationModalId) {
@@ -141,13 +142,12 @@ function generateNewId(reservationModalId) {
 
 function bindClickEventsToButtons() {
     $('.rentCar').on('click', function () {
-        let formId = $(this).closest("form").attr('id');
         let rentalId;
         let rentalDTO = {};
         let dataArray = $(this).closest("form").serializeArray();
         for (let i in dataArray) {
             rentalDTO[dataArray[i].name] = dataArray[i].value;
-            if (dataArray[i].name==="rental_id") {
+            if (dataArray[i].name === "rental_id") {
                 rentalId = dataArray[i].value;
             }
         }
@@ -158,7 +158,7 @@ function bindClickEventsToButtons() {
             data: JSON.stringify(rentalDTO),
             success: function (res) {
                 if (res.status === 200) {
-                    uploadFiles(rentalId, formId);
+                    uploadFiles(rentalId);
                 }
                 alert(res.message);
             },
@@ -170,7 +170,7 @@ function bindClickEventsToButtons() {
     });
 }
 
-function uploadFiles(rentalId, formId) {
+function uploadFiles(rentalId) {
     let data = new FormData();
     let bankSlip = $('.bank-slip')[0].files[0];
 
@@ -186,7 +186,7 @@ function uploadFiles(rentalId, formId) {
         data: data,
         success: function (res) {
             if (res.status === 200) {
-                clearReservationForm(formId);
+                clearReservationForm();
             }
         },
         error: function (err) {
@@ -195,9 +195,6 @@ function uploadFiles(rentalId, formId) {
     });
 }
 
-function clearReservationForm(formId) {
-    $('#search-pick-up-date, #search-return-date').val("");
-    $(formId).parent().parent().parent().parent().modal('toggle');
-    carCards.removeClass("d-block");
-    carCards.addClass("d-none");
+function clearReservationForm() {
+    location.reload();
 }

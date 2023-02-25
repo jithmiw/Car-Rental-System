@@ -13,7 +13,5 @@ public interface DriverScheduleService {
 //
 //    ArrayList<RentalDetailDTO> getAllRentalDetail();
 
-    ArrayList<DriverDTO> searchAvailableDriversForReservation(LocalDate pick_up_date, LocalDate return_date);
-
     String generateNewScheduleId();
 }

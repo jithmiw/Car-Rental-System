@@ -8,9 +8,6 @@ import java.util.List;
 
 public interface DriverScheduleRepo extends JpaRepository<DriverSchedule, String> {
 
-    @Query(value = "SELECT * FROM DriverSchedule WHERE rental_id.rental_status=?1", nativeQuery = true)
-    List<DriverSchedule> findDriverScheduleByRental_status(String rental_status);
-
     @Query(value = "SELECT schedule_id FROM DriverSchedule ORDER BY schedule_id DESC LIMIT 1", nativeQuery = true)
     String getLastScheduleId();
 }
