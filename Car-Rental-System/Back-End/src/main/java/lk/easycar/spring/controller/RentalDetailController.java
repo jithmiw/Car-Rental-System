@@ -38,13 +38,14 @@ public class RentalDetailController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil makeReservation(@RequestBody RentalDetailDTO dto) {
+        DriverScheduleDTO driverScheduleDTO = null;
         if (dto.getDriver_status().equals("Yes")) {
             ArrayList<DriverDTO> drivers = driverScheduleService.searchAvailableDriversForReservation(dto.getPick_up_date(), dto.getReturn_date());
             Collections.shuffle(drivers);
-            driverScheduleService.saveDriverSchedule(new DriverScheduleDTO(driverScheduleService.generateNewScheduleId(), dto.getPick_up_date(), dto.getPick_up_time(),
-                    dto.getReturn_date(), dto.getReturn_time(), drivers.get(0).getNic_no(), dto.getRental_id()));
+            driverScheduleDTO = new DriverScheduleDTO(driverScheduleService.generateNewScheduleId(), dto.getPick_up_date(), dto.getPick_up_time(),
+                    dto.getReturn_date(), dto.getReturn_time(), drivers.get(0).getNic_no(), dto.getRental_id());
         }
-        rentalDetailService.saveRentalDetail(dto);
+        rentalDetailService.saveRentalDetail(dto, driverScheduleDTO);
         return new ResponseUtil(200, "Rental Request sent successfully", null);
     }
 }

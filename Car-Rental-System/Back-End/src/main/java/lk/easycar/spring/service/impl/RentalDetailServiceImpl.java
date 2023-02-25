@@ -1,14 +1,10 @@
 package lk.easycar.spring.service.impl;
 
 import lk.easycar.spring.dto.CarDTO;
+import lk.easycar.spring.dto.DriverScheduleDTO;
 import lk.easycar.spring.dto.RentalDetailDTO;
-import lk.easycar.spring.entity.Car;
-import lk.easycar.spring.entity.Customer;
-import lk.easycar.spring.entity.RentalDetail;
-import lk.easycar.spring.repo.CarRepo;
-import lk.easycar.spring.repo.CustomerRepo;
-import lk.easycar.spring.repo.DriverScheduleRepo;
-import lk.easycar.spring.repo.RentalDetailRepo;
+import lk.easycar.spring.entity.*;
+import lk.easycar.spring.repo.*;
 import lk.easycar.spring.service.RentalDetailService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -35,13 +31,16 @@ public class RentalDetailServiceImpl implements RentalDetailService {
     private CustomerRepo customerRepo;
 
     @Autowired
+    private DriverRepo driverRepo;
+
+    @Autowired
     private CarRepo carRepo;
 
     @Autowired
     private ModelMapper mapper;
 
     @Override
-    public void saveRentalDetail(RentalDetailDTO dto) {
+    public void saveRentalDetail(RentalDetailDTO dto, DriverScheduleDTO driverDTO) {
         Customer customer = customerRepo.findById(dto.getCustomer_nic()).get();
         Car car = carRepo.findById(dto.getCar_reg_no()).get();
         RentalDetail rentalDetail = new RentalDetail(dto.getRental_id(), dto.getPick_up_date(), dto.getReturn_date(),
@@ -52,6 +51,15 @@ public class RentalDetailServiceImpl implements RentalDetailService {
         }
         rentalDetailRepo.save(rentalDetail);
 
+        // save rental detail
+        if (driverDTO!=null){
+            Driver driver = driverRepo.findById(dto.getCustomer_nic()).get();
+            DriverSchedule driverSchedule = new DriverSchedule(driverDTO.getSchedule_id(), driverDTO.getStart_date(), driverDTO.getStart_time(), driverDTO.getEnd_date(), driverDTO.getEnd_time(), driver, rentalDetail);
+            if (driverScheduleRepo.existsById(driverDTO.getSchedule_id())) {
+                throw new RuntimeException("Driver Schedule " + driverDTO.getSchedule_id() + " already added");
+            }
+            driverScheduleRepo.save(driverSchedule);
+        }
         // update car status
         rentalDetail.getCar().setStatus("Reserved");
         carRepo.save(car);

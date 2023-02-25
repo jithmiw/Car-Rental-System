@@ -25,24 +25,10 @@ public class DriverScheduleServiceImpl implements DriverScheduleService {
     private DriverScheduleRepo driverScheduleRepo;
 
     @Autowired
-    private RentalDetailRepo rentalDetailRepo;
-
-    @Autowired
     private DriverRepo driverRepo;
 
     @Autowired
     private ModelMapper mapper;
-
-    @Override
-    public void saveDriverSchedule(DriverScheduleDTO dto) {
-        Driver driver = driverRepo.findById(dto.getDriver_nic()).get();
-        RentalDetail rentalDetail = rentalDetailRepo.findById(dto.getRental_id()).get();
-        DriverSchedule driverSchedule = new DriverSchedule(dto.getSchedule_id(), dto.getStart_date(), dto.getStart_time(), dto.getEnd_date(), dto.getEnd_time(), driver, rentalDetail);
-        if (driverScheduleRepo.existsById(dto.getSchedule_id())) {
-            throw new RuntimeException("Driver Schedule " + dto.getSchedule_id() + " already added");
-        }
-        driverScheduleRepo.save(driverSchedule);
-    }
 
     @Override
     public ArrayList<DriverDTO> searchAvailableDriversForReservation(LocalDate pick_up_date, LocalDate return_date) {
