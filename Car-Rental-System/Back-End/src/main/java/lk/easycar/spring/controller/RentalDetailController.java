@@ -41,7 +41,7 @@ public class RentalDetailController {
         if (dto.getDriver_status().equals("Yes")) {
             ArrayList<DriverDTO> drivers = driverScheduleService.searchAvailableDriversForReservation(dto.getPick_up_date(), dto.getReturn_date());
             Collections.shuffle(drivers);
-            driverScheduleService.saveDriverSchedule(new DriverScheduleDTO(dto.getPick_up_date(), dto.getPick_up_time(),
+            driverScheduleService.saveDriverSchedule(new DriverScheduleDTO(driverScheduleService.generateNewScheduleId(), dto.getPick_up_date(), dto.getPick_up_time(),
                     dto.getReturn_date(), dto.getReturn_time(), drivers.get(0).getNic_no(), dto.getRental_id()));
         }
         rentalDetailService.saveRentalDetail(dto);

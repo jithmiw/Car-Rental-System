@@ -2,10 +2,10 @@ package lk.easycar.spring.service.impl;
 
 import lk.easycar.spring.dto.DriverDTO;
 import lk.easycar.spring.dto.DriverScheduleDTO;
-import lk.easycar.spring.entity.Driver;
-import lk.easycar.spring.entity.DriverSchedule;
+import lk.easycar.spring.entity.*;
 import lk.easycar.spring.repo.DriverRepo;
 import lk.easycar.spring.repo.DriverScheduleRepo;
+import lk.easycar.spring.repo.RentalDetailRepo;
 import lk.easycar.spring.service.DriverScheduleService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -25,6 +25,9 @@ public class DriverScheduleServiceImpl implements DriverScheduleService {
     private DriverScheduleRepo driverScheduleRepo;
 
     @Autowired
+    private RentalDetailRepo rentalDetailRepo;
+
+    @Autowired
     private DriverRepo driverRepo;
 
     @Autowired
@@ -32,10 +35,13 @@ public class DriverScheduleServiceImpl implements DriverScheduleService {
 
     @Override
     public void saveDriverSchedule(DriverScheduleDTO dto) {
-        if (driverScheduleRepo.existsById(String.valueOf(dto.getSchedule_id()))) {
+        Driver driver = driverRepo.findById(dto.getDriver_nic()).get();
+        RentalDetail rentalDetail = rentalDetailRepo.findById(dto.getRental_id()).get();
+        DriverSchedule driverSchedule = new DriverSchedule(dto.getSchedule_id(), dto.getStart_date(), dto.getStart_time(), dto.getEnd_date(), dto.getEnd_time(), driver, rentalDetail);
+        if (driverScheduleRepo.existsById(dto.getSchedule_id())) {
             throw new RuntimeException("Driver Schedule " + dto.getSchedule_id() + " already added");
         }
-        driverScheduleRepo.save(mapper.map(dto, DriverSchedule.class));
+        driverScheduleRepo.save(driverSchedule);
     }
 
     @Override
@@ -59,5 +65,16 @@ public class DriverScheduleServiceImpl implements DriverScheduleService {
         }
         return mapper.map(driverRepo.findAll(), new TypeToken<ArrayList<DriverDTO>>() {
         }.getType());
+    }
+
+    @Override
+    public String generateNewScheduleId() {
+        String schedule_id = "";
+        schedule_id = driverScheduleRepo.getLastScheduleId();
+        if (schedule_id != null) {
+            int newRentalId = Integer.parseInt(schedule_id.replace("SID-", "")) + 1;
+            return String.format("SID-%03d", newRentalId);
+        }
+        return "SID-001";
     }
 }

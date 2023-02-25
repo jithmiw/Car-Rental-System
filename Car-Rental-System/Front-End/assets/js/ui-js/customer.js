@@ -142,10 +142,14 @@ function generateNewId(reservationModalId) {
 function bindClickEventsToButtons() {
     $('.rentCar').on('click', function () {
         let formId = $(this).closest("form").attr('id');
+        let rentalId;
         let rentalDTO = {};
         let dataArray = $(this).closest("form").serializeArray();
         for (let i in dataArray) {
             rentalDTO[dataArray[i].name] = dataArray[i].value;
+            if (dataArray[i].name==="rental_id") {
+                rentalId = dataArray[i].value;
+            }
         }
         $.ajax({
             url: baseUrl + "rentalDetail",
@@ -154,7 +158,7 @@ function bindClickEventsToButtons() {
             data: JSON.stringify(rentalDTO),
             success: function (res) {
                 if (res.status === 200) {
-                    uploadFiles(formId + ' .rental-id');
+                    uploadFiles(rentalId, formId);
                 }
                 alert(res.message);
             },
@@ -166,12 +170,12 @@ function bindClickEventsToButtons() {
     });
 }
 
-function uploadFiles(rentalId) {
+function uploadFiles(rentalId, formId) {
     let data = new FormData();
     let bankSlip = $('.bank-slip')[0].files[0];
 
     data.append("bankSlipImage", bankSlip, bankSlip.name);
-    data.append("rentalId", $(rentalId).val());
+    data.append("rentalId", rentalId);
 
     $.ajax({
         url: baseUrl + "files/upload/bankSlipImages",
@@ -181,9 +185,8 @@ function uploadFiles(rentalId) {
         processData: false,
         data: data,
         success: function (res) {
-            console.log(res.message);
             if (res.status === 200) {
-                clearReservationForm();
+                clearReservationForm(formId);
             }
         },
         error: function (err) {
@@ -192,8 +195,9 @@ function uploadFiles(rentalId) {
     });
 }
 
-function clearReservationForm() {
+function clearReservationForm(formId) {
     $('#search-pick-up-date, #search-return-date').val("");
+    $(formId).parent().parent().parent().parent().modal('toggle');
     carCards.removeClass("d-block");
     carCards.addClass("d-none");
 }

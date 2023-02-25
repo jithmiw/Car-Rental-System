@@ -16,8 +16,7 @@ import java.time.LocalTime;
 @Entity
 public class DriverSchedule {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long schedule_id;
+    private String schedule_id;
     private LocalDate start_date;
     private LocalTime start_time;
     private LocalDate end_date;
