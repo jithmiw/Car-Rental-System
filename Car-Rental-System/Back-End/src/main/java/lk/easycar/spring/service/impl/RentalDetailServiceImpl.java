@@ -121,7 +121,5 @@ public class RentalDetailServiceImpl implements RentalDetailService {
             return rentalRequests;
         }
         return null;
-//        return mapper.map(rentalRequests, new TypeToken<ArrayList<RentalDetailDTO>>() {
-//        }.getType());
     }
 }

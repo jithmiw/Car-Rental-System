@@ -13,4 +13,6 @@ public interface DriverService {
     DriverDTO verifyDriver(String username, String password);
 
     DriverDTO getDriverByNic(String nic_no);
+
+    String getDriverNicByRentalId(String rental_id);
 }

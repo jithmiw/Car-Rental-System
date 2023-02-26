@@ -12,24 +12,27 @@ function getRentalRequests() {
     $.ajax({
         url: baseUrl + "rentalDetail/getRentalRequests",
         success: function (res) {
-            for (let c of res.data) {
-                let rentalId = c.rental_id;
-                let customerNic = c.customer_nic;
-                let carRegNo = c.car_reg_no;
-                let pickUpDate = c.pick_up_date;
-                let returnDate = c.return_date;
-                let pickUpTime = c.pick_up_time;
-                let returnTime = c.return_time;
-                let pickUpVenue = c.pick_up_venue;
-                let returnVenue = c.return_venue;
-                let reservedDate = c.reserved_date;
+            if (res.data != null) {
+                for (let c of res.data) {
+                    let rentalId = c.rental_id;
+                    let customerNic = c.customer_nic;
+                    let carRegNo = c.car_reg_no;
+                    let pickUpDate = c.pick_up_date;
+                    let returnDate = c.return_date;
+                    let pickUpTime = c.pick_up_time;
+                    let returnTime = c.return_time;
+                    let pickUpVenue = c.pick_up_venue;
+                    let returnVenue = c.return_venue;
+                    let driverStatus = c.driver_status;
+                    let reservedDate = c.reserved_date;
 
-                let row = "<tr><td>" + rentalId + "</td><td>" + customerNic + "</td><td>" + carRegNo + "</td>" +
-                    "<td>" + pickUpDate + "</td><td>" + returnDate + "</td><td>" + pickUpTime + "</td><td>" + returnTime + "</td>" +
-                    "<td>" + pickUpVenue + "</td><td>" + returnVenue + "</td><td>" + returnVenue + "</td><td>" + reservedDate + "</td></tr>";
-                $('#tblReservations').append(row);
+                    let row = "<tr><td>" + rentalId + "</td><td>" + customerNic + "</td><td>" + carRegNo + "</td>" +
+                        "<td>" + pickUpDate + "</td><td>" + returnDate + "</td><td>" + pickUpTime + "</td><td>" + returnTime + "</td>" +
+                        "<td>" + pickUpVenue + "</td><td>" + returnVenue + "</td><td>" + driverStatus + "</td><td>" + reservedDate + "</td></tr>";
+                    $('#tblReservations').append(row);
+                }
+                bindClickEventsToRows();
             }
-            // bindClickEventsToRows();
             // clearAll();
         },
         error: function (error) {
@@ -37,6 +40,64 @@ function getRentalRequests() {
         }
     });
 }
+
+// bind events for the table rows
+function bindClickEventsToRows() {
+    $('#tblReservations > tr').on('click', function () {
+        let rentalId = $(this).children(':eq(0)').text();
+        let customerNic = $(this).children(':eq(1)').text();
+        let carRegNo = $(this).children(':eq(2)').text();
+        let pickUpDate = $(this).children(':eq(3)').text();
+        let returnDate = $(this).children(':eq(4)').text();
+        let pickUpTime = $(this).children(':eq(5)').text();
+        let returnTime = $(this).children(':eq(6)').text();
+        let pickUpVenue = $(this).children(':eq(7)').text();
+        let returnVenue = $(this).children(':eq(8)').text();
+        let driverStatus = $(this).children(':eq(9)').text();
+        let reservedDate = $(this).children(':eq(10)').text();
+
+        $('#rental-id').val(rentalId);
+        $('#reg-no').val(carRegNo);
+        $('#customer-nic').val(customerNic);
+        $('#pick-up-date').val(pickUpDate);
+        $('#return-date').val(returnDate);
+        $('#pick-up-time').val(pickUpTime);
+        $('#return-time').val(returnTime);
+        $('#pick-up-venue').val(pickUpVenue);
+        $('#return-venue').val(returnVenue);
+        $('#reserved-date').val(reservedDate);
+
+        if (driverStatus === "Yes") {
+            $("#selectDriverNic").empty();
+            $.ajax({
+                url: baseUrl + "driver/rentalId/" + rentalId,
+                success: function (res) {
+                    $("#selectDriverNic").append(`<option value="${res.data}">${res.data}</option>`);
+                },
+                error: function (error) {
+                    console.log(JSON.parse(error.responseText).message);
+                }
+            });
+        }
+    });
+}
+
+// function loadAllDrivers() {
+//     $("#selectDriverNic").empty();
+//     $.ajax({
+//         url: baseUrl + "item",
+//         success: function (res) {
+//             for (let c of res.data) {
+//                 let code = c.code;
+//                 $("#selectItemCode").append(`<option value="${code}">${code}</option>`);
+//             }
+//         },
+//         error: function (error) {
+//             let message = JSON.parse(error.responseText).message;
+//             alert(message);
+//         }
+//     });
+// }
 
 // add driver
 $("#saveDriver").click(function () {
@@ -123,7 +184,7 @@ $("#saveCar").click(function () {
         dataType: "json",
         success: function (res) {
             console.log(res);
-            if (res.status===200){
+            if (res.status === 200) {
                 uploadCarImages();
                 clearManageCarsForm();
             }
@@ -206,7 +267,7 @@ $('#updateCar').click(function () {
         dataType: "json",
         data: JSON.stringify(carOb),
         success: function (res) {
-            if (res.status === 200){
+            if (res.status === 200) {
                 uploadCarImages();
                 clearManageCarsForm();
             }

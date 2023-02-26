@@ -3,6 +3,7 @@ package lk.easycar.spring.service.impl;
 import lk.easycar.spring.dto.DriverDTO;
 import lk.easycar.spring.entity.Driver;
 import lk.easycar.spring.repo.DriverRepo;
+import lk.easycar.spring.repo.DriverScheduleRepo;
 import lk.easycar.spring.service.DriverService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class DriverServiceImpl implements DriverService {
 
     @Autowired
     private DriverRepo driverRepo;
+
+    @Autowired
+    private DriverScheduleRepo driverScheduleRepo;
 
     @Autowired
     private ModelMapper mapper;
@@ -63,5 +67,10 @@ public class DriverServiceImpl implements DriverService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public String getDriverNicByRentalId(String rental_id) {
+        return driverScheduleRepo.getDriverNicByRentalId(rental_id);
     }
 }
