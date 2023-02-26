@@ -1,5 +1,6 @@
 package lk.easycar.spring.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,6 @@ public class DriverDTO {
 
     private String username;
     private String password;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate reg_date;
 }

@@ -1,6 +1,42 @@
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
+$('#manage-reservations').click(function () {
+    $('#reservations').removeClass("d-none");
+    $('#reservations').addClass("d-block");
+    getRentalRequests();
+});
 
+// get rental requests
+function getRentalRequests() {
+    $('#tblReservations').empty();
+    $.ajax({
+        url: baseUrl + "rentalDetail/getRentalRequests",
+        success: function (res) {
+            for (let c of res.data) {
+                let rentalId = c.rental_id;
+                let customerNic = c.customer_nic;
+                let carRegNo = c.car_reg_no;
+                let pickUpDate = c.pick_up_date;
+                let returnDate = c.return_date;
+                let pickUpTime = c.pick_up_time;
+                let returnTime = c.return_time;
+                let pickUpVenue = c.pick_up_venue;
+                let returnVenue = c.return_venue;
+                let reservedDate = c.reserved_date;
+
+                let row = "<tr><td>" + rentalId + "</td><td>" + customerNic + "</td><td>" + carRegNo + "</td>" +
+                    "<td>" + pickUpDate + "</td><td>" + returnDate + "</td><td>" + pickUpTime + "</td><td>" + returnTime + "</td>" +
+                    "<td>" + pickUpVenue + "</td><td>" + returnVenue + "</td><td>" + returnVenue + "</td><td>" + reservedDate + "</td></tr>";
+                $('#tblReservations').append(row);
+            }
+            // bindClickEventsToRows();
+            // clearAll();
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
 
 // add driver
 $("#saveDriver").click(function () {

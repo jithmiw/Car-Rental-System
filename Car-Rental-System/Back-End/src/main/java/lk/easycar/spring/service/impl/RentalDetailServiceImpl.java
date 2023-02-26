@@ -1,7 +1,6 @@
 package lk.easycar.spring.service.impl;
 
 import lk.easycar.spring.dto.CarDTO;
-import lk.easycar.spring.dto.DriverScheduleDTO;
 import lk.easycar.spring.dto.RentalDetailDTO;
 import lk.easycar.spring.entity.*;
 import lk.easycar.spring.repo.*;
@@ -53,7 +52,7 @@ public class RentalDetailServiceImpl implements RentalDetailService {
         rentalDetailRepo.save(rentalDetail);
 
         // save rental detail
-        if (dto.getDriver_status().equals("Yes")){
+        if (dto.getDriver_status().equals("Yes")) {
             List<Driver> drivers = driverRepo.findAll();
             Collections.shuffle(drivers);
             Driver driver = driverRepo.findById(drivers.get(0).getNic_no()).get();
@@ -106,5 +105,23 @@ public class RentalDetailServiceImpl implements RentalDetailService {
     public RentalDetailDTO getRentalDetailByRentalId(String rental_id) {
         RentalDetail rentalDetail = rentalDetailRepo.findRentalDetailByRental_id(rental_id);
         return mapper.map(rentalDetail, RentalDetailDTO.class);
+    }
+
+    @Override
+    public ArrayList<RentalDetailDTO> getRentalRequests() {
+        List<RentalDetail> requests = rentalDetailRepo.findRentalDetailByRental_status("Rental");
+        ArrayList<RentalDetailDTO> rentalRequests = new ArrayList<>();
+        if (requests.size() != 0) {
+            for (RentalDetail rental : requests) {
+                rentalRequests.add(new RentalDetailDTO(rental.getRental_id(), rental.getPick_up_date(),
+                        rental.getReturn_date(), rental.getPick_up_time(), rental.getReturn_time(), rental.getPick_up_venue(),
+                        rental.getReturn_venue(), rental.getRental_status(), rental.getDriver_status(), rental.getReserved_date(),
+                        rental.getBank_slip_img(), rental.getCustomer().getNic_no(), rental.getCar().getReg_no()));
+            }
+            return rentalRequests;
+        }
+        return null;
+//        return mapper.map(rentalRequests, new TypeToken<ArrayList<RentalDetailDTO>>() {
+//        }.getType());
     }
 }

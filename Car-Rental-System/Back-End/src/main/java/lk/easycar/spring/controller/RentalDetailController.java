@@ -45,4 +45,9 @@ public class RentalDetailController {
         rentalDetailService.saveRentalDetail(dto, scheduleId);
         return new ResponseUtil(200, "Rental Request sent successfully", null);
     }
+
+    @GetMapping(path = "/getRentalRequests")
+    public ResponseUtil getRentalRequests() {
+        return new ResponseUtil(200, "Successfully Loaded", rentalDetailService.getRentalRequests());
+    }
 }
