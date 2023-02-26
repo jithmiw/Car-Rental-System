@@ -1,5 +1,7 @@
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
+
+
 // add driver
 $("#saveDriver").click(function () {
     let formData = $('#driverForm').serialize();

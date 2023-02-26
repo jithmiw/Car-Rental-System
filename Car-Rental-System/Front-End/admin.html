@@ -29,7 +29,7 @@
                         <a class="nav-link active text-black fw-semibold" aria-current="page" href="#">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="">Reservations</a>
+                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="manage-reservations">Reservations</button>
                     </li>
                     <li class="nav-item">
                         <!-- Manage Cars Button trigger modal -->
@@ -246,6 +246,95 @@
         </div>
     </div>
 </header>
+<main>
+    <!--RESERVATIONS SECTION-->
+    <section id="reservations">
+        <div class="container-fluid mt-5 mb-5 pt-4">
+            <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+                <div class="navbar-brand ms-2">Reservations</div>
+                <form class="d-flex ms-2 me-2" role="search">
+                    <input id="txtSearch" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="btnSearch" class="btn btn-outline-secondary" type="button">Search</button>
+                </form>
+            </div>
+            <form id="reservationForm" class="row g-3 mt-0 me-0 ms-0 bg-white">
+                <div class="col-md-3">
+                    <label class="form-label">Rental Id</label>
+                    <input type="text" class="form-control rental-id" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Registration No</label>
+                    <input type="text" class="form-control reg-no" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Customer Nic</label>
+                    <input type="text" class="form-control customer-nic" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Pick-up Date</label>
+                    <input type="Date" class="form-control pick-up-date" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Return Date</label>
+                    <input type="Date" class="form-control return-date" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Pick-up Time</label>
+                    <input type="Time" class="form-control pick-up-time" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Return Time</label>
+                    <input type="Time" class="form-control return-time" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Pick-up Venue</label>
+                    <input type="text" class="form-control pick-up-venue" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Return Venue</label>
+                    <input type="text" class="form-control return-venue" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Driver Status</label>
+                    <input type="text" class="form-control driver-status">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Rental Status</label>
+                    <input type="text" class="form-control rental-status">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Reserved Date</label>
+                    <input type="Date" class="form-control reserved-date" readonly>
+                </div>
+                <div class="d-flex flex-column flex-sm-row justify-content-center mt-4 mb-5">
+                    <button type="button" class="btn btn-outline-secondary mt-1 mb-1 me-sm-2 ms-sm-2">CHANGE DRIVER</button>
+                    <button type="button" class="btn btn-outline-secondary mt-1 mb-1 me-sm-2 ms-sm-2">CHANGE DRIVER STATUS</button>
+                    <button type="button" class="btn btn-secondary mt-1 mb-1 me-sm-2 ms-sm-2">ACCEPT REQUEST</button>
+                    <button type="button" class="btn btn-secondary mt-1 mb-1 me-sm-2 ms-sm-2">DENY REQUEST</button>
+                </div>
+            </form>
+            <table class="table table-bordered table-hover mt-4">
+                <thead class="bg-dark">
+                <tr>
+                    <th scope="col" class="text-white">Rental Id</th>
+                    <th scope="col" class="text-white">Customer Nic</th>
+                    <th scope="col" class="text-white">Car Reg No</th>
+                    <th scope="col" class="text-white">Pick-up Date</th>
+                    <th scope="col" class="text-white">Return Date</th>
+                    <th scope="col" class="text-white">Pick-up Time</th>
+                    <th scope="col" class="text-white">Return Time</th>
+                    <th scope="col" class="text-white">Pick-up Venue</th>
+                    <th scope="col" class="text-white">Return Venue</th>
+                    <th scope="col" class="text-white">Driver Status</th>
+                    <th scope="col" class="text-white">Reserved Date</th>
+                </tr>
+                </thead>
+                <tbody style="overflow-y:auto;" id="tblReservations" class="table-light">
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
 <script src="assets/js/jquery-3.6.1.min.js"></script>
 <script src="./assets/js/ui-js/admin.js"></script>
 <script src="./assets/js/bootstrap.min.js"></script>
