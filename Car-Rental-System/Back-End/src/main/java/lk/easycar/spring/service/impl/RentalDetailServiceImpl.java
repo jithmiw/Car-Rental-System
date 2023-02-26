@@ -74,7 +74,7 @@ public class RentalDetailServiceImpl implements RentalDetailService {
         List<Car> reservedCars = carRepo.findCarByStatus("Reserved");
 
         for (Car car : reservedCars) {
-            List<RentalDetail> rentalDetails = rentalDetailRepo.findRentalDetailByCar_Reg_noAndRental_status(car.getReg_no(), "Rental");
+            List<RentalDetail> rentalDetails = rentalDetailRepo.findRentalDetailByCar_Reg_noAndRental_status(car.getReg_no(), "Rental", "Accepted");
             for (RentalDetail detail : rentalDetails) {
                 if (!(detail.getPick_up_date().isAfter(LocalDate.parse(return_date)) ||
                         detail.getReturn_date().isBefore(LocalDate.parse(pick_up_date)))) {

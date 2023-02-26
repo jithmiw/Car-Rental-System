@@ -260,55 +260,51 @@
             <form id="reservationForm" class="row g-3 mt-0 me-0 ms-0 bg-white">
                 <div class="col-md-3">
                     <label class="form-label">Rental Id</label>
-                    <input type="text" class="form-control rental-id" readonly>
+                    <input type="text" id="rental-id" class="form-control" readonly>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Registration No</label>
-                    <input type="text" class="form-control reg-no" readonly>
+                    <input type="text" id="reg-no" class="form-control" readonly>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Customer Nic</label>
-                    <input type="text" class="form-control customer-nic" readonly>
+                    <input type="text" id="customer-nic" class="form-control" readonly>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Pick-up Date</label>
-                    <input type="Date" class="form-control pick-up-date" readonly>
+                    <input type="Date" id="pick-up-date" class="form-control" readonly>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Return Date</label>
-                    <input type="Date" class="form-control return-date" readonly>
+                    <input type="Date" id="return-date" class="form-control" readonly>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Pick-up Time</label>
-                    <input type="Time" class="form-control pick-up-time" readonly>
+                    <input type="Time" id="pick-up-time" class="form-control" readonly>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Return Time</label>
-                    <input type="Time" class="form-control return-time" readonly>
+                    <input type="Time" id="return-time" class="form-control" readonly>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Pick-up Venue</label>
-                    <input type="text" class="form-control pick-up-venue" readonly>
+                    <input type="text" id="pick-up-venue" class="form-control" readonly>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Return Venue</label>
-                    <input type="text" class="form-control return-venue" readonly>
+                    <input type="text" id="return-venue" class="form-control" readonly>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">Driver Status</label>
-                    <input type="text" class="form-control driver-status">
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label">Rental Status</label>
-                    <input type="text" class="form-control rental-status">
+                    <label class="form-label">Driver Nic</label>
+                    <select id="selectDriverNic" class="form-select"></select>
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Reserved Date</label>
-                    <input type="Date" class="form-control reserved-date" readonly>
+                    <input type="Date" id="reserved-date" class="form-control" readonly>
                 </div>
                 <div class="d-flex flex-column flex-sm-row justify-content-center mt-4 mb-5">
                     <button type="button" class="btn btn-outline-secondary mt-1 mb-1 me-sm-2 ms-sm-2">CHANGE DRIVER</button>
-                    <button type="button" class="btn btn-outline-secondary mt-1 mb-1 me-sm-2 ms-sm-2">CHANGE DRIVER STATUS</button>
+                    <button type="button" class="btn btn-outline-secondary mt-1 mb-1 me-sm-2 ms-sm-2">CALCULATE PAYMENT</button>
                     <button type="button" class="btn btn-secondary mt-1 mb-1 me-sm-2 ms-sm-2">ACCEPT REQUEST</button>
                     <button type="button" class="btn btn-secondary mt-1 mb-1 me-sm-2 ms-sm-2">DENY REQUEST</button>
                 </div>

@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface RentalDetailRepo extends JpaRepository<RentalDetail, String> {
 
-    @Query(value = "SELECT * FROM RentalDetail WHERE car_reg_no=?1 && rental_status=?2", nativeQuery = true)
-    List<RentalDetail> findRentalDetailByCar_Reg_noAndRental_status(String car_reg_no, String rental_status);
+    @Query(value = "SELECT * FROM RentalDetail WHERE car_reg_no=?1 && rental_status=?2 OR rental_status=?3", nativeQuery = true)
+    List<RentalDetail> findRentalDetailByCar_Reg_noAndRental_status(String car_reg_no, String rental_status1, String rental_status2);
 
 
     @Query(value = "SELECT rental_id FROM RentalDetail ORDER BY rental_id DESC LIMIT 1", nativeQuery = true)
