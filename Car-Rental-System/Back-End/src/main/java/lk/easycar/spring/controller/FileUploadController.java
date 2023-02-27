@@ -45,6 +45,7 @@ public class FileUploadController {
             CustomerDTO customer = customerService.getCustomerByNic(customerNic);
             customer.setNic_img("uploads/customers/" + files[0].getOriginalFilename());
             customer.setLicense_img("uploads/customers/" + files[1].getOriginalFilename());
+            customerService.updateCustomer(customer);
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
             return new ResponseUtil(500, "Sign up failed, Please try again.", null);
@@ -85,6 +86,7 @@ public class FileUploadController {
 
             RentalDetailDTO rentalDetail = rentalDetailService.getRentalDetailByRentalId(rentalId);
             rentalDetail.setBank_slip_img("uploads/bank-slips/" + file.getOriginalFilename());
+            rentalDetailService.updateRentalDetail(rentalDetail);
         } catch (URISyntaxException | IOException e) {
             e.printStackTrace();
             return new ResponseUtil(500, "Something went wrong, Please try again later", null);

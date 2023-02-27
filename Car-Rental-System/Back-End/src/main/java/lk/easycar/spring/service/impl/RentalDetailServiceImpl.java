@@ -1,6 +1,8 @@
 package lk.easycar.spring.service.impl;
 
 import lk.easycar.spring.dto.CarDTO;
+import lk.easycar.spring.dto.CustomerDTO;
+import lk.easycar.spring.dto.DriverDTO;
 import lk.easycar.spring.dto.RentalDetailDTO;
 import lk.easycar.spring.entity.*;
 import lk.easycar.spring.repo.*;
@@ -68,6 +70,19 @@ public class RentalDetailServiceImpl implements RentalDetailService {
     }
 
     @Override
+    public void updateRentalDetail(RentalDetailDTO dto) {
+        if (!rentalDetailRepo.existsById(dto.getRental_id())) {
+            throw new RuntimeException("No such a reservation, Please enter valid rental id");
+        }
+        Customer customer = customerRepo.findById(dto.getCustomer_nic()).get();
+        Car car = carRepo.findById(dto.getCar_reg_no()).get();
+        RentalDetail rentalDetail = new RentalDetail(dto.getRental_id(), dto.getPick_up_date(), dto.getReturn_date(),
+                dto.getPick_up_time(), dto.getReturn_time(), dto.getPick_up_venue(), dto.getReturn_venue(), dto.getRental_status(),
+                dto.getDriver_status(), dto.getReserved_date(), dto.getBank_slip_img(), customer, car);
+        rentalDetailRepo.save(rentalDetail);
+    }
+
+    @Override
     public ArrayList<CarDTO> searchAvailableCarsForReservation(String pick_up_date, String return_date) {
         List<Car> availableCars = carRepo.findCarByStatus("Available");
         List<Car> reservedCars = carRepo.findCarByStatus("Reserved");
@@ -103,8 +118,11 @@ public class RentalDetailServiceImpl implements RentalDetailService {
 
     @Override
     public RentalDetailDTO getRentalDetailByRentalId(String rental_id) {
-        RentalDetail rentalDetail = rentalDetailRepo.findRentalDetailByRental_id(rental_id);
-        return mapper.map(rentalDetail, RentalDetailDTO.class);
+        RentalDetail rental = rentalDetailRepo.findRentalDetailByRental_id(rental_id);
+        return new RentalDetailDTO(rental.getRental_id(), rental.getPick_up_date(),
+                rental.getReturn_date(), rental.getPick_up_time(), rental.getReturn_time(), rental.getPick_up_venue(),
+                rental.getReturn_venue(), rental.getRental_status(), rental.getDriver_status(), rental.getReserved_date(),
+                rental.getBank_slip_img(), rental.getCustomer().getNic_no(), rental.getCar().getReg_no());
     }
 
     @Override

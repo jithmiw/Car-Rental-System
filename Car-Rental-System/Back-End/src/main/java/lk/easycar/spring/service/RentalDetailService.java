@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public interface RentalDetailService {
     void saveRentalDetail(RentalDetailDTO dto, String scheduleId);
 
-//    void updateRentalDetail(RentalDetailDTO dto);
+    void updateRentalDetail(RentalDetailDTO dto);
 
 //    void deleteRentalDetail(String rental_id);
 

@@ -184,10 +184,8 @@ function uploadFiles(rentalId) {
         contentType: false,
         processData: false,
         data: data,
-        success: function (res) {
-            if (res.status === 200) {
-                clearReservationForm();
-            }
+        success: function () {
+            clearReservationForm();
         },
         error: function (err) {
             console.log(err);
