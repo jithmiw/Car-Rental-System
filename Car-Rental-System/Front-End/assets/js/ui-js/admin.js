@@ -123,6 +123,51 @@ $("#changeDriver").click(function () {
     }
 });
 
+// accept request
+$("#acceptRequest").click(function () {
+    let rentalId = $('#rental-id').val();
+    if (confirm('Are you sure you want to accept this request in rental id : ' + rentalId + '?')) {
+        $.ajax({
+            url: baseUrl + "rentalDetail?rental_id=" + rentalId,
+            method: "put",
+            success: function (res) {
+                alert(res.message);
+                getRentalRequests();
+                clearForm();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    }
+});
+
+// deny request
+$("#denyRequest").click(function () {
+    let rentalId = $('#rental-id').val();
+    let rentalStatus = $('#rental-status').val();
+    if (confirm('Are you sure you want to deny this request in rental id : ' + rentalId + '?')) {
+        $.ajax({
+            url: baseUrl + "rentalDetail?rental_id=" + rentalId + "&reason=" + rentalStatus,
+            method: "put",
+            success: function (res) {
+                alert(res.message);
+                getRentalRequests();
+                clearForm();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    }
+});
+
+function clearForm() {
+    $('#rental-id, #reg-no, #customer-nic, #pick-up-date, #return-date, #pick-up-time, #return-time, ' +
+        '#pick-up-venue, #return-venue, #rental-status, #reserved-date').val("");
+    $("#selectDriverNic").empty();
+}
+
 // add driver
 $("#saveDriver").click(function () {
     let formData = $('#driverForm').serialize();

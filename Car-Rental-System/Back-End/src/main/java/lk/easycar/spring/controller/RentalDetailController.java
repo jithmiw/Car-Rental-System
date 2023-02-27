@@ -36,6 +36,22 @@ public class RentalDetailController {
         return new ResponseUtil(200, "Loaded successfully", availableCars);
     }
 
+    @PutMapping(params = {"rental_id"})
+    public ResponseUtil AcceptRentalRequest(@RequestParam String rental_id) {
+        RentalDetailDTO rental = rentalDetailService.getRentalDetailByRentalId(rental_id);
+        rental.setRental_status("Accepted");
+        rentalDetailService.updateRentalDetail(rental);
+        return new ResponseUtil(200, "Rental id: " + rental_id + " accepted", null);
+    }
+
+    @PutMapping(params = {"rental_id", "reason"})
+    public ResponseUtil DenyRentalRequest(@RequestParam String rental_id, @RequestParam String reason) {
+        RentalDetailDTO rental = rentalDetailService.getRentalDetailByRentalId(rental_id);
+        rental.setRental_status("Denied, " + reason);
+        rentalDetailService.updateRentalDetail(rental);
+        return new ResponseUtil(200, "Rental id: " + rental_id + " denied", null);
+    }
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil makeReservation(@RequestBody RentalDetailDTO dto) {
         String scheduleId = null;
