@@ -11,4 +11,7 @@ public interface DriverScheduleRepo extends JpaRepository<DriverSchedule, String
 
     @Query(value = "SELECT driver_nic FROM DriverSchedule WHERE rental_id=?1", nativeQuery = true)
     String getDriverNicByRentalId(String rental_id);
+
+    @Query(value = "SELECT * FROM DriverSchedule WHERE rental_id=?1", nativeQuery = true)
+    DriverSchedule getDriverScheduleByRentalId(String rental_id);
 }

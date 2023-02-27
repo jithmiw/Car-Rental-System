@@ -26,6 +26,12 @@ public class DriverController {
         return new ResponseUtil(200, "Nic no: " + dto.getNic_no() + " driver updated successfully", null);
     }
 
+    @PutMapping(params = {"rental_id", "nic_no"})
+    public ResponseUtil changeDriver(@RequestParam String rental_id, @RequestParam String nic_no) {
+        driverService.changeDriver(rental_id, nic_no);
+        return new ResponseUtil(200, "Rental id: " + rental_id + " driver changed successfully", null);
+    }
+
     @DeleteMapping(params = {"nic_no"})
     public ResponseUtil deleteDriver(@RequestParam String nic_no) {
         driverService.deleteDriver(nic_no);
@@ -38,9 +44,14 @@ public class DriverController {
         return new ResponseUtil(200, "Driver exists", driverDTO);
     }
 
-    @GetMapping(path = "rentalId/{rental_id}")
+    @GetMapping(path = "/rentalId/{rental_id}")
     public ResponseUtil getDriverNicByRentalId(@PathVariable String rental_id) {
         String driverNic = driverService.getDriverNicByRentalId(rental_id);
         return new ResponseUtil(200, "Done", driverNic);
+    }
+
+    @GetMapping(path = "/getAllDriversNic")
+    public ResponseUtil getAllDriversNic() {
+        return new ResponseUtil(200, "Loaded successfully", driverService.getAllDriversNic());
     }
 }

@@ -13,18 +13,18 @@ function getRentalRequests() {
         url: baseUrl + "rentalDetail/getRentalRequests",
         success: function (res) {
             if (res.data != null) {
-                for (let c of res.data) {
-                    let rentalId = c.rental_id;
-                    let customerNic = c.customer_nic;
-                    let carRegNo = c.car_reg_no;
-                    let pickUpDate = c.pick_up_date;
-                    let returnDate = c.return_date;
-                    let pickUpTime = c.pick_up_time;
-                    let returnTime = c.return_time;
-                    let pickUpVenue = c.pick_up_venue;
-                    let returnVenue = c.return_venue;
-                    let driverStatus = c.driver_status;
-                    let reservedDate = c.reserved_date;
+                for (let r of res.data) {
+                    let rentalId = r.rental_id;
+                    let customerNic = r.customer_nic;
+                    let carRegNo = r.car_reg_no;
+                    let pickUpDate = r.pick_up_date;
+                    let returnDate = r.return_date;
+                    let pickUpTime = r.pick_up_time;
+                    let returnTime = r.return_time;
+                    let pickUpVenue = r.pick_up_venue;
+                    let returnVenue = r.return_venue;
+                    let driverStatus = r.driver_status;
+                    let reservedDate = r.reserved_date;
 
                     let row = "<tr><td>" + rentalId + "</td><td>" + customerNic + "</td><td>" + carRegNo + "</td>" +
                         "<td>" + pickUpDate + "</td><td>" + returnDate + "</td><td>" + pickUpTime + "</td><td>" + returnTime + "</td>" +
@@ -72,32 +72,56 @@ function bindClickEventsToRows() {
             $.ajax({
                 url: baseUrl + "driver/rentalId/" + rentalId,
                 success: function (res) {
-                    $("#selectDriverNic").append(`<option value="${res.data}">${res.data}</option>`);
+                    let nic = res.data;
+                    $("#selectDriverNic").append(`<option selected value="${nic}">${nic}</option>`);
+                    loadAllDrivers(nic);
                 },
                 error: function (error) {
                     console.log(JSON.parse(error.responseText).message);
                 }
             });
+        } else {
+            $("#selectDriverNic").empty();
+            $("#selectDriverNic").append(`<option selected value="No">No</option>`);
         }
     });
 }
 
-// function loadAllDrivers() {
-//     $("#selectDriverNic").empty();
-//     $.ajax({
-//         url: baseUrl + "item",
-//         success: function (res) {
-//             for (let c of res.data) {
-//                 let code = c.code;
-//                 $("#selectItemCode").append(`<option value="${code}">${code}</option>`);
-//             }
-//         },
-//         error: function (error) {
-//             let message = JSON.parse(error.responseText).message;
-//             alert(message);
-//         }
-//     });
-// }
+function loadAllDrivers(driverNic) {
+    $.ajax({
+        url: baseUrl + "driver/getAllDriversNic",
+        success: function (res) {
+            for (let n of res.data) {
+                let nic = n;
+                if (nic === driverNic) {
+                    continue;
+                }
+                $("#selectDriverNic").append(`<option value="${nic}">${nic}</option>`);
+            }
+        },
+        error: function (error) {
+            console.log(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+// change driver
+$("#changeDriver").click(function () {
+    let rentalId = $('#rental-id').val();
+    let driverNic = $('#selectDriverNic').val();
+    if (confirm('Are you sure you want to change the driver assigned in rental id : ' + rentalId + '?')) {
+        $.ajax({
+            url: baseUrl + "driver?rental_id=" + rentalId + "&nic_no=" + driverNic,
+            method: "put",
+            success: function (res) {
+                alert(res.message);
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    }
+});
 
 // add driver
 $("#saveDriver").click(function () {
