@@ -1,9 +1,15 @@
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
 $('#manage-reservations').click(function () {
-    $('#reservations').removeClass("d-none");
-    $('#reservations').addClass("d-block");
+    $('#reservations').css('display', 'block');
+    $('#customers').css('display', 'none');
     getRentalRequests();
+});
+
+$('#view-customers').click(function () {
+    $('#customers').css('display', 'block');
+    $('#reservations').css('display', 'none');
+    getAllCustomers();
 });
 
 // get rental requests
@@ -102,6 +108,74 @@ function loadAllDrivers(driverNic) {
         error: function (error) {
             console.log(JSON.parse(error.responseText).message);
         }
+    });
+}
+
+// get customers
+function getAllCustomers() {
+    $('#tblCustomers').empty();
+    $.ajax({
+        url: baseUrl + "customer",
+        success: function (res) {
+            if (res.data != null) {
+                for (let c of res.data) {
+                    let nicNo = c.nic_no;
+                    let customerName = c.customer_name;
+                    let address = c.address;
+                    let email = c.email;
+                    let licenseNo = c.license_no;
+                    let contactNo = c.contact_no;
+                    let regDate = c.reg_date;
+
+                    let row = "<tr><td>" + nicNo + "</td><td>" + customerName + "</td><td>" + address + "</td>" +
+                        "<td>" + email + "</td><td>" + licenseNo + "</td><td>" + contactNo + "</td><td>" + regDate + "</td></tr>";
+                    $('#tblCustomers').append(row);
+                }
+                bindClickEventsToCustomerRows();
+            }
+            // clearAll();
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+// bind events for the customer table rows
+function bindClickEventsToCustomerRows() {
+    $('#tblCustomers > tr').on('click', function () {
+        let nicNo = $(this).children(':eq(0)').text();
+        let customerName = $(this).children(':eq(1)').text();
+        let address = $(this).children(':eq(2)').text();
+        let email = $(this).children(':eq(3)').text();
+        let licenseNo = $(this).children(':eq(4)').text();
+        let contactNo = $(this).children(':eq(5)').text();
+        let regDate = $(this).children(':eq(6)').text();
+
+        $('#nic-no').val(nicNo);
+        $('#customer-name').val(customerName);
+        $('#address').val(address);
+        $('#email').val(email);
+        $('#license-no').val(licenseNo);
+        $('#contact-no').val(contactNo);
+        $('#registered-date').val(regDate);
+
+
+        $.ajax({
+            url: baseUrl + "customer/" + nicNo,
+            method: 'get',
+            dataType: 'json',
+            success: function (res) {
+                let nicUrl = res.data.nic_img;
+                let licenseUrl = res.data.license_img;
+
+                $("#displayNic").attr("src", baseUrl + nicUrl);
+                $("#displayLicense").attr("src", baseUrl + licenseUrl);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
     });
 }
 

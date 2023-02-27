@@ -38,7 +38,7 @@
                         </button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="">Customers</a>
+                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="view-customers">Customers</button>
                     </li>
                     <li class="nav-item">
                         <!-- Manage Drivers Button trigger modal -->
@@ -248,13 +248,13 @@
 </header>
 <main>
     <!--RESERVATIONS SECTION-->
-    <section id="reservations" class="d-none">
+    <section id="reservations">
         <div class="container-fluid mt-5 mb-5 pt-4">
             <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
                 <div class="navbar-brand ms-2">Reservations</div>
                 <form class="d-flex ms-2 me-2" role="search">
-                    <input id="txtSearch" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button id="btnSearch" class="btn btn-outline-secondary" type="button">Search</button>
+                    <input id="searchRequest" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="btnSearchRequest" class="btn btn-outline-secondary" type="button">Search</button>
                 </form>
             </div>
             <form id="reservationForm" class="row g-3 mt-0 me-0 ms-0 bg-white">
@@ -330,6 +330,68 @@
                 </tr>
                 </thead>
                 <tbody style="overflow-y:auto;" id="tblReservations" class="table-light">
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!--CUSTOMERS SECTION-->
+    <section id="customers">
+        <div class="container-fluid mt-5 mb-5 pt-4">
+            <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+                <div class="navbar-brand ms-2">Customers</div>
+                <form class="d-flex ms-2 me-2" role="search">
+                    <input id="searchCustomer" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="btnSearchCustomer" class="btn btn-outline-secondary" type="button">Search</button>
+                </form>
+            </div>
+            <form class="row g-3 mt-0 me-0 ms-0 mb-5 bg-white">
+                <div class="col-md-3">
+                    <label class="form-label">Nic No</label>
+                    <input type="text" id="nic-no" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Customer Name</label>
+                    <input type="text" id="customer-name" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Address</label>
+                    <input type="text" id="address" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="email" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">License No</label>
+                    <input type="text" id="license-no" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Contact No</label>
+                    <input type="text" id="contact-no" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Registered Date</label>
+                    <input type="Date" id="registered-date" class="form-control" readonly>
+                </div>
+            </form>
+            <span class="fw-bold">NIC & LICENSE IMAGES</span>
+            <div class="d-flex flex-row justify-content-center mb-4">
+                <img id="displayNic" src="" alt="nic-img" class="border border-1 w-100 mt-2 me-1 img-fluid" style="height: 450px">
+                <img id="displayLicense" src="" alt="license-img" class="border border-1 w-100 mt-2 ms-1 img-fluid" style="height: 450px">
+            </div>
+            <table class="table table-bordered table-hover mt-4">
+                <thead class="bg-dark">
+                <tr>
+                    <th scope="col" class="text-white">Nic No</th>
+                    <th scope="col" class="text-white">Customer Name</th>
+                    <th scope="col" class="text-white">Address</th>
+                    <th scope="col" class="text-white">Email</th>
+                    <th scope="col" class="text-white">License No</th>
+                    <th scope="col" class="text-white">Contact No</th>
+                    <th scope="col" class="text-white">Registered Date</th>
+                </tr>
+                </thead>
+                <tbody style="overflow-y:auto;" id="tblCustomers" class="table-light">
                 </tbody>
             </table>
         </div>

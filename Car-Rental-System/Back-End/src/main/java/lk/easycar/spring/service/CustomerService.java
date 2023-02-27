@@ -2,6 +2,8 @@ package lk.easycar.spring.service;
 
 import lk.easycar.spring.dto.CustomerDTO;
 
+import java.util.ArrayList;
+
 public interface CustomerService {
     void saveCustomer(CustomerDTO dto);
 
@@ -12,4 +14,6 @@ public interface CustomerService {
     CustomerDTO verifyCustomer(String username, String password);
 
     CustomerDTO getCustomerByNic(String nic_no);
+
+    ArrayList<CustomerDTO> getAllCustomers();
 }

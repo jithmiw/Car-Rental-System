@@ -37,4 +37,9 @@ public class CustomerController {
         CustomerDTO customerDTO = customerService.getCustomerByNic(nic);
         return new ResponseUtil(200, "Customer exists", customerDTO);
     }
+
+    @GetMapping
+    public ResponseUtil getAllCustomers() {
+        return new ResponseUtil(200, "Loaded successfully", customerService.getAllCustomers());
+    }
 }
