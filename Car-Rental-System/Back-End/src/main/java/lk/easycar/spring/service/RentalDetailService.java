@@ -10,8 +10,6 @@ public interface RentalDetailService {
 
     void updateRentalDetail(RentalDetailDTO dto);
 
-//    void deleteRentalDetail(String rental_id);
-
     ArrayList<CarDTO> searchAvailableCarsForReservation(String pick_up_date, String return_date);
 
     String generateNewRentalId();
@@ -19,4 +17,6 @@ public interface RentalDetailService {
     RentalDetailDTO getRentalDetailByRentalId(String rental_id);
 
     ArrayList<RentalDetailDTO> getRentalRequests();
+
+    ArrayList<RentalDetailDTO> getRentalRequestsByCustomerNic(String nic);
 }

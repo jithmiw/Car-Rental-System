@@ -1,5 +1,20 @@
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
+$(document).ready(function () {
+    $("#home").click();
+});
+
+$("#home").click(function () {
+    $('#customer-home').css('display', 'block');
+    $('#reservations').css('display', 'none');
+});
+
+$("#my-reservations").click(function () {
+    $('#reservations').css('display', 'block');
+    $('#customer-home').css('display', 'none');
+    getAllReservations();
+});
+
 $("#toggleUpdatePassword").click(function () {
     togglePassword($("#updatePassword"));
 });
@@ -30,6 +45,88 @@ $('#my-profile').click(function () {
         }
     });
 });
+
+// get reservations
+function getAllReservations() {
+    $('#tblReservations').empty();
+    $.ajax({
+        url: baseUrl + "rentalDetail?customer_nic=" + nic,
+        success: function (res) {
+            if (res.data != null) {
+                for (let r of res.data) {
+                    let rentalId = r.rental_id;
+                    let carRegNo = r.car_reg_no;
+                    let pickUpDate = r.pick_up_date;
+                    let returnDate = r.return_date;
+                    let pickUpTime = r.pick_up_time;
+                    let returnTime = r.return_time;
+                    let pickUpVenue = r.pick_up_venue;
+                    let returnVenue = r.return_venue;
+                    let driverStatus = r.driver_status;
+                    let rentalStatus = r.rental_status;
+                    let reservedDate = r.reserved_date;
+
+                    if (rentalStatus === "Rental") {
+                        rentalStatus = "Pending";
+                    }
+                    let row = "<tr><td>" + rentalId + "</td><td>" + carRegNo + "</td><td>" + pickUpDate + "</td>" +
+                        "<td>" + returnDate + "</td><td>" + pickUpTime + "</td><td>" + returnTime + "</td>" +
+                        "<td>" + pickUpVenue + "</td><td>" + returnVenue + "</td><td>" + driverStatus + "</td><td>" + rentalStatus + "</td>" +
+                        "<td>" + reservedDate + "</td></tr>";
+                    $('#tblReservations').append(row);
+                }
+            }
+            loadDriverInfo();
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+// bind events for the table rows
+function loadDriverInfo() {
+    $('#tblReservations > tr').on('click', function () {
+        let rentalId = $(this).children(':eq(0)').text();
+        let driverStatus = $(this).children(':eq(8)').text();
+        let rentalStatus = $(this).children(':eq(9)').text();
+
+        if (driverStatus === "Yes" && rentalStatus === "Accepted") {
+            $.ajax({
+                url: baseUrl + "driver/rentalId/" + rentalId,
+                success: function (res) {
+                    let nic = res.data;
+                    getDriver(nic);
+                },
+                error: function (error) {
+                    console.log(JSON.parse(error.responseText).message);
+                }
+            });
+        } else {
+            $('#driver-name').val("");
+            $('#contact-no').val("");
+            $('#email').val("");
+        }
+    });
+}
+
+function getDriver(driverNic) {
+    $.ajax({
+        url: baseUrl + "driver/" + driverNic,
+        success: function (res) {
+            let name = res.data.driver_name;
+            let contactNo = res.data.contact_no;
+            let email = res.data.email;
+
+            $('#driver-name').val(name);
+            $('#contact-no').val(contactNo);
+            $('#email').val(email);
+        },
+        error: function (error) {
+            console.log(JSON.parse(error.responseText).message);
+        }
+    });
+}
 
 let carCards = $("#carCards");
 $('#searchCar').click(function () {
@@ -144,6 +241,7 @@ function bindClickEventsToButtons() {
     $('.rentCar').on('click', function () {
         let rentalId;
         let rentalDTO = {};
+        let bankSlip = $(this).closest('form').find('.bank-slip')[0].files[0];
         let dataArray = $(this).closest("form").serializeArray();
         for (let i in dataArray) {
             rentalDTO[dataArray[i].name] = dataArray[i].value;
@@ -158,38 +256,31 @@ function bindClickEventsToButtons() {
             data: JSON.stringify(rentalDTO),
             success: function (res) {
                 if (res.status === 200) {
-                    uploadFiles(rentalId);
+                    let data = new FormData();
+                    data.append("bankSlipImage", bankSlip, bankSlip.name);
+                    data.append("rentalId", rentalId);
+
+                    $.ajax({
+                        url: baseUrl + "files/upload/bankSlipImages",
+                        method: "post",
+                        async: true,
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function () {
+                            clearReservationForm();
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
                 }
                 alert(res.message);
             },
             error: function (error) {
-                console.log(JSON.parse(error.responseText));
                 alert(JSON.parse(error.responseText).message);
             }
         });
-    });
-}
-
-function uploadFiles(rentalId) {
-    let data = new FormData();
-    let bankSlip = $('.bank-slip')[0].files[0];
-
-    data.append("bankSlipImage", bankSlip, bankSlip.name);
-    data.append("rentalId", rentalId);
-
-    $.ajax({
-        url: baseUrl + "files/upload/bankSlipImages",
-        method: "post",
-        async: true,
-        contentType: false,
-        processData: false,
-        data: data,
-        success: function () {
-            clearReservationForm();
-        },
-        error: function (err) {
-            console.log(err);
-        }
     });
 }
 

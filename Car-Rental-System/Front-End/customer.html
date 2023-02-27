@@ -27,13 +27,17 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="#customer-home">Home</a>
+                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="home">
+                            Home
+                        </button>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active text-black fw-semibold" aria-current="page" target="_blank" href="car.html">Cars</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="">Reservations</a>
+                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="my-reservations">
+                            Reservations
+                        </button>
                     </li>
                     <li class="nav-item">
                         <!-- My Profile Button trigger modal -->
@@ -120,10 +124,6 @@
                             <label for="updateLicenseFile" class="form-label">License Image</label>
                             <input class="form-control" type="file" id="updateLicenseFile">
                         </div>
-<!--                        <div class="col-md-6">-->
-<!--                            <label for="updateRegDate" class="form-label">Register Date</label>-->
-<!--                            <input type="date" class="form-control" id="updateRegDate" readonly>-->
-<!--                        </div>-->
                         <div class="modal-footer col-12 me-auto pe-2">
                             <button type="button" class="btn btn-dark me-0">UPDATE</button>
                         </div>
@@ -148,14 +148,6 @@
                         <label for="search-return-date" class="form-label">Return Date</label>
                         <input type="date" class="form-control" id="search-return-date">
                     </div>
-<!--                    <div class="row-12 mb-3">-->
-<!--                        <label for="pick-up-time" class="form-label">Pick-up Time</label>-->
-<!--                        <input type="time" class="form-control" id="pick-up-time">-->
-<!--                    </div>-->
-<!--                    <div class="row-12 mb-3">-->
-<!--                        <label for="return-time" class="form-label">Return Time</label>-->
-<!--                        <input type="time" class="form-control" id="return-time">-->
-<!--                    </div>-->
                     <div class="row-12 mb-3">
                         <button id="searchCar" type="button" class="btn btn-dark">SEARCH</button>
                     </div>
@@ -298,6 +290,48 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+    <!--RESERVATIONS SECTION-->
+    <section id="reservations">
+        <div class="container-fluid mt-5 mb-5 pt-4">
+            <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+                <div class="navbar-brand ms-2">Reservations</div>
+            </div>
+            <div class="fw-bold ms-2 mt-4">Driver Info</div>
+            <form class="row g-3 mt-0 me-0 ms-0 mb-5 bg-white">
+                <div class="col-md-3">
+                    <label class="form-label">Driver Name</label>
+                    <input type="text" id="driver-name" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Contact No</label>
+                    <input type="text" id="contact-no" class="form-control" readonly>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Email</label>
+                    <input type="text" id="email" class="form-control" readonly>
+                </div>
+            </form>
+            <table class="table table-bordered table-hover">
+                <thead class="bg-dark">
+                <tr>
+                    <th scope="col" class="text-white">Rental Id</th>
+                    <th scope="col" class="text-white">Car Reg No</th>
+                    <th scope="col" class="text-white">Pick-up Date</th>
+                    <th scope="col" class="text-white">Return Date</th>
+                    <th scope="col" class="text-white">Pick-up Time</th>
+                    <th scope="col" class="text-white">Return Time</th>
+                    <th scope="col" class="text-white">Pick-up Venue</th>
+                    <th scope="col" class="text-white">Return Venue</th>
+                    <th scope="col" class="text-white">Driver Status</th>
+                    <th scope="col" class="text-white">Rental Status</th>
+                    <th scope="col" class="text-white">Reserved Date</th>
+                </tr>
+                </thead>
+                <tbody style="overflow-y:auto;" id="tblReservations" class="table-light">
+                </tbody>
+            </table>
         </div>
     </section>
 </main>

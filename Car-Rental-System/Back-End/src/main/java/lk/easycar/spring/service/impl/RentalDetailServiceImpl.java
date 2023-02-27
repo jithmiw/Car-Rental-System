@@ -140,4 +140,20 @@ public class RentalDetailServiceImpl implements RentalDetailService {
         }
         return null;
     }
+
+    @Override
+    public ArrayList<RentalDetailDTO> getRentalRequestsByCustomerNic(String nic) {
+        List<RentalDetail> requests = rentalDetailRepo.findRentalDetailByCustomer_nic(nic, "Closed");
+        ArrayList<RentalDetailDTO> reservations = new ArrayList<>();
+        if (requests.size() != 0) {
+            for (RentalDetail rental : requests) {
+                reservations.add(new RentalDetailDTO(rental.getRental_id(), rental.getPick_up_date(),
+                        rental.getReturn_date(), rental.getPick_up_time(), rental.getReturn_time(), rental.getPick_up_venue(),
+                        rental.getReturn_venue(), rental.getRental_status(), rental.getDriver_status(), rental.getReserved_date(),
+                        rental.getBank_slip_img(), rental.getCustomer().getNic_no(), rental.getCar().getReg_no()));
+            }
+            return reservations;
+        }
+        return null;
+    }
 }

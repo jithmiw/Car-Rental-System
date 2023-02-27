@@ -11,7 +11,6 @@ public interface RentalDetailRepo extends JpaRepository<RentalDetail, String> {
     @Query(value = "SELECT * FROM RentalDetail WHERE car_reg_no=?1 && rental_status=?2 OR rental_status=?3", nativeQuery = true)
     List<RentalDetail> findRentalDetailByCar_Reg_noAndRental_status(String car_reg_no, String rental_status1, String rental_status2);
 
-
     @Query(value = "SELECT rental_id FROM RentalDetail ORDER BY rental_id DESC LIMIT 1", nativeQuery = true)
     String getLastRentalId();
 
@@ -20,4 +19,7 @@ public interface RentalDetailRepo extends JpaRepository<RentalDetail, String> {
 
     @Query(value = "SELECT * FROM RentalDetail WHERE rental_status=?1", nativeQuery = true)
     List<RentalDetail> findRentalDetailByRental_status(String rental_status);
+
+    @Query(value = "SELECT * FROM RentalDetail WHERE customer_nic=?1 && rental_status!=2", nativeQuery = true)
+    List<RentalDetail> findRentalDetailByCustomer_nic(String customer_nic, String rental_status);
 }

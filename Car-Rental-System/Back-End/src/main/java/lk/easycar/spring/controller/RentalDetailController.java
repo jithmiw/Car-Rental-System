@@ -36,6 +36,16 @@ public class RentalDetailController {
         return new ResponseUtil(200, "Loaded successfully", availableCars);
     }
 
+    @GetMapping(path = "/getRentalRequests")
+    public ResponseUtil getRentalRequests() {
+        return new ResponseUtil(200, "Successfully Loaded", rentalDetailService.getRentalRequests());
+    }
+
+    @GetMapping(params = {"customer_nic"})
+    public ResponseUtil getRentalRequestsByCustomerNic(@RequestParam String customer_nic) {
+        return new ResponseUtil(200, "Successfully Loaded", rentalDetailService.getRentalRequestsByCustomerNic(customer_nic));
+    }
+
     @PutMapping(params = {"rental_id"})
     public ResponseUtil AcceptRentalRequest(@RequestParam String rental_id) {
         RentalDetailDTO rental = rentalDetailService.getRentalDetailByRentalId(rental_id);
@@ -60,10 +70,5 @@ public class RentalDetailController {
         }
         rentalDetailService.saveRentalDetail(dto, scheduleId);
         return new ResponseUtil(200, "Rental Request sent successfully", null);
-    }
-
-    @GetMapping(path = "/getRentalRequests")
-    public ResponseUtil getRentalRequests() {
-        return new ResponseUtil(200, "Successfully Loaded", rentalDetailService.getRentalRequests());
     }
 }
