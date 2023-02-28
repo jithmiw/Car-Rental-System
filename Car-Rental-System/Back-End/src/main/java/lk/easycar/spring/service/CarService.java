@@ -12,4 +12,6 @@ public interface CarService {
     void deleteCar(String reg_no);
 
     ArrayList<CarDTO> getAllCars();
+
+    CarDTO findCarByRegNo(String reg_no);
 }

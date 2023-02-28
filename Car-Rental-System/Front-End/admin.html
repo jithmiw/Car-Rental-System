@@ -425,15 +425,15 @@
                     <form id="paymentForm" class="row g-3">
                         <div class="col-md-6">
                             <label for="payment-id" class="form-label">Payment Id</label>
-                            <input type="text" class="form-control" id="payment-id" name="payment_id">
+                            <input type="text" class="form-control" id="payment-id" name="payment_id" readonly>
                         </div>
                         <div class="col-md-6">
-                            <label for="input-rental-id" class="form-label">Rental Id</label>
-                            <input type="text" class="form-control" id="input-rental-id" name="rental_id">
+                            <label for="payment-rental-id" class="form-label">Rental Id</label>
+                            <input type="text" class="form-control" id="payment-rental-id" name="rental_id" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="rental-fee" class="form-label">Rental Fee(Rs.)</label>
-                            <input type="number" class="form-control" id="rental-fee" name="rental_fee">
+                            <input type="number" class="form-control" id="rental-fee" name="rental_fee" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="driver-fee" class="form-label">Driver Fee(Rs.)</label>
@@ -445,7 +445,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="extra-km-fee" class="form-label">Extra km Fee(Rs.)</label>
-                            <input type="number" class="form-control" id="extra-km-fee" name="extra_km_fee">
+                            <input type="number" class="form-control" id="extra-km-fee" name="extra_km_fee" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="damage-fee" class="form-label">Damage Fee(Rs.)</label>
@@ -453,14 +453,14 @@
                         </div>
                         <div class="col-md-6">
                             <label for="returned-amount" class="form-label">Returned Amount(Rs.)</label>
-                            <input type="number" class="form-control" id="returned-amount" name="damage_fee">
+                            <input type="number" class="form-control" id="returned-amount" name="returned_amount" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="total-payment" class="form-label">Total Payment(Rs.)</label>
-                            <input type="number" class="form-control" id="total-payment" name="total_payment">
+                            <input type="number" class="form-control" id="total-payment" name="total_payment" readonly>
                         </div>
                         <div class="modal-footer col-12 me-auto pe-2">
-                            <button id="btnPayment" type="button" class="btn btn-dark">Pay</button>
+                            <button id="btnPay" type="button" class="btn btn-dark">Pay</button>
                         </div>
                     </form>
                 </div>

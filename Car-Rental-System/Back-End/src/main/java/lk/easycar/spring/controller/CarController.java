@@ -32,6 +32,11 @@ public class CarController {
         return new ResponseUtil(200, "Reg no: " + reg_no + " car deleted successfully", null);
     }
 
+    @GetMapping(params = {"reg_no"})
+    public ResponseUtil findCarByRegNo(@RequestParam String reg_no) {
+        return new ResponseUtil(200, "Loaded successfully", carService.findCarByRegNo(reg_no));
+    }
+
     @GetMapping
     public ResponseUtil getAllCars() {
         return new ResponseUtil(200, "Loaded successfully", carService.getAllCars());

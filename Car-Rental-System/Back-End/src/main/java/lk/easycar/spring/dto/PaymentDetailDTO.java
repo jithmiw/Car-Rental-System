@@ -26,5 +26,5 @@ public class PaymentDetailDTO {
     private BigDecimal total_payment;
     private int extra_km;
 
-    private RentalDetailDTO rentalDetail;
+    private String rental_id;
 }

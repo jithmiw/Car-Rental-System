@@ -42,6 +42,7 @@ function getRentalRequests() {
                     }
                 }
             }
+            clearForm();
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -120,9 +121,12 @@ function bindClickEventsToRows() {
         $('#return-venue').val(returnVenue);
         $('#reserved-date').val(reservedDate);
         $("#displayBankSlip").attr("src", baseUrl + bankSlipImg);
+        clearPaymentForm();
 
-        if (rentalStatus !== "Rental" && "Accepted" && "Closed") {
+        if (rentalStatus !== "Rental" && rentalStatus !== "Accepted" && rentalStatus !== "Closed") {
             $('#rental-status').val(rentalStatus);
+        } else {
+            $('#rental-status').val('');
         }
         if (driverStatus === "Yes") {
             $("#selectDriverNic").empty();
@@ -497,3 +501,105 @@ function clearManageCarsForm() {
         '#inputDailyRate, #inputMonthlyRate, #inputExtraKmPrice, #inputFreeKmDay, #inputFreeKmMonth, #inputLdwPayment, ' +
         '#inputStatus, #inputFrontView, #inputBackView, #inputSideView, #inputInterior').val("");
 }
+
+$(document).on('show.bs.modal', '#calculatePaymentModal', function (e) {
+    generateNewId();
+
+    let timeDifference = new Date($('#return-date').val()).getTime() - new Date($('#pick-up-date').val()).getTime();
+    let noOfDays = timeDifference / (1000 * 60 * 60 * 24);
+    calculateRates(noOfDays);
+    $('#payment-rental-id').val($('#rental-id').val());
+});
+
+function generateNewId() {
+    $.ajax({
+        url: baseUrl + "paymentDetail/generatePaymentId",
+        success: function (res) {
+            $('#payment-id').val(res.data);
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+let extraKmPrice;
+
+function calculateRates(noOfDays) {
+    let regNo = $('#reg-no').val();
+    $.ajax({
+        url: baseUrl + "car?reg_no=" + regNo,
+        success: function (res) {
+            let dailyRate = res.data.daily_rate;
+            let monthlyRate = res.data.monthly_rate;
+            let ldwPayment = res.data.ldw_payment;
+            extraKmPrice = res.data.extra_km_price;
+
+            if ($('#rental-status').val() !== '') {
+                $('#returned-amount').val(ldwPayment);
+                $('#rental-fee, #extra-km, #extra-km-fee, #driver-fee, #damage-fee, #total-payment').val(0);
+            } else {
+                if (noOfDays < 30) {
+                    $('#rental-fee').val(dailyRate * noOfDays);
+                } else if (noOfDays >= 30) {
+                    $('#rental-fee').val(monthlyRate * (noOfDays / 30));
+                }
+                $('#returned-amount').val(0);
+            }
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+function clearPaymentForm() {
+    $('#rental-fee, #extra-km, #extra-km-fee, #driver-fee, #damage-fee, #total-payment').val('');
+}
+
+$('#driver-fee, #damage-fee').on('keyup', function (event) {
+    calculateTotalPayment()
+});
+
+$('#extra-km').on('keyup', function (event) {
+    $('#extra-km-fee').val($('#extra-km').val() * extraKmPrice);
+    calculateTotalPayment()
+});
+
+function calculateTotalPayment() {
+    let rentalFee = $('#rental-fee').val() === "" ? 0 : parseInt($('#rental-fee').val());
+    let driverFee = $('#driver-fee').val() === "" ? 0 : parseInt($('#driver-fee').val());
+    let extraKmFee = $('#extra-km-fee').val() === "" ? 0 : parseInt($('#extra-km-fee').val());
+    let damageFee = $('#damage-fee').val() === "" ? 0 : parseInt($('#damage-fee').val());
+    let returnedAmount = $('#returned-amount').val() === "" ? 0 : parseInt($('#returned-amount').val());
+
+    let totalPayment = rentalFee + driverFee + extraKmFee + damageFee - returnedAmount;
+    $('#total-payment').val(totalPayment);
+}
+
+// add payment detail
+$("#btnPay").click(function () {
+    let paymentDTO = {};
+    let dataArray = $('#paymentForm').serializeArray();
+    for (let i in dataArray) {
+        paymentDTO[dataArray[i].name] = dataArray[i].value;
+    }
+    $.ajax({
+        url: baseUrl + "paymentDetail",
+        method: "post",
+        contentType: "application/json",
+        data: JSON.stringify(paymentDTO),
+        success: function (res) {
+            alert(res.message);
+            clearPaymentForm();
+            $('#payment-id').val('');
+            $('#payment-rental-id').val('');
+            getRentalRequests();
+            $('#btnClosed').click();
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+});
+
