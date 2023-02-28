@@ -68,7 +68,7 @@ $('#btnClosed').click(function () {
 // set table rows
 function setTableRows(array) {
     $('#tblReservations').empty();
-    array.forEach(function(r) {
+    array.forEach(function (r) {
         let rentalId = r.rental_id;
         let customerNic = r.customer_nic;
         let carRegNo = r.car_reg_no;
@@ -118,10 +118,12 @@ function bindClickEventsToRows() {
         $('#return-time').val(returnTime);
         $('#pick-up-venue').val(pickUpVenue);
         $('#return-venue').val(returnVenue);
-        $('#rental-status').val(rentalStatus);
         $('#reserved-date').val(reservedDate);
         $("#displayBankSlip").attr("src", baseUrl + bankSlipImg);
 
+        if (rentalStatus !== "Rental" && "Accepted" && "Closed") {
+            $('#rental-status').val(rentalStatus);
+        }
         if (driverStatus === "Yes") {
             $("#selectDriverNic").empty();
             $.ajax({

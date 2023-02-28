@@ -17,9 +17,6 @@ public interface RentalDetailRepo extends JpaRepository<RentalDetail, String> {
     @Query(value = "SELECT * FROM RentalDetail WHERE rental_id=?1", nativeQuery = true)
     RentalDetail findRentalDetailByRental_id(String rental_id);
 
-//    @Query(value = "SELECT * FROM RentalDetail WHERE rental_status=?1", nativeQuery = true)
-//    List<RentalDetail> findRentalDetailByRental_status(String rental_status);
-
     @Query(value = "SELECT * FROM RentalDetail WHERE customer_nic=?1 && rental_status!=2", nativeQuery = true)
     List<RentalDetail> findRentalDetailByCustomer_nic(String customer_nic, String rental_status);
 }
