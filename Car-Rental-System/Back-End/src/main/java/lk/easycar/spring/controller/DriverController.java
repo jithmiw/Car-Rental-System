@@ -44,6 +44,11 @@ public class DriverController {
         return new ResponseUtil(200, "Driver exists", driverDTO);
     }
 
+    @GetMapping(params = {"driver_nic"})
+    public ResponseUtil getDriverSchedulesByDriverNic(@RequestParam String driver_nic) {
+        return new ResponseUtil(200, "Successfully Loaded", driverService.getDriverSchedulesByDriverNic(driver_nic));
+    }
+
     @GetMapping(path = "/rentalId/{rental_id}")
     public ResponseUtil getDriverNicByRentalId(@PathVariable String rental_id) {
         String driverNic = driverService.getDriverNicByRentalId(rental_id);

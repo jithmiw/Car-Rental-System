@@ -1,6 +1,7 @@
 package lk.easycar.spring.service.impl;
 
 import lk.easycar.spring.dto.DriverDTO;
+import lk.easycar.spring.dto.DriverScheduleDTO;
 import lk.easycar.spring.entity.Driver;
 import lk.easycar.spring.entity.DriverSchedule;
 import lk.easycar.spring.repo.DriverRepo;
@@ -95,5 +96,22 @@ public class DriverServiceImpl implements DriverService {
             drivers.add(driver.getNic_no());
         }
         return drivers;
+    }
+
+    @Override
+    public ArrayList<DriverScheduleDTO> getDriverSchedulesByDriverNic(String nic) {
+        List<DriverSchedule> driverSchedules = driverScheduleRepo.findDriverScheduleByDriver_nic(nic);
+        ArrayList<DriverScheduleDTO> schedules = new ArrayList<>();
+        if (driverSchedules.size() != 0) {
+            for (DriverSchedule schedule : driverSchedules) {
+                if (!schedule.getRentalDetail().getRental_status().equals("Closed")) {
+                    schedules.add(new DriverScheduleDTO(schedule.getSchedule_id(), schedule.getStart_date(), schedule.getStart_time(),
+                            schedule.getEnd_date(), schedule.getEnd_time(), schedule.getDriver().getNic_no(), schedule.getRentalDetail().getRental_id()));
+
+                }
+            }
+            return schedules;
+        }
+        return null;
     }
 }

@@ -29,8 +29,12 @@ $("#loginUser").click(function () {
         data: JSON.stringify(userDTO),
         success: function (res) {
             if (res.status === 200) {
-                if (res.message === ("Customer")) {
-                    loginCustomer(res.data.nic_no)
+                if (res.message === "Customer") {
+                    loginCustomer(res.data.nic_no);
+                } else if (res.message === "Driver") {
+                    loginDriver(res.data.nic_no);
+                } else if (res.message === "Admin") {
+                    loginAdmin();
                 }
             }
         },
@@ -50,7 +54,7 @@ $("#saveCustomer").click(function () {
         dataType: "json",
         success: function (res) {
             console.log(res);
-            if (res.status === 200){
+            if (res.status === 200) {
                 uploadFiles();
             }
         },
@@ -79,7 +83,7 @@ function uploadFiles() {
         data: data,
         success: function (res) {
             console.log(res.message);
-            if (res.status === 200){
+            if (res.status === 200) {
                 openCustomerHome();
                 clearSignUpForm();
             }
@@ -90,17 +94,42 @@ function uploadFiles() {
     });
 }
 
+function disableBackButton() {
+    function disableBack() {
+        window.history.forward()
+    }
+
+    window.onload = disableBack();
+    window.onpageshow = function (e) {
+        if (e.persisted)
+            disableBack();
+    }
+}
+
 function loginCustomer(nic) {
     localStorage.setItem("nicValue", nic);
     window.location.href = "customer.html";
+    disableBackButton();
+}
+
+function loginDriver(nic) {
+    localStorage.setItem("driverNic", nic);
+    window.location.href = "driver.html";
+    disableBackButton();
+}
+
+function loginAdmin() {
+    window.location.href = "admin.html";
+    disableBackButton();
 }
 
 function openCustomerHome() {
     localStorage.setItem("nicValue", $('#inputNicNo').val());
     window.location.href = "customer.html";
+    disableBackButton();
 }
 
-function clearSignUpForm(){
+function clearSignUpForm() {
     $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , ' +
         '#inputPassword, #nicFile, #licenseFile').val("");
 }

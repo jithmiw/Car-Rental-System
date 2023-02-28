@@ -1,6 +1,7 @@
 package lk.easycar.spring.service;
 
 import lk.easycar.spring.dto.DriverDTO;
+import lk.easycar.spring.dto.DriverScheduleDTO;
 
 import java.util.ArrayList;
 
@@ -21,4 +22,6 @@ public interface DriverService {
     ArrayList<String> getAllDriversNic();
 
     void changeDriver(String rental_id, String nic);
+
+    ArrayList<DriverScheduleDTO> getDriverSchedulesByDriverNic(String nic);
 }

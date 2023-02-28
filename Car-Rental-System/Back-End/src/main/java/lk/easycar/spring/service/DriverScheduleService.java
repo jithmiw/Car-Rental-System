@@ -1,17 +1,6 @@
 package lk.easycar.spring.service;
 
-import lk.easycar.spring.dto.DriverDTO;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 public interface DriverScheduleService {
-//
-//    void updateDriverSchedule(DriverScheduleDTO dto);
-//
-//    void deleteRentalDetail(String rental_id);
-//
-//    ArrayList<RentalDetailDTO> getAllRentalDetail();
 
     String generateNewScheduleId();
 }

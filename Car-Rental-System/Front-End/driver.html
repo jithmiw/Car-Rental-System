@@ -27,19 +27,15 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="my-schedule">
-                            My Schedule
-                        </button>
+                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="#schedules">My Schedules</a>
                     </li>
                     <li class="nav-item">
-                        <!-- My Profile Button trigger modal -->
                         <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="my-profile" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             My Profile
                         </button>
                     </li>
                     <li class="nav-item">
-                        <!-- Logout Button trigger modal -->
-                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                        <button type="button" class="btn btn-outline-dark" id="logOut">
                             Logout
                         </button>
                     </li>
@@ -47,24 +43,6 @@
             </div>
         </div>
     </nav>
-    <!-- Logout Modal -->
-    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="logoutModalLabel">Logout</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are sure you want to logout?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark">Logout</button>
-                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- My Profile Modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -103,14 +81,18 @@
                         </div>
                         <div class="col-md-6">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" readonly>
+                            <input type="text" class="form-control" id="username" readonly>
                         </div>
                         <div class="col-md-6">
                             <label for="password" class="form-label">Password</label>
                             <div class="d-flex flex-row align-items-center">
                                 <input type="password" class="form-control me-2" id="password" readonly>
-                                <i class="bi bi-eye-slash" id="toggleUpdatePassword" style="cursor: pointer"></i>
+                                <i class="bi bi-eye-slash" id="togglePassword" style="cursor: pointer"></i>
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="regDate" class="form-label">Registered Date</label>
+                            <input type="text" class="form-control" id="regDate" readonly>
                         </div>
                     </form>
                 </div>
@@ -120,10 +102,10 @@
 </header>
 <main>
     <!--DRIVER SCHEDULE SECTION-->
-    <section id="schedule">
+    <section id="schedules">
         <div class="container-fluid mt-5 mb-5 pt-4">
             <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
-                <div class="navbar-brand ms-2">My Schedule</div>
+                <div class="navbar-brand ms-2">My Schedules</div>
             </div>
             <form class="row g-3 mt-0 me-0 ms-0 mb-5 bg-white">
                 <div class="col-md-4">
@@ -162,7 +144,7 @@
                     <th scope="col" class="text-white">End Time</th>
                 </tr>
                 </thead>
-                <tbody style="overflow-y:auto;" id="tblSchedule" class="table-light">
+                <tbody style="overflow-y:auto;" id="tblSchedules" class="table-light">
                 </tbody>
             </table>
         </div>
@@ -170,7 +152,7 @@
 </main>
 </body>
 <script src="assets/js/jquery-3.6.1.min.js"></script>
-<script src="./assets/js/ui-js/customer.js"></script>
+<script src="./assets/js/ui-js/driver.js"></script>
 <script src="./assets/js/bootstrap.min.js"></script>
 </html>
 
