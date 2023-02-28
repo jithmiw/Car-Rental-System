@@ -308,11 +308,24 @@
                 </div>
                 <div class="d-flex flex-column flex-sm-row justify-content-center mt-4 mb-5">
                     <button type="button" id="changeDriver" class="btn btn-outline-secondary mt-1 mb-1 me-sm-2 ms-sm-2">CHANGE DRIVER</button>
-                    <button type="button" class="btn btn-outline-secondary mt-1 mb-1 me-sm-2 ms-sm-2">CALCULATE PAYMENT</button>
+                    <!-- Calculate Payment Button trigger modal -->
+                    <button type="button" class="btn btn-outline-secondary mt-1 mb-1 me-sm-2 ms-sm-2" id="calculatePayment" data-bs-toggle="modal" data-bs-target="#calculatePaymentModal">
+                        CALCULATE PAYMENT
+                    </button>
                     <button type="button" id="acceptRequest" class="btn btn-secondary mt-1 mb-1 me-sm-2 ms-sm-2">ACCEPT REQUEST</button>
                     <button type="button" id="denyRequest" class="btn btn-secondary mt-1 mb-1 me-sm-2 ms-sm-2">DENY REQUEST</button>
                 </div>
             </form>
+            <div class="d-flex flex-column mb-4">
+                <span class="fw-bold">BANK SLIP IMAGE OF LOSS DAMAGE WAIVER PAYMENT</span>
+                <img id="displayBankSlip" src="" alt="bank-slip-img" class="border border-1 w-50 mt-2 me-1 img-fluid" style="height: 450px">
+            </div>
+            <div class="d-flex flex-column flex-sm-row justify-content-center mt-5 mb-3">
+                <button type="button" id="btnRental" class="btn btn-outline-dark mt-1 mb-1 me-sm-2 ms-sm-2" style="border-radius: 50px">Rental</button>
+                <button type="button" id="btnAccepted" class="btn btn-outline-dark mt-1 mb-1 me-sm-2 ms-sm-2" style="border-radius: 50px">Accepted</button>
+                <button type="button" id="btnDenied" class="btn btn-outline-dark mt-1 mb-1 me-sm-2 ms-sm-2" style="border-radius: 50px">Denied</button>
+                <button type="button" id="btnClosed" class="btn btn-outline-dark mt-1 mb-1 me-sm-2 ms-sm-2" style="border-radius: 50px">Closed</button>
+            </div>
             <table class="table table-bordered table-hover mt-4">
                 <thead class="bg-dark">
                 <tr>
@@ -326,7 +339,9 @@
                     <th scope="col" class="text-white">Pick-up Venue</th>
                     <th scope="col" class="text-white">Return Venue</th>
                     <th scope="col" class="text-white">Driver Status</th>
+                    <th scope="col" class="text-white">Rental Status</th>
                     <th scope="col" class="text-white">Reserved Date</th>
+                    <th scope="col" class="text-white d-none">Bank Slip Image</th>
                 </tr>
                 </thead>
                 <tbody style="overflow-y:auto;" id="tblReservations" class="table-light">
@@ -396,6 +411,62 @@
             </table>
         </div>
     </section>
+    <!-- Calculate Payment Modal -->
+    <div class="modal fade" id="calculatePaymentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="calculatePaymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex flex-column">
+                        <h1 class="modal-title fs-5 fw-bold" id="calculatePaymentModalLabel">Calculate Payment</h1>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="paymentForm" class="row g-3">
+                        <div class="col-md-6">
+                            <label for="payment-id" class="form-label">Payment Id</label>
+                            <input type="text" class="form-control" id="payment-id" name="payment_id">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="input-rental-id" class="form-label">Rental Id</label>
+                            <input type="text" class="form-control" id="input-rental-id" name="rental_id">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="rental-fee" class="form-label">Rental Fee(Rs.)</label>
+                            <input type="number" class="form-control" id="rental-fee" name="rental_fee">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="driver-fee" class="form-label">Driver Fee(Rs.)</label>
+                            <input type="number" class="form-control" id="driver-fee" name="driver_fee">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="extra-km" class="form-label">Extra km</label>
+                            <input type="number" class="form-control" id="extra-km" name="extra_km">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="extra-km-fee" class="form-label">Extra km Fee(Rs.)</label>
+                            <input type="number" class="form-control" id="extra-km-fee" name="extra_km_fee">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="damage-fee" class="form-label">Damage Fee(Rs.)</label>
+                            <input type="number" class="form-control" id="damage-fee" name="damage_fee">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="returned-amount" class="form-label">Returned Amount(Rs.)</label>
+                            <input type="number" class="form-control" id="returned-amount" name="damage_fee">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="total-payment" class="form-label">Total Payment(Rs.)</label>
+                            <input type="number" class="form-control" id="total-payment" name="total_payment">
+                        </div>
+                        <div class="modal-footer col-12 me-auto pe-2">
+                            <button id="btnPayment" type="button" class="btn btn-dark">Pay</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 <script src="assets/js/jquery-3.6.1.min.js"></script>
 <script src="./assets/js/ui-js/admin.js"></script>

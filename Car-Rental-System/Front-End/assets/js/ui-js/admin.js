@@ -4,6 +4,7 @@ $('#manage-reservations').click(function () {
     $('#reservations').css('display', 'block');
     $('#customers').css('display', 'none');
     getRentalRequests();
+    $('#btnRental').click();
 });
 
 $('#view-customers').click(function () {
@@ -12,39 +13,83 @@ $('#view-customers').click(function () {
     getAllCustomers();
 });
 
+let rental = [];
+let accepted = [];
+let closed = [];
+let denied = [];
+
 // get rental requests
 function getRentalRequests() {
-    $('#tblReservations').empty();
+    rental = [];
+    accepted = [];
+    closed = [];
+    denied = [];
     $.ajax({
         url: baseUrl + "rentalDetail/getRentalRequests",
         success: function (res) {
             if (res.data != null) {
                 for (let r of res.data) {
-                    let rentalId = r.rental_id;
-                    let customerNic = r.customer_nic;
-                    let carRegNo = r.car_reg_no;
-                    let pickUpDate = r.pick_up_date;
-                    let returnDate = r.return_date;
-                    let pickUpTime = r.pick_up_time;
-                    let returnTime = r.return_time;
-                    let pickUpVenue = r.pick_up_venue;
-                    let returnVenue = r.return_venue;
-                    let driverStatus = r.driver_status;
-                    let reservedDate = r.reserved_date;
+                    let rentalStatus = r.rental_status;
 
-                    let row = "<tr><td>" + rentalId + "</td><td>" + customerNic + "</td><td>" + carRegNo + "</td>" +
-                        "<td>" + pickUpDate + "</td><td>" + returnDate + "</td><td>" + pickUpTime + "</td><td>" + returnTime + "</td>" +
-                        "<td>" + pickUpVenue + "</td><td>" + returnVenue + "</td><td>" + driverStatus + "</td><td>" + reservedDate + "</td></tr>";
-                    $('#tblReservations').append(row);
+                    if (rentalStatus === "Rental") {
+                        rental.push(r);
+                    } else if (rentalStatus === "Accepted") {
+                        accepted.push(r);
+                    } else if (rentalStatus === "Closed") {
+                        closed.push(r);
+                    } else {
+                        denied.push(r);
+                    }
                 }
-                bindClickEventsToRows();
             }
-            // clearAll();
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);
         }
     });
+}
+
+$('#btnRental').click(function () {
+    setTableRows(rental);
+});
+
+$('#btnAccepted').click(function () {
+    setTableRows(accepted);
+});
+
+$('#btnDenied').click(function () {
+    setTableRows(denied);
+});
+
+$('#btnClosed').click(function () {
+    setTableRows(closed);
+});
+
+// set table rows
+function setTableRows(array) {
+    $('#tblReservations').empty();
+    array.forEach(function(r) {
+        let rentalId = r.rental_id;
+        let customerNic = r.customer_nic;
+        let carRegNo = r.car_reg_no;
+        let pickUpDate = r.pick_up_date;
+        let returnDate = r.return_date;
+        let pickUpTime = r.pick_up_time;
+        let returnTime = r.return_time;
+        let pickUpVenue = r.pick_up_venue;
+        let returnVenue = r.return_venue;
+        let driverStatus = r.driver_status;
+        let rentalStatus = r.rental_status;
+        let reservedDate = r.reserved_date;
+        let bankSlipImg = r.bank_slip_img;
+
+        let row = "<tr><td>" + rentalId + "</td><td>" + customerNic + "</td><td>" + carRegNo + "</td>" +
+            "<td>" + pickUpDate + "</td><td>" + returnDate + "</td><td>" + pickUpTime + "</td><td>" + returnTime + "</td>" +
+            "<td>" + pickUpVenue + "</td><td>" + returnVenue + "</td><td>" + driverStatus + "</td><td>" + rentalStatus + "</td>" +
+            "<td>" + reservedDate + "</td><td class='d-none'>" + bankSlipImg + "</td></tr>";
+        $('#tblReservations').append(row);
+    });
+    bindClickEventsToRows();
 }
 
 // bind events for the table rows
@@ -60,7 +105,9 @@ function bindClickEventsToRows() {
         let pickUpVenue = $(this).children(':eq(7)').text();
         let returnVenue = $(this).children(':eq(8)').text();
         let driverStatus = $(this).children(':eq(9)').text();
-        let reservedDate = $(this).children(':eq(10)').text();
+        let rentalStatus = $(this).children(':eq(10)').text();
+        let reservedDate = $(this).children(':eq(11)').text();
+        let bankSlipImg = $(this).children(':eq(12)').text();
 
         $('#rental-id').val(rentalId);
         $('#reg-no').val(carRegNo);
@@ -71,7 +118,9 @@ function bindClickEventsToRows() {
         $('#return-time').val(returnTime);
         $('#pick-up-venue').val(pickUpVenue);
         $('#return-venue').val(returnVenue);
+        $('#rental-status').val(rentalStatus);
         $('#reserved-date').val(reservedDate);
+        $("#displayBankSlip").attr("src", baseUrl + bankSlipImg);
 
         if (driverStatus === "Yes") {
             $("#selectDriverNic").empty();
@@ -207,6 +256,7 @@ $("#acceptRequest").click(function () {
             success: function (res) {
                 alert(res.message);
                 getRentalRequests();
+                $('#btnAccepted').click();
                 clearForm();
             },
             error: function (error) {
@@ -227,6 +277,7 @@ $("#denyRequest").click(function () {
             success: function (res) {
                 alert(res.message);
                 getRentalRequests();
+                $('#btnDenied').click();
                 clearForm();
             },
             error: function (error) {

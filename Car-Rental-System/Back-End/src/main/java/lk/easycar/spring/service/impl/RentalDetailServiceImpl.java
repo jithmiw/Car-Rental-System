@@ -127,7 +127,7 @@ public class RentalDetailServiceImpl implements RentalDetailService {
 
     @Override
     public ArrayList<RentalDetailDTO> getRentalRequests() {
-        List<RentalDetail> requests = rentalDetailRepo.findRentalDetailByRental_status("Rental");
+        List<RentalDetail> requests = rentalDetailRepo.findAll();
         ArrayList<RentalDetailDTO> rentalRequests = new ArrayList<>();
         if (requests.size() != 0) {
             for (RentalDetail rental : requests) {
