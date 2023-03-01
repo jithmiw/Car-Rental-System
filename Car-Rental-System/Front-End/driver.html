@@ -10,7 +10,7 @@
     <title>Easy Car Rental | My Account</title>
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -18,24 +18,30 @@
     <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-white">
         <div class="container-fluid">
             <a class="navbar-brand text-black fw-bolder">
-                <img src="assets/img/easycar-logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                <img alt="Logo" class="d-inline-block align-text-top" height="30" src="assets/img/easycar-logo.png"
+                     width="30">
                 Easy Car
             </a>
-            <button class="navbar-toggler bg-black" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler bg-black" data-bs-target="#navbarSupportedContent"
+                    data-bs-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="#schedules">My Schedules</a>
+                        <a aria-current="page" class="nav-link active text-black fw-semibold" href="#schedules">My
+                            Schedules</a>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="my-profile" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button class="btn btn-link text-decoration-none nav-link active text-black fw-semibold"
+                                data-bs-target="#staticBackdrop"
+                                data-bs-toggle="modal" id="my-profile" type="button">
                             My Profile
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="btn btn-outline-dark" id="logOut">
+                        <button class="btn btn-outline-dark" id="logOut" type="button">
                             Logout
                         </button>
                     </li>
@@ -44,55 +50,56 @@
         </div>
     </nav>
     <!-- My Profile Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="staticBackdropLabel" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+         id="staticBackdrop" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex flex-column">
                         <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">My Profile</h1>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <div class="modal-body">
                     <form class="row g-3">
                         <div class="col-md-6">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" readonly>
+                            <label class="form-label" for="name">Name</label>
+                            <input class="form-control" id="name" readonly type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" readonly>
+                            <label class="form-label" for="address">Address</label>
+                            <input class="form-control" id="address" readonly type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" readonly>
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" id="email" readonly type="email">
                         </div>
                         <div class="col-md-6">
-                            <label for="contactNo" class="form-label">Contact No</label>
-                            <input type="text" class="form-control" id="contactNo" readonly>
+                            <label class="form-label" for="contactNo">Contact No</label>
+                            <input class="form-control" id="contactNo" readonly type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="nicNo" class="form-label">NIC No</label>
-                            <input type="text" class="form-control" id="nicNo" readonly>
+                            <label class="form-label" for="nicNo">NIC No</label>
+                            <input class="form-control" id="nicNo" readonly type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="licenseNo" class="form-label">License No</label>
-                            <input type="text" class="form-control" id="licenseNo" readonly>
+                            <label class="form-label" for="licenseNo">License No</label>
+                            <input class="form-control" id="licenseNo" readonly type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" readonly>
+                            <label class="form-label" for="username">Username</label>
+                            <input class="form-control" id="username" readonly type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="password" class="form-label">Password</label>
+                            <label class="form-label" for="password">Password</label>
                             <div class="d-flex flex-row align-items-center">
-                                <input type="password" class="form-control me-2" id="password" readonly>
+                                <input class="form-control me-2" id="password" readonly type="password">
                                 <i class="bi bi-eye-slash" id="togglePassword" style="cursor: pointer"></i>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="regDate" class="form-label">Registered Date</label>
-                            <input type="text" class="form-control" id="regDate" readonly>
+                            <label class="form-label" for="regDate">Registered Date</label>
+                            <input class="form-control" id="regDate" readonly type="text">
                         </div>
                     </form>
                 </div>
@@ -104,47 +111,48 @@
     <!--DRIVER SCHEDULE SECTION-->
     <section id="schedules">
         <div class="container-fluid mt-5 mb-5 pt-4">
-            <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+            <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between"
+                 style="background-color: #e3e3e3">
                 <div class="navbar-brand ms-2">My Schedules</div>
             </div>
             <form class="row g-3 mt-0 me-0 ms-0 mb-5 bg-white">
                 <div class="col-md-4">
                     <label class="form-label">Schedule Id</label>
-                    <input type="text" id="schedule-id" class="form-control" readonly>
+                    <input class="form-control" id="schedule-id" readonly type="text">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Rental Id</label>
-                    <input type="text" id="rental-id" class="form-control" readonly>
+                    <input class="form-control" id="rental-id" readonly type="text">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">Start Date</label>
-                    <input type="date" id="start-date" class="form-control" readonly>
+                    <input class="form-control" id="start-date" readonly type="date">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">End Date</label>
-                    <input type="date" id="end-date" class="form-control" readonly>
+                    <input class="form-control" id="end-date" readonly type="date">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">End Date</label>
-                    <input type="time" id="start-time" class="form-control" readonly>
+                    <input class="form-control" id="start-time" readonly type="time">
                 </div>
                 <div class="col-md-4">
                     <label class="form-label">End Date</label>
-                    <input type="time" id="end-time" class="form-control" readonly>
+                    <input class="form-control" id="end-time" readonly type="time">
                 </div>
             </form>
             <table class="table table-bordered table-hover">
                 <thead class="bg-dark">
                 <tr>
-                    <th scope="col" class="text-white">Schedule Id</th>
-                    <th scope="col" class="text-white">Rental Id</th>
-                    <th scope="col" class="text-white">Start Date</th>
-                    <th scope="col" class="text-white">End Date</th>
-                    <th scope="col" class="text-white">Start Time</th>
-                    <th scope="col" class="text-white">End Time</th>
+                    <th class="text-white" scope="col">Schedule Id</th>
+                    <th class="text-white" scope="col">Rental Id</th>
+                    <th class="text-white" scope="col">Start Date</th>
+                    <th class="text-white" scope="col">End Date</th>
+                    <th class="text-white" scope="col">Start Time</th>
+                    <th class="text-white" scope="col">End Time</th>
                 </tr>
                 </thead>
-                <tbody style="overflow-y:auto;" id="tblSchedules" class="table-light">
+                <tbody class="table-light" id="tblSchedules" style="overflow-y:auto;">
                 </tbody>
             </table>
         </div>

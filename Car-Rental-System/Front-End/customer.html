@@ -10,7 +10,7 @@
     <title>Easy Car Rental | My Account</title>
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -18,35 +18,45 @@
     <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-white">
         <div class="container-fluid">
             <a class="navbar-brand text-black fw-bolder">
-                <img src="assets/img/easycar-logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                <img alt="Logo" class="d-inline-block align-text-top" height="30" src="assets/img/easycar-logo.png"
+                     width="30">
                 Easy Car
             </a>
-            <button class="navbar-toggler bg-black" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler bg-black" data-bs-target="#navbarSupportedContent"
+                    data-bs-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="home">
+                        <button class="btn btn-link text-decoration-none nav-link active text-black fw-semibold"
+                                id="home"
+                                type="button">
                             Home
                         </button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-black fw-semibold" aria-current="page" target="_blank" href="car.html">Cars</a>
+                        <a aria-current="page" class="nav-link active text-black fw-semibold" href="car.html"
+                           target="_blank">Cars</a>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="my-reservations">
+                        <button class="btn btn-link text-decoration-none nav-link active text-black fw-semibold"
+                                id="my-reservations"
+                                type="button">
                             Reservations
                         </button>
                     </li>
                     <li class="nav-item">
                         <!-- My Profile Button trigger modal -->
-                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="my-profile" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button class="btn btn-link text-decoration-none nav-link active text-black fw-semibold"
+                                data-bs-target="#staticBackdrop"
+                                data-bs-toggle="modal" id="my-profile" type="button">
                             My Profile
                         </button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="btn btn-outline-dark" id="logOut">
+                        <button class="btn btn-outline-dark" id="logOut" type="button">
                             Logout
                         </button>
                     </li>
@@ -55,58 +65,59 @@
         </div>
     </nav>
     <!-- Sign Up Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="staticBackdropLabel" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+         id="staticBackdrop" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex flex-column">
                         <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">My Profile</h1>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <div class="modal-body">
                     <form class="row g-3">
                         <div class="col-md-6">
-                            <label for="updateName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="updateName" name="customer_name" readonly>
+                            <label class="form-label" for="updateName">Name</label>
+                            <input class="form-control" id="updateName" name="customer_name" readonly type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="updateAddress" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="updateAddress" name="address">
+                            <label class="form-label" for="updateAddress">Address</label>
+                            <input class="form-control" id="updateAddress" name="address" type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="updateEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="updateEmail" name="email">
+                            <label class="form-label" for="updateEmail">Email</label>
+                            <input class="form-control" id="updateEmail" name="email" type="email">
                         </div>
                         <div class="col-md-6">
-                            <label for="updateContactNo" class="form-label">Contact No</label>
-                            <input type="text" class="form-control" id="updateContactNo" name="contact_no">
+                            <label class="form-label" for="updateContactNo">Contact No</label>
+                            <input class="form-control" id="updateContactNo" name="contact_no" type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="updateNicNo" class="form-label">NIC No</label>
-                            <input type="text" class="form-control" id="updateNicNo" name="nic-no" readonly>
+                            <label class="form-label" for="updateNicNo">NIC No</label>
+                            <input class="form-control" id="updateNicNo" name="nic-no" readonly type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="updateLicenseNo" class="form-label">License No</label>
-                            <input type="text" class="form-control" id="updateLicenseNo" name="license_no">
+                            <label class="form-label" for="updateLicenseNo">License No</label>
+                            <input class="form-control" id="updateLicenseNo" name="license_no" type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="updateUsername" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="updateUsername" name="username">
+                            <label class="form-label" for="updateUsername">Username</label>
+                            <input class="form-control" id="updateUsername" name="username" type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="updatePassword" class="form-label">Password</label>
+                            <label class="form-label" for="updatePassword">Password</label>
                             <div class="d-flex flex-row align-items-center">
-                                <input type="password" class="form-control me-2" id="updatePassword" name="password">
+                                <input class="form-control me-2" id="updatePassword" name="password" type="password">
                                 <i class="bi bi-eye-slash" id="toggleUpdatePassword" style="cursor: pointer"></i>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="updateLicenseFile" class="form-label">License Image</label>
-                            <input class="form-control" type="file" id="updateLicenseFile">
+                            <label class="form-label" for="updateLicenseFile">License Image</label>
+                            <input class="form-control" id="updateLicenseFile" type="file">
                         </div>
                         <div class="modal-footer col-12 me-auto pe-2">
-                            <button type="button" class="btn btn-dark me-0">UPDATE</button>
+                            <button class="btn btn-dark me-0" type="button">UPDATE</button>
                         </div>
                     </form>
                 </div>
@@ -122,78 +133,97 @@
                 <form class="col g-3">
                     <h3 class="mb-3 mt-3">FIND YOUR CAR</h3>
                     <div class="row-12 mb-3">
-                        <label for="search-pick-up-date" class="form-label">Pick-up Date</label>
-                        <input type="date" class="form-control" id="search-pick-up-date">
+                        <label class="form-label" for="search-pick-up-date">Pick-up Date</label>
+                        <input class="form-control" id="search-pick-up-date" type="date">
                     </div>
                     <div class="row-12 mb-3">
-                        <label for="search-return-date" class="form-label">Return Date</label>
-                        <input type="date" class="form-control" id="search-return-date">
+                        <label class="form-label" for="search-return-date">Return Date</label>
+                        <input class="form-control" id="search-return-date" type="date">
                     </div>
                     <div class="row-12 mb-3">
-                        <button id="searchCar" type="button" class="btn btn-dark">SEARCH</button>
+                        <button class="btn btn-dark" id="searchCar" type="button">SEARCH</button>
                     </div>
                 </form>
                 <div class="ms-1">
-                    <img class="img-fluid" src="assets/img/black-car.jpg" alt="car img">
+                    <img alt="car img" class="img-fluid" src="assets/img/black-car.jpg">
                 </div>
             </div>
-            <div id="carCards" class="container-fluid d-flex flex-row flex-wrap justify-content-evenly d-none">
+            <div class="container-fluid d-flex flex-row flex-wrap justify-content-evenly d-none" id="carCards">
                 <div class="card mb-5" style="width: 20rem;">
                     <div class="card-header fw-bold">Luxury</div>
-                    <img src="assets/img/black-car.jpg" class="card-img-top" alt="car-img" style="height: 190px">
+                    <img alt="car-img" class="card-img-top" src="assets/img/black-car.jpg" style="height: 190px">
                     <div class="card-body">
                         <h5 class="card-title mb-3">BMW i8</h5>
-                        <span class="transType btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Transmission Type :</span>
-                        <span class="noOfPassengers btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Passengers :</span>
-                        <span class="fuelType btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Fuel Type :</span>
-                        <span class="freeKmDay btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Free km for a Day :</span>
-                        <span class="freeKmMonth btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2" style="font-size: 13px; cursor: text">Free km for a Month :</span>
-                        <span id="regNo" class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2 d-none car-reg-no" style="font-size: 13px; cursor: text">Reg No :</span>
+                        <span class="transType btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2"
+                              style="font-size: 13px; cursor: text">Transmission Type :</span>
+                        <span class="noOfPassengers btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2"
+                              style="font-size: 13px; cursor: text">Passengers :</span>
+                        <span class="fuelType btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2"
+                              style="font-size: 13px; cursor: text">Fuel Type :</span>
+                        <span class="freeKmDay btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2"
+                              style="font-size: 13px; cursor: text">Free km for a Day :</span>
+                        <span class="freeKmMonth btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2"
+                              style="font-size: 13px; cursor: text">Free km for a Month :</span>
+                        <span class="btn btn-outline-dark pe-2 ps-2 pt-1 pb-1 mb-2 d-none car-reg-no" id="regNo"
+                              style="font-size: 13px; cursor: text">Reg No :</span>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="dailyRate list-group-item bg-dark text-white">Daily Rate :</li>
                         <li class="monthlyRate list-group-item" style="background-color: #d3d3d3">Monthly Rate :</li>
-                        <li class="extraKmPrice list-group-item" style="background-color: #e3e3e3">Price per Extra km :</li>
-                        <li class="ldwPayment list-group-item" style="background-color: #f3f3f3">Loss Damage Waiver Payment :</li>
+                        <li class="extraKmPrice list-group-item" style="background-color: #e3e3e3">Price per Extra km
+                            :
+                        </li>
+                        <li class="ldwPayment list-group-item" style="background-color: #f3f3f3">Loss Damage Waiver
+                            Payment :
+                        </li>
                     </ul>
                     <div class="d-flex flex-row justify-content-center m-2 mt-3">
                         <!-- See images button trigger modal -->
-                        <button type="button" class="btn btn-outline-secondary me-2 btn-img" data-bs-toggle="modal" data-bs-target="#seeImgsModal">SEE IMAGES</button>
+                        <button class="btn btn-outline-secondary me-2 btn-img" data-bs-target="#seeImgsModal" data-bs-toggle="modal"
+                                type="button">SEE IMAGES
+                        </button>
                         <!-- Reservation Button trigger modal -->
-                        <button type="button" class="btn btn-dark btn-reservation" data-bs-toggle="modal" data-bs-target="#reservationModal">
+                        <button class="btn btn-dark btn-reservation" data-bs-target="#reservationModal" data-bs-toggle="modal"
+                                type="button">
                             MAKE RESERVATION
                         </button>
                     </div>
                     <!-- See images Modal -->
-                    <div class="modal modal-lg fade see-img-modal" id="seeImgsModal" tabindex="-1" aria-labelledby="seeImgsModalLabel" aria-hidden="true">
+                    <div aria-hidden="true" aria-labelledby="seeImgsModalLabel" class="modal modal-lg fade see-img-modal"
+                         id="seeImgsModal" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="seeImgsModalLabel">BMW i8</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"
+                                            type="button"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
                                             <div class="carousel-item active">
-                                                <img src="assets/img/black-car.jpg" class="d-block w-100" alt="img-1">
+                                                <img alt="img-1" class="d-block w-100" src="assets/img/black-car.jpg">
                                             </div>
                                             <div class="carousel-item">
-                                                <img src="assets/img/black-car.jpg" class="d-block w-100" alt="img-2">
+                                                <img alt="img-2" class="d-block w-100" src="assets/img/black-car.jpg">
                                             </div>
                                             <div class="carousel-item">
-                                                <img src="assets/img/black-car.jpg" class="d-block w-100" alt="img-3">
+                                                <img alt="img-3" class="d-block w-100" src="assets/img/black-car.jpg">
                                             </div>
                                             <div class="carousel-item">
-                                                <img src="assets/img/black-car.jpg" class="d-block w-100" alt="img-4">
+                                                <img alt="img-4" class="d-block w-100" src="assets/img/black-car.jpg">
                                             </div>
                                         </div>
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon bg-secondary" aria-hidden="true"></span>
+                                        <button class="carousel-control-prev" data-bs-slide="prev"
+                                                data-bs-target="#carCarousel" type="button">
+                                            <span aria-hidden="true"
+                                                  class="carousel-control-prev-icon bg-secondary"></span>
                                             <span class="visually-hidden">Previous</span>
                                         </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon bg-secondary" aria-hidden="true"></span>
+                                        <button class="carousel-control-next" data-bs-slide="next"
+                                                data-bs-target="#carCarousel" type="button">
+                                            <span aria-hidden="true"
+                                                  class="carousel-control-next-icon bg-secondary"></span>
                                             <span class="visually-hidden">Next</span>
                                         </button>
                                     </div>
@@ -202,56 +232,63 @@
                         </div>
                     </div>
                     <!-- Reservation Modal -->
-                    <div class="modal fade reservationModal reservation-modal" id="reservationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="reservationModalLabel" aria-hidden="true">
+                    <div aria-hidden="true" aria-labelledby="reservationModalLabel"
+                         class="modal fade reservationModal reservation-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+                         id="reservationModal" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <div class="d-flex flex-column">
-                                        <h1 class="modal-title fs-5 fw-bold" id="reservationModalLabel">Reservation Details</h1>
+                                        <h1 class="modal-title fs-5 fw-bold" id="reservationModalLabel">Reservation
+                                            Details</h1>
                                     </div>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"
+                                            type="button"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="reservationForm" class="row g-3">
+                                    <form class="row g-3" id="reservationForm">
                                         <div class="col-md-6">
                                             <label class="form-label">Rental Id</label>
-                                            <input type="text" class="form-control rental-id" name="rental_id" readonly>
+                                            <input class="form-control rental-id" name="rental_id" readonly type="text">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Registration No</label>
-                                            <input type="text" class="form-control reg-no" name="car_reg_no" readonly>
+                                            <input class="form-control reg-no" name="car_reg_no" readonly type="text">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Customer Nic</label>
-                                            <input type="text" class="form-control customer-nic" name="customer_nic" readonly>
+                                            <input class="form-control customer-nic" name="customer_nic" readonly
+                                                   type="text">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Pick-up Date</label>
-                                            <input type="Date" class="form-control pick-up-date" name="pick_up_date" readonly>
+                                            <input class="form-control pick-up-date" name="pick_up_date" readonly
+                                                   type="Date">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Return Date</label>
-                                            <input type="Date" class="form-control return-date" name="return_date" readonly>
+                                            <input class="form-control return-date" name="return_date" readonly
+                                                   type="Date">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Pick-up Time</label>
-                                            <input type="Time" class="form-control pick-up-time" name="pick_up_time">
+                                            <input class="form-control pick-up-time" name="pick_up_time" type="Time">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Return Time</label>
-                                            <input type="Time" class="form-control return-time"  name="return_time">
+                                            <input class="form-control return-time" name="return_time" type="Time">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Pick-up Venue</label>
-                                            <input type="text" class="form-control pick-up-venue" name="pick_up_venue">
+                                            <input class="form-control pick-up-venue" name="pick_up_venue" type="text">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Return Venue</label>
-                                            <input type="text" class="form-control return-venue" name="return_venue">
+                                            <input class="form-control return-venue" name="return_venue" type="text">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Bank Slip Image</label>
-                                            <input type="file" class="form-control bank-slip">
+                                            <input class="form-control bank-slip" type="file">
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Add Driver or Not?</label>
@@ -262,7 +299,8 @@
                                             </select>
                                         </div>
                                         <div class="modal-footer col-12 me-auto pe-2">
-                                            <button type="button" class="btn btn-dark me-0 rentCar">MAKE RESERVATION</button>
+                                            <button class="btn btn-dark me-0 rentCar" type="button">MAKE RESERVATION
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
@@ -276,41 +314,42 @@
     <!--RESERVATIONS SECTION-->
     <section id="reservations">
         <div class="container-fluid mt-5 mb-5 pt-4">
-            <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+            <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between"
+                 style="background-color: #e3e3e3">
                 <div class="navbar-brand ms-2">Reservations</div>
             </div>
             <div class="fw-bold ms-2 mt-4">Driver Info</div>
             <form class="row g-3 mt-0 me-0 ms-0 mb-5 bg-white">
                 <div class="col-md-3">
                     <label class="form-label">Driver Name</label>
-                    <input type="text" id="driver-name" class="form-control" readonly>
+                    <input class="form-control" id="driver-name" readonly type="text">
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Contact No</label>
-                    <input type="text" id="contact-no" class="form-control" readonly>
+                    <input class="form-control" id="contact-no" readonly type="text">
                 </div>
                 <div class="col-md-3">
                     <label class="form-label">Email</label>
-                    <input type="text" id="email" class="form-control" readonly>
+                    <input class="form-control" id="email" readonly type="text">
                 </div>
             </form>
             <table class="table table-bordered table-hover">
                 <thead class="bg-dark">
                 <tr>
-                    <th scope="col" class="text-white">Rental Id</th>
-                    <th scope="col" class="text-white">Car Reg No</th>
-                    <th scope="col" class="text-white">Pick-up Date</th>
-                    <th scope="col" class="text-white">Return Date</th>
-                    <th scope="col" class="text-white">Pick-up Time</th>
-                    <th scope="col" class="text-white">Return Time</th>
-                    <th scope="col" class="text-white">Pick-up Venue</th>
-                    <th scope="col" class="text-white">Return Venue</th>
-                    <th scope="col" class="text-white">Driver Status</th>
-                    <th scope="col" class="text-white">Rental Status</th>
-                    <th scope="col" class="text-white">Reserved Date</th>
+                    <th class="text-white" scope="col">Rental Id</th>
+                    <th class="text-white" scope="col">Car Reg No</th>
+                    <th class="text-white" scope="col">Pick-up Date</th>
+                    <th class="text-white" scope="col">Return Date</th>
+                    <th class="text-white" scope="col">Pick-up Time</th>
+                    <th class="text-white" scope="col">Return Time</th>
+                    <th class="text-white" scope="col">Pick-up Venue</th>
+                    <th class="text-white" scope="col">Return Venue</th>
+                    <th class="text-white" scope="col">Driver Status</th>
+                    <th class="text-white" scope="col">Rental Status</th>
+                    <th class="text-white" scope="col">Reserved Date</th>
                 </tr>
                 </thead>
-                <tbody style="overflow-y:auto;" id="tblReservations" class="table-light">
+                <tbody class="table-light" id="tblReservations" style="overflow-y:auto;">
                 </tbody>
             </table>
         </div>

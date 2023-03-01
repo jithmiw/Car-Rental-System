@@ -10,7 +10,7 @@
     <title>Easy Car Rental</title>
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -18,61 +18,70 @@
     <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-white">
         <div class="container-fluid">
             <a class="navbar-brand text-black fw-bolder">
-                <img src="assets/img/easycar-logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                <img alt="Logo" class="d-inline-block align-text-top" height="30" src="assets/img/easycar-logo.png"
+                     width="30">
                 Easy Car
             </a>
-            <button class="navbar-toggler bg-black" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler bg-black" data-bs-target="#navbarSupportedContent"
+                    data-bs-toggle="collapse" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="#home">Home</a>
+                        <a aria-current="page" class="nav-link active text-black fw-semibold" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-black fw-semibold" aria-current="page" target="_blank" href="car.html">Cars</a>
+                        <a aria-current="page" class="nav-link active text-black fw-semibold" href="car.html"
+                           target="_blank">Cars</a>
                     </li>
                     <li class="nav-item">
                         <!-- Login Button trigger modal -->
-                        <a class="nav-link active text-black fw-semibold" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                        <a class="nav-link active text-black fw-semibold" data-bs-target="#staticBackdrop1" data-bs-toggle="modal"
+                           style="cursor: pointer">
                             Login
                         </a>
                     </li>
                 </ul>
                 <!-- Sign Up Button trigger modal -->
-                <button type="button" class="btn btn-outline-dark fw-semibold" data-bs-toggle="modal" data-bs-target="#signup-modal">
+                <button class="btn btn-outline-dark fw-semibold" data-bs-target="#signup-modal" data-bs-toggle="modal"
+                        type="button">
                     Sign Up
                 </button>
             </div>
         </div>
     </nav>
     <!-- Login Modal -->
-    <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="staticBackdropLabel1" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+         id="staticBackdrop1" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex flex-column">
                         <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel1">Login</h1>
-                        <span style="color: #aaaaaa">Don't have an account?<button class="btn btn-link text-decoration-none pt-0" data-bs-target="#signup-modal" data-bs-toggle="modal">Sign Up</button></span>
+                        <span style="color: #aaaaaa">Don't have an account?<button
+                                class="btn btn-link text-decoration-none pt-0" data-bs-target="#signup-modal"
+                                data-bs-toggle="modal">Sign Up</button></span>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <div class="modal-body">
                     <!--LOGIN FORM-->
                     <form id="loginForm">
                         <div class="mb-3">
-                            <label for="enterUsername" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="enterUsername">
+                            <label class="form-label" for="enterUsername">Username</label>
+                            <input class="form-control" id="enterUsername" type="text">
                         </div>
                         <div class="mb-3">
-                            <label for="enterPassword" class="form-label">Password</label>
+                            <label class="form-label" for="enterPassword">Password</label>
                             <div class="d-flex flex-row align-items-center">
-                                <input type="password" class="form-control me-2" id="enterPassword">
+                                <input class="form-control me-2" id="enterPassword" type="password">
                                 <i class="bi bi-eye-slash" id="toggleLoginPassword" style="cursor: pointer"></i>
                             </div>
                         </div>
                         <div class="modal-footer col-12 me-auto pe-0">
-                            <button type="button" class="btn btn-dark me-0" id="loginUser">LOGIN</button>
+                            <button class="btn btn-dark me-0" id="loginUser" type="button">LOGIN</button>
                         </div>
                     </form>
                 </div>
@@ -80,64 +89,67 @@
         </div>
     </div>
     <!-- Sign Up Modal -->
-    <div class="modal fade" id="signup-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div aria-hidden="true" aria-labelledby="staticBackdropLabel" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+         id="signup-modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex flex-column">
                         <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">Sign Up</h1>
-                        <span style="color: #aaaaaa">Already have an account?<button class="btn btn-link text-decoration-none pt-0" data-bs-target="#staticBackdrop1" data-bs-toggle="modal">Login</button></span>
+                        <span style="color: #aaaaaa">Already have an account?<button
+                                class="btn btn-link text-decoration-none pt-0" data-bs-target="#staticBackdrop1"
+                                data-bs-toggle="modal">Login</button></span>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <div class="modal-body">
                     <!--SIGN UP FORM-->
-                    <form id="customerForm" class="row g-3">
+                    <form class="row g-3" id="customerForm">
                         <div class="col-md-6">
-                            <label for="inputName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="inputName" name="customer_name">
+                            <label class="form-label" for="inputName">Name</label>
+                            <input class="form-control" id="inputName" name="customer_name" type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputAddress" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" name="address">
+                            <label class="form-label" for="inputAddress">Address</label>
+                            <input class="form-control" id="inputAddress" name="address" type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" name="email">
+                            <label class="form-label" for="inputEmail">Email</label>
+                            <input class="form-control" id="inputEmail" name="email" type="email">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputContactNo" class="form-label">Contact No</label>
-                            <input type="text" class="form-control" id="inputContactNo" name="contact_no">
+                            <label class="form-label" for="inputContactNo">Contact No</label>
+                            <input class="form-control" id="inputContactNo" name="contact_no" type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputNicNo" class="form-label">NIC No</label>
-                            <input type="text" class="form-control" id="inputNicNo" name="nic_no">
+                            <label class="form-label" for="inputNicNo">NIC No</label>
+                            <input class="form-control" id="inputNicNo" name="nic_no" type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputLicenseNo" class="form-label">License No</label>
-                            <input type="text" class="form-control" id="inputLicenseNo" name="license_no">
+                            <label class="form-label" for="inputLicenseNo">License No</label>
+                            <input class="form-control" id="inputLicenseNo" name="license_no" type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputUsername" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="inputUsername" name="username">
+                            <label class="form-label" for="inputUsername">Username</label>
+                            <input class="form-control" id="inputUsername" name="username" type="text">
                         </div>
                         <div class="col-md-6">
-                            <label for="inputPassword" class="form-label">Password</label>
+                            <label class="form-label" for="inputPassword">Password</label>
                             <div class="d-flex flex-row align-items-center">
-                                <input type="password" class="form-control me-2" id="inputPassword" name="password">
+                                <input class="form-control me-2" id="inputPassword" name="password" type="password">
                                 <i class="bi bi-eye-slash" id="toggleSignupPassword" style="cursor: pointer"></i>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label for="nicFile" class="form-label">NIC Image</label>
-                            <input class="form-control" type="file" id="nicFile">
+                            <label class="form-label" for="nicFile">NIC Image</label>
+                            <input class="form-control" id="nicFile" type="file">
                         </div>
                         <div class="col-md-6">
-                            <label for="licenseFile" class="form-label">License Image</label>
-                            <input class="form-control" type="file" id="licenseFile">
+                            <label class="form-label" for="licenseFile">License Image</label>
+                            <input class="form-control" id="licenseFile" type="file">
                         </div>
                         <div class="modal-footer col-12 me-auto pe-2">
-                            <button id="saveCustomer" type="button" class="btn btn-dark me-0">SIGN UP</button>
+                            <button class="btn btn-dark me-0" id="saveCustomer" type="button">SIGN UP</button>
                         </div>
                     </form>
                 </div>
@@ -157,7 +169,7 @@
                     <p class="mb-0">We provide awesome cars at great prices. Rent a car, anytime, anywhere.</p>
                 </div>
                 <div>
-                    <img class="img-fluid" src="assets/img/background.png" alt="car img">
+                    <img alt="car img" class="img-fluid" src="assets/img/background.png">
                 </div>
             </div>
         </div>
