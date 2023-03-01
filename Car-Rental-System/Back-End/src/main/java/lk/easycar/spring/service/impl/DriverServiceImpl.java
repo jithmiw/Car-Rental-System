@@ -1,9 +1,7 @@
 package lk.easycar.spring.service.impl;
 
-import lk.easycar.spring.dto.CustomerDTO;
 import lk.easycar.spring.dto.DriverDTO;
 import lk.easycar.spring.dto.DriverScheduleDTO;
-import lk.easycar.spring.entity.Customer;
 import lk.easycar.spring.entity.Driver;
 import lk.easycar.spring.entity.DriverSchedule;
 import lk.easycar.spring.repo.DriverRepo;

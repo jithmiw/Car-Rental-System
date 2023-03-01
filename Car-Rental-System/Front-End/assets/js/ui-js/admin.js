@@ -375,6 +375,8 @@ $("#saveDriver").click(function () {
         dataType: "json",
         success: function (res) {
             alert(res.message);
+            getAllDrivers();
+            clearManageDriversForm();
         },
         error: function (error) {
             console.log(JSON.parse(error.responseText));
@@ -412,6 +414,7 @@ $('#updateDriver').click(function () {
         data: JSON.stringify(driverDTO),
         success: function (res) {
             alert(res.message);
+            clearManageDriversForm();
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -428,7 +431,7 @@ $('#deleteDriver').click(function () {
         method: "delete",
         success: function (res) {
             alert(res.message);
-            clearManageDriversForm()
+            clearManageDriversForm();
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);

@@ -20,9 +20,9 @@ public class RentalDetailDTO {
     private LocalDate pick_up_date;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate return_date;
-    @JsonFormat(pattern="HH:mm")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime pick_up_time;
-    @JsonFormat(pattern="HH:mm")
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime return_time;
     private String pick_up_venue;
     private String return_venue;

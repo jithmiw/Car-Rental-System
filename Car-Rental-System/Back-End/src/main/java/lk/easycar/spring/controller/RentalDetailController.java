@@ -1,8 +1,6 @@
 package lk.easycar.spring.controller;
 
 import lk.easycar.spring.dto.CarDTO;
-import lk.easycar.spring.dto.DriverDTO;
-import lk.easycar.spring.dto.DriverScheduleDTO;
 import lk.easycar.spring.dto.RentalDetailDTO;
 import lk.easycar.spring.service.DriverScheduleService;
 import lk.easycar.spring.service.RentalDetailService;
@@ -12,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 @RestController
 @RequestMapping("/rentalDetail")
