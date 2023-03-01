@@ -44,6 +44,9 @@
                         <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="manage-drivers">Drivers</button>
                     </li>
                     <li class="nav-item">
+                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="view-payments">Payments</button>
+                    </li>
+                    <li class="nav-item">
                         <button type="button" class="btn btn-outline-dark" id="logOut">
                             Logout
                         </button>
@@ -156,7 +159,8 @@
                         <div class="modal-footer col-12 me-auto pe-2">
                             <button id="saveCar" type="button" class="btn btn-dark">ADD</button>
                             <button id="updateCar" type="button" class="btn text-white" style="background-color: #7f7f7f;">UPDATE</button>
-                            <button id="deleteCar" type="button" class="btn me-0" style="background-color: #c2c2c2;">DELETE</button>
+                            <button id="deleteCar" type="button" class="btn" style="background-color: #c2c2c2;">DELETE</button>
+                            <a type="button" class="btn me-0" target="_blank" style="background-color: #f3f3f3;" href="car.html">VIEW CARS</a>
                         </div>
                     </form>
                 </div>
@@ -209,7 +213,7 @@
                         <div class="navbar-brand ms-2 fs-4">DAILY INCOME (RS.)</div>
                     </div>
                     <div class="d-flex flex-column align-items-center mt-4 mb-4">
-                        <div id="dailyIncome" class="fs-3 text-center">0.00</div>
+                        <div id="dailyIncome" class="fs-3 text-center">0</div>
                     </div>
                 </div>
                 <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
@@ -217,7 +221,7 @@
                         <div class="navbar-brand ms-2 fs-4">WEEKLY INCOME (RS.)</div>
                     </div>
                     <div class="d-flex flex-column align-items-center mt-4 mb-4">
-                        <div id="weeklyIncome" class="fs-3 text-center">0.00</div>
+                        <div id="weeklyIncome" class="fs-3 text-center">0</div>
                     </div>
                 </div>
                 <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
@@ -225,7 +229,7 @@
                         <div class="navbar-brand ms-2 fs-4">MONTHLY INCOME (RS.)</div>
                     </div>
                     <div class="d-flex flex-column align-items-center mt-4 mb-4">
-                        <div id="monthlyIncome" class="fs-3 text-center">0.00</div>
+                        <div id="monthlyIncome" class="fs-3 text-center">0</div>
                     </div>
                 </div>
                 <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
@@ -233,7 +237,7 @@
                         <div class="navbar-brand ms-2 fs-4">YEARLY INCOME (RS.)</div>
                     </div>
                     <div class="d-flex flex-column align-items-center mt-4 mb-4">
-                        <div id="yearlyIncome" class="fs-3 text-center">0.00</div>
+                        <div id="yearlyIncome" class="fs-3 text-center">0</div>
                     </div>
                 </div>
             </div>
@@ -470,6 +474,36 @@
                 </tr>
                 </thead>
                 <tbody style="overflow-y:auto;" id="tblDrivers" class="table-light">
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!--PAYMENTS SECTION-->
+    <section id="payments">
+        <div class="container-fluid mt-5 mb-5 pt-4">
+            <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+                <div class="navbar-brand ms-2">Payments</div>
+                <form class="d-flex ms-2 me-2" role="search">
+                    <input id="searchPayment" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="btnSearchPayment" class="btn btn-outline-secondary" type="button">Search</button>
+                </form>
+            </div>
+            <table class="table table-bordered table-hover mt-4">
+                <thead class="bg-dark">
+                <tr>
+                    <th scope="col" class="text-white">Payment Id</th>
+                    <th scope="col" class="text-white">Rental Id</th>
+                    <th scope="col" class="text-white">Rental Fee(Rs.)</th>
+                    <th scope="col" class="text-white">Driver Fee(Rs.)</th>
+                    <th scope="col" class="text-white">Extra km</th>
+                    <th scope="col" class="text-white">Extra km Fee(Rs.)</th>
+                    <th scope="col" class="text-white">Damage Fee(Rs.)</th>
+                    <th scope="col" class="text-white">Returned Amount(Rs.)</th>
+                    <th scope="col" class="text-white">Total Payment(Rs.)</th>
+                    <th scope="col" class="text-white">Payment Date</th>
+                </tr>
+                </thead>
+                <tbody style="overflow-y:auto;" id="tblPayments" class="table-light">
                 </tbody>
             </table>
         </div>

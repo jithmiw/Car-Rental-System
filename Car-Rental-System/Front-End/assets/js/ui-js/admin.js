@@ -1,38 +1,45 @@
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
-$(document).ready(function(){
+$(document).ready(function () {
     $('#home').click();
 });
 
 $('#home').click(function () {
     $('#dashboard').css('display', 'block');
-    $('#reservations, #customers, #drivers').css('display', 'none');
+    $('#reservations, #customers, #drivers, #payments').css('display', 'none');
     setDashboard();
 });
 
 $('#manage-reservations').click(function () {
     $('#reservations').css('display', 'block');
-    $('#dashboard, #customers').css('display', 'none');
+    $('#dashboard, #customers, #payments, #drivers').css('display', 'none');
     getRentalRequests();
     $('#btnRental').click();
 });
 
 $('#manage-drivers').click(function () {
     $('#drivers').css('display', 'block');
-    $('#dashboard, #customers, #reservations').css('display', 'none');
+    $('#dashboard, #customers, #reservations, #payments').css('display', 'none');
     getAllDrivers();
 });
 
 $('#view-customers').click(function () {
     $('#customers').css('display', 'block');
-    $('#dashboard, #reservations, #drivers').css('display', 'none');
+    $('#dashboard, #reservations, #drivers, #payments').css('display', 'none');
     getAllCustomers();
+});
+
+$('#view-payments').click(function () {
+    $('#payments').css('display', 'block');
+    $('#dashboard, #reservations, #drivers, #customers').css('display', 'none');
+    getAllPayments();
 });
 
 function setDashboard() {
     getAllCustomers();
     getAllCars();
     getRentalRequests();
+    getAllPayments();
 }
 
 let rental = [];
@@ -42,7 +49,7 @@ let denied = [];
 
 // get rental requests
 function getRentalRequests() {
-    let todayBookings=0;
+    let todayBookings = 0;
     rental = [];
     accepted = [];
     closed = [];
@@ -55,7 +62,7 @@ function getRentalRequests() {
                     let resDate = new Date(r.reserved_date);
                     let currDate = new Date();
 
-                    if(resDate.setHours(0, 0, 0, 0) ===
+                    if (resDate.setHours(0, 0, 0, 0) ===
                         currDate.setHours(0, 0, 0, 0)) {
                         todayBookings++;
                     }
@@ -200,7 +207,7 @@ function loadAllDrivers(driverNic) {
 // get customers
 function getAllCustomers() {
     $('#tblCustomers').empty();
-    let registeredUsers=0;
+    let registeredUsers = 0;
     $.ajax({
         url: baseUrl + "customer",
         success: function (res) {
@@ -231,15 +238,15 @@ function getAllCustomers() {
 
 // get cars
 function getAllCars() {
-    let availableCars=0;
-    let reservedCars=0;
+    let availableCars = 0;
+    let reservedCars = 0;
     $.ajax({
         url: baseUrl + "car",
         success: function (res) {
             if (res.data != null) {
                 for (let c of res.data) {
                     let status = c.status;
-                    if (status==="Available") {
+                    if (status === "Available") {
                         availableCars++;
                     } else {
                         reservedCars++;
@@ -720,15 +727,60 @@ $("#btnPay").click(function () {
     });
 });
 
+// get payments
+function getAllPayments() {
+    let dailyIncome = 0;
+    $('#tblPayments').empty();
+    $.ajax({
+        url: baseUrl + "paymentDetail",
+        success: function (res) {
+            if (res.data != null) {
+                for (let p of res.data) {
+                    let payDate = new Date(p.payment_date);
+                    let currDate = new Date();
+
+                    if (payDate.setHours(0, 0, 0, 0) ===
+                        currDate.setHours(0, 0, 0, 0)) {
+                        dailyIncome += p.total_payment;
+                    }
+
+                    let paymentId = p.payment_id;
+                    let rentalId = p.rental_id;
+                    let rentalFee = p.rental_fee;
+                    let driverFee = p.driver_fee;
+                    let extraKm = p.extra_km;
+                    let extraKmFee = p.extra_km_fee;
+                    let returnedAmount = p.returned_amount;
+                    let damageFee = p.damage_fee;
+                    let totalPayment = p.total_payment;
+                    let paymentDate = p.payment_date;
+
+                    let row = "<tr><td>" + paymentId + "</td><td>" + rentalId + "</td><td>" + rentalFee + "</td>" +
+                        "<td>" + driverFee + "</td><td>" + extraKm + "</td><td>" + extraKmFee + "</td><td>" + damageFee + "</td>" +
+                        "<td>" + returnedAmount + "</td><td>" + totalPayment + "</td><td>" + paymentDate + "</td></tr>";
+                    $('#tblPayments').append(row);
+                }
+                $('#dailyIncome').text(dailyIncome);
+            }
+            // clearAll();
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
 // log out
 $("#logOut").click(function () {
     if (confirm('Are sure you want to logout?')) {
         window.location.href = "index.html";
+
         function disableBack() {
             window.history.forward()
         }
+
         window.onload = disableBack();
-        window.onpageshow = function(e) {
+        window.onpageshow = function (e) {
             if (e.persisted)
                 disableBack();
         }

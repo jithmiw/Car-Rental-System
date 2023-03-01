@@ -25,4 +25,9 @@ public class PaymentDetailController {
     public ResponseUtil generatePaymentId() {
         return new ResponseUtil(200, "Rental id generated", paymentDetailService.generateNewPaymentId());
     }
+
+    @GetMapping
+    public ResponseUtil getAllPaymentDetails() {
+        return new ResponseUtil(200, "Loaded successfully", paymentDetailService.getAllPaymentDetails());
+    }
 }

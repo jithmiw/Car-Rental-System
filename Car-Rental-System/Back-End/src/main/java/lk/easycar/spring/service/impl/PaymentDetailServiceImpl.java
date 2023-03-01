@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -49,5 +51,20 @@ public class PaymentDetailServiceImpl implements PaymentDetailService {
             return String.format("PID-%03d", newPaymentId);
         }
         return "PID-001";
+    }
+
+    @Override
+    public ArrayList<PaymentDetailDTO> getAllPaymentDetails() {
+        List<PaymentDetail> all = paymentDetailRepo.findAll();
+        ArrayList<PaymentDetailDTO> payments = new ArrayList<>();
+        if (all.size() != 0) {
+            for (PaymentDetail detail : all) {
+                payments.add(new PaymentDetailDTO(detail.getPayment_id(), detail.getPayment_date(), detail.getRental_fee(),
+                        detail.getDriver_fee(), detail.getDamage_fee(), detail.getExtra_km_fee(), detail.getReturned_amount(),
+                        detail.getTotal_payment(), detail.getExtra_km(), detail.getRentalDetail().getRental_id()));
+            }
+            return payments;
+        }
+        return null;
     }
 }
