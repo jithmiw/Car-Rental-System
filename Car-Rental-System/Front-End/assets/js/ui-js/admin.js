@@ -359,6 +359,11 @@ $("#denyRequest").click(function () {
     }
 });
 
+// cancel request
+$("#cancelRequest").click(function () {
+    $("#denyRequest").click();
+});
+
 function clearForm() {
     $('#rental-id, #reg-no, #customer-nic, #pick-up-date, #return-date, #pick-up-time, #return-time, ' +
         '#pick-up-venue, #return-venue, #rental-status, #reserved-date').val("");
