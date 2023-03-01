@@ -1,13 +1,16 @@
 package lk.easycar.spring.service.impl;
 
+import lk.easycar.spring.dto.CustomerDTO;
 import lk.easycar.spring.dto.DriverDTO;
 import lk.easycar.spring.dto.DriverScheduleDTO;
+import lk.easycar.spring.entity.Customer;
 import lk.easycar.spring.entity.Driver;
 import lk.easycar.spring.entity.DriverSchedule;
 import lk.easycar.spring.repo.DriverRepo;
 import lk.easycar.spring.repo.DriverScheduleRepo;
 import lk.easycar.spring.service.DriverService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -113,5 +116,12 @@ public class DriverServiceImpl implements DriverService {
             return schedules;
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<DriverDTO> getAllDrivers() {
+        List<Driver> all = driverRepo.findAll();
+        return mapper.map(all, new TypeToken<ArrayList<DriverDTO>>() {
+        }.getType());
     }
 }

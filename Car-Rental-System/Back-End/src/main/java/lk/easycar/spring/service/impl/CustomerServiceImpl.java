@@ -1,8 +1,6 @@
 package lk.easycar.spring.service.impl;
 
-import lk.easycar.spring.dto.CarDTO;
 import lk.easycar.spring.dto.CustomerDTO;
-import lk.easycar.spring.entity.Car;
 import lk.easycar.spring.entity.Customer;
 import lk.easycar.spring.repo.CustomerRepo;
 import lk.easycar.spring.service.CustomerService;

@@ -1,17 +1,39 @@
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
+$(document).ready(function(){
+    $('#home').click();
+});
+
+$('#home').click(function () {
+    $('#dashboard').css('display', 'block');
+    $('#reservations, #customers, #drivers').css('display', 'none');
+    setDashboard();
+});
+
 $('#manage-reservations').click(function () {
     $('#reservations').css('display', 'block');
-    $('#customers').css('display', 'none');
+    $('#dashboard, #customers').css('display', 'none');
     getRentalRequests();
     $('#btnRental').click();
 });
 
+$('#manage-drivers').click(function () {
+    $('#drivers').css('display', 'block');
+    $('#dashboard, #customers, #reservations').css('display', 'none');
+    getAllDrivers();
+});
+
 $('#view-customers').click(function () {
     $('#customers').css('display', 'block');
-    $('#reservations').css('display', 'none');
+    $('#dashboard, #reservations, #drivers').css('display', 'none');
     getAllCustomers();
 });
+
+function setDashboard() {
+    getAllCustomers();
+    getAllCars();
+    getRentalRequests();
+}
 
 let rental = [];
 let accepted = [];
@@ -20,6 +42,7 @@ let denied = [];
 
 // get rental requests
 function getRentalRequests() {
+    let todayBookings=0;
     rental = [];
     accepted = [];
     closed = [];
@@ -29,6 +52,13 @@ function getRentalRequests() {
         success: function (res) {
             if (res.data != null) {
                 for (let r of res.data) {
+                    let resDate = new Date(r.reserved_date);
+                    let currDate = new Date();
+
+                    if(resDate.setHours(0, 0, 0, 0) ===
+                        currDate.setHours(0, 0, 0, 0)) {
+                        todayBookings++;
+                    }
                     let rentalStatus = r.rental_status;
 
                     if (rentalStatus === "Rental") {
@@ -41,6 +71,7 @@ function getRentalRequests() {
                         denied.push(r);
                     }
                 }
+                $('#todayBookings').text(todayBookings);
             }
             clearForm();
         },
@@ -169,11 +200,13 @@ function loadAllDrivers(driverNic) {
 // get customers
 function getAllCustomers() {
     $('#tblCustomers').empty();
+    let registeredUsers=0;
     $.ajax({
         url: baseUrl + "customer",
         success: function (res) {
             if (res.data != null) {
                 for (let c of res.data) {
+                    registeredUsers++;
                     let nicNo = c.nic_no;
                     let customerName = c.customer_name;
                     let address = c.address;
@@ -188,7 +221,33 @@ function getAllCustomers() {
                 }
                 bindClickEventsToCustomerRows();
             }
-            // clearAll();
+            $('#registeredUsers').text(registeredUsers);
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+// get cars
+function getAllCars() {
+    let availableCars=0;
+    let reservedCars=0;
+    $.ajax({
+        url: baseUrl + "car",
+        success: function (res) {
+            if (res.data != null) {
+                for (let c of res.data) {
+                    let status = c.status;
+                    if (status==="Available") {
+                        availableCars++;
+                    } else {
+                        reservedCars++;
+                    }
+                }
+            }
+            $('#availableCars').text(availableCars);
+            $('#reservedCars').text(reservedCars);
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -372,6 +431,64 @@ $('#deleteDriver').click(function () {
 
 function clearManageDriversForm() {
     $('#inputName ,#inputAddress, #inputEmail, #inputContactNo, #inputNicNo, #inputLicenseNo, #inputUsername , #inputPassword').val("");
+}
+
+// get customers
+function getAllDrivers() {
+    $('#tblDrivers').empty();
+    $.ajax({
+        url: baseUrl + "driver",
+        success: function (res) {
+            if (res.data != null) {
+                for (let c of res.data) {
+                    let nicNo = c.nic_no;
+                    let driverName = c.driver_name;
+                    let address = c.address;
+                    let email = c.email;
+                    let licenseNo = c.license_no;
+                    let contactNo = c.contact_no;
+                    let username = c.username;
+                    let password = c.password;
+                    let regDate = c.reg_date;
+
+                    let row = "<tr><td>" + nicNo + "</td><td>" + driverName + "</td><td>" + address + "</td>" +
+                        "<td>" + email + "</td><td>" + licenseNo + "</td><td>" + contactNo + "</td><td class='d-none'>" + username + "</td>" +
+                        "<td class='d-none'>" + password + "</td><td>" + regDate + "</td></tr>";
+                    $('#tblDrivers').append(row);
+                }
+                bindClickEventsToDriverRows();
+            }
+            // clearAll();
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+// bind events for the driver table rows
+function bindClickEventsToDriverRows() {
+    $('#tblDrivers > tr').on('click', function () {
+        let nicNo = $(this).children(':eq(0)').text();
+        let driverName = $(this).children(':eq(1)').text();
+        let address = $(this).children(':eq(2)').text();
+        let email = $(this).children(':eq(3)').text();
+        let licenseNo = $(this).children(':eq(4)').text();
+        let contactNo = $(this).children(':eq(5)').text();
+        let username = $(this).children(':eq(6)').text();
+        let password = $(this).children(':eq(7)').text();
+        let regDate = $(this).children(':eq(8)').text();
+
+        $('#inputNicNo').val(nicNo);
+        $('#inputName').val(driverName);
+        $('#inputAddress').val(address);
+        $('#inputEmail').val(email);
+        $('#inputLicenseNo').val(licenseNo);
+        $('#inputContactNo').val(contactNo);
+        $('#inputUsername').val(username);
+        $('#inputPassword').val(password);
+        $('#registered-date').val(regDate);
+    });
 }
 
 // add car
@@ -601,5 +718,20 @@ $("#btnPay").click(function () {
             alert(JSON.parse(error.responseText).message);
         }
     });
+});
+
+// log out
+$("#logOut").click(function () {
+    if (confirm('Are sure you want to logout?')) {
+        window.location.href = "index.html";
+        function disableBack() {
+            window.history.forward()
+        }
+        window.onload = disableBack();
+        window.onpageshow = function(e) {
+            if (e.persisted)
+                disableBack();
+        }
+    }
 });
 

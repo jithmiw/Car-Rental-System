@@ -59,4 +59,9 @@ public class DriverController {
     public ResponseUtil getAllDriversNic() {
         return new ResponseUtil(200, "Loaded successfully", driverService.getAllDriversNic());
     }
+
+    @GetMapping
+    public ResponseUtil getAllDrivers() {
+        return new ResponseUtil(200, "Loaded successfully", driverService.getAllDrivers());
+    }
 }

@@ -24,4 +24,6 @@ public interface DriverService {
     void changeDriver(String rental_id, String nic);
 
     ArrayList<DriverScheduleDTO> getDriverSchedulesByDriverNic(String nic);
+
+    ArrayList<DriverDTO> getAllDrivers();
 }

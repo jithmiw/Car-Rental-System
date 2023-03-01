@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="#">Dashboard</a>
+                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="home">Dashboard</button>
                     </li>
                     <li class="nav-item">
                         <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="manage-reservations">Reservations</button>
@@ -41,17 +41,10 @@
                         <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="view-customers">Customers</button>
                     </li>
                     <li class="nav-item">
-                        <!-- Manage Drivers Button trigger modal -->
-                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="manage-drivers" data-bs-toggle="modal" data-bs-target="#manageDriverModal">
-                            Drivers
-                        </button>
+                        <button type="button" class="btn btn-link text-decoration-none nav-link active text-black fw-semibold" id="manage-drivers">Drivers</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active text-black fw-semibold" aria-current="page" href="">Payments</a>
-                    </li>
-                    <li class="nav-item">
-                        <!-- Logout Button trigger modal -->
-                        <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                        <button type="button" class="btn btn-outline-dark" id="logOut">
                             Logout
                         </button>
                     </li>
@@ -59,24 +52,6 @@
             </div>
         </div>
     </nav>
-    <!-- Logout Modal -->
-    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="logoutModalLabel">Logout</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are sure you want to logout?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark">Logout</button>
-                    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Manage Car Modal -->
     <div class="modal fade" id="manageCarModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="manageCarModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -188,65 +163,82 @@
             </div>
         </div>
     </div>
-    <!-- Manage Driver Modal -->
-    <div class="modal fade" id="manageDriverModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="manageDriverModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="d-flex flex-column">
-                        <h1 class="modal-title fs-5 fw-bold" id="manageDriverModalLabel">Manage Drivers</h1>
+</header>
+<main>
+    <!--HOME SECTION-->
+    <section id="dashboard">
+        <div class="container-fluid mt-5 mb-5 pt-4">
+            <div class="d-flex flex-column flex-sm-row">
+                <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
+                    <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+                        <div class="navbar-brand ms-2 fs-4">REGISTERED USERS</div>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="d-flex flex-column align-items-center mt-4 mb-4">
+                        <div id="registeredUsers" class="fs-3 text-center">0</div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form id="driverForm" class="row g-3">
-                        <div class="col-md-6">
-                            <label for="inputName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="inputName" name="driver_name">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputNicNo" class="form-label">NIC No</label>
-                            <input type="text" class="form-control" id="inputNicNo" name="nic_no">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputAddress" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" name="address">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" name="email">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputContactNo" class="form-label">Contact No</label>
-                            <input type="text" class="form-control" id="inputContactNo" name="contact_no">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputLicenseNo" class="form-label">License No</label>
-                            <input type="text" class="form-control" id="inputLicenseNo" name="license_no">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputUsername" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="inputUsername" name="username">
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputPassword" class="form-label">Password</label>
-                            <div class="d-flex flex-row align-items-center">
-                                <input type="password" class="form-control me-2" id="inputPassword" name="password">
-                                <i class="bi bi-eye-slash" id="toggleSignupPassword" style="cursor: pointer"></i>
-                            </div>
-                        </div>
-                        <div class="modal-footer col-12 me-auto pe-2">
-                            <button id="saveDriver" type="button" class="btn btn-dark">ADD</button>
-                            <button id="updateDriver" type="button" class="btn text-white" style="background-color: #7f7f7f;">UPDATE</button>
-                            <button id="deleteDriver" type="button" class="btn me-0" style="background-color: #c2c2c2;">DELETE</button>
-                        </div>
-                    </form>
+                <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
+                    <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+                        <div class="navbar-brand ms-2 fs-4">TODAY BOOKINGS</div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center mt-4 mb-4">
+                        <div id="todayBookings" class="fs-3 text-center">0</div>
+                    </div>
+                </div>
+                <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
+                    <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+                        <div class="navbar-brand ms-2 fs-4">AVAILABLE CARS</div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center mt-4 mb-4">
+                        <div id="availableCars" class="fs-3 text-center">0</div>
+                    </div>
+                </div>
+                <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
+                    <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3;">
+                        <div class="navbar-brand ms-2 fs-4">RESERVED CARS</div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center mt-4 mb-4">
+                        <div id="reservedCars" class="fs-3 text-center">0</div>
+                    </div>
+                </div>
+            </div>
+            <!--INCOME SUMMARY-->
+            <div class="d-flex flex-column flex-sm-row">
+                <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
+                    <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+                        <div class="navbar-brand ms-2 fs-4">DAILY INCOME (RS.)</div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center mt-4 mb-4">
+                        <div id="dailyIncome" class="fs-3 text-center">0.00</div>
+                    </div>
+                </div>
+                <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
+                    <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+                        <div class="navbar-brand ms-2 fs-4">WEEKLY INCOME (RS.)</div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center mt-4 mb-4">
+                        <div id="weeklyIncome" class="fs-3 text-center">0.00</div>
+                    </div>
+                </div>
+                <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
+                    <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+                        <div class="navbar-brand ms-2 fs-4">MONTHLY INCOME (RS.)</div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center mt-4 mb-4">
+                        <div id="monthlyIncome" class="fs-3 text-center">0.00</div>
+                    </div>
+                </div>
+                <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
+                    <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3;">
+                        <div class="navbar-brand ms-2 fs-4">YEARLY INCOME (RS.)</div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center mt-4 mb-4">
+                        <div id="yearlyIncome" class="fs-3 text-center">0.00</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</header>
-<main>
+    </section>
     <!--RESERVATIONS SECTION-->
     <section id="reservations">
         <div class="container-fluid mt-5 mb-5 pt-4">
@@ -407,6 +399,77 @@
                 </tr>
                 </thead>
                 <tbody style="overflow-y:auto;" id="tblCustomers" class="table-light">
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!--DRIVERS SECTION-->
+    <section id="drivers">
+        <div class="container-fluid mt-5 mb-5 pt-4">
+            <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between" style="background-color: #e3e3e3">
+                <div class="navbar-brand ms-2">Drivers</div>
+                <form class="d-flex ms-2 me-2" role="search">
+                    <input id="searchDriver" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button id="btnSearchDriver" class="btn btn-outline-secondary" type="button">Search</button>
+                </form>
+            </div>
+            <form id="driverForm" class="row g-3 mt-0 me-0 ms-0 bg-white">
+                <div class="col-md-3">
+                    <label for="inputName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="inputName" name="driver_name">
+                </div>
+                <div class="col-md-3">
+                    <label for="inputNicNo" class="form-label">NIC No</label>
+                    <input type="text" class="form-control" id="inputNicNo" name="nic_no">
+                </div>
+                <div class="col-md-3">
+                    <label for="inputAddress" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="inputAddress" name="address">
+                </div>
+                <div class="col-md-3">
+                    <label for="inputEmail" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" name="email">
+                </div>
+                <div class="col-md-3">
+                    <label for="inputContactNo" class="form-label">Contact No</label>
+                    <input type="text" class="form-control" id="inputContactNo" name="contact_no">
+                </div>
+                <div class="col-md-3">
+                    <label for="inputLicenseNo" class="form-label">License No</label>
+                    <input type="text" class="form-control" id="inputLicenseNo" name="license_no">
+                </div>
+                <div class="col-md-3">
+                    <label for="inputUsername" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="inputUsername" name="username">
+                </div>
+                <div class="col-md-3">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <div class="d-flex flex-row align-items-center">
+                        <input type="password" class="form-control me-2" id="inputPassword" name="password">
+                        <i class="bi bi-eye-slash" id="toggleSignupPassword" style="cursor: pointer"></i>
+                    </div>
+                </div>
+                <div class="d-flex flex-column flex-sm-row justify-content-center mt-5 mb-3">
+                    <button id="saveDriver" type="button" class="btn btn-dark mt-1 mb-1 me-sm-2 ms-sm-2">ADD</button>
+                    <button id="updateDriver" type="button" class="btn text-white mt-1 mb-1 me-sm-2 ms-sm-2" style="background-color: #7f7f7f;">UPDATE</button>
+                    <button id="deleteDriver" type="button" class="btn mt-1 mb-1 me-sm-2 ms-sm-2" style="background-color: #c2c2c2;">DELETE</button>
+                </div>
+            </form>
+            <table class="table table-bordered table-hover mt-4">
+                <thead class="bg-dark">
+                <tr>
+                    <th scope="col" class="text-white">Nic No</th>
+                    <th scope="col" class="text-white">Driver Name</th>
+                    <th scope="col" class="text-white">Address</th>
+                    <th scope="col" class="text-white">Email</th>
+                    <th scope="col" class="text-white">License No</th>
+                    <th scope="col" class="text-white">Contact No</th>
+                    <th scope="col" class="text-white d-none">Username</th>
+                    <th scope="col" class="text-white d-none">Password</th>
+                    <th scope="col" class="text-white">Registered Date</th>
+                </tr>
+                </thead>
+                <tbody style="overflow-y:auto;" id="tblDrivers" class="table-light">
                 </tbody>
             </table>
         </div>

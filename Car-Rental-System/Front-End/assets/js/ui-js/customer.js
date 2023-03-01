@@ -287,3 +287,18 @@ function bindClickEventsToButtons() {
 function clearReservationForm() {
     location.reload();
 }
+
+// log out
+$("#logOut").click(function () {
+    if (confirm('Are sure you want to logout?')) {
+        window.location.href = "index.html";
+        function disableBack() {
+            window.history.forward()
+        }
+        window.onload = disableBack();
+        window.onpageshow = function(e) {
+            if (e.persisted)
+                disableBack();
+        }
+    }
+});
