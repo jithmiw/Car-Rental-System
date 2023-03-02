@@ -321,6 +321,10 @@
             <div class="fw-bold ms-2 mt-4">Driver Info</div>
             <form class="row g-3 mt-0 me-0 ms-0 mb-5 bg-white">
                 <div class="col-md-3">
+                    <label class="form-label">Rental Id</label>
+                    <input class="form-control" id="rental-id" readonly type="text">
+                </div>
+                <div class="col-md-3">
                     <label class="form-label">Driver Name</label>
                     <input class="form-control" id="driver-name" readonly type="text">
                 </div>
@@ -347,6 +351,7 @@
                     <th class="text-white" scope="col">Driver Status</th>
                     <th class="text-white" scope="col">Rental Status</th>
                     <th class="text-white" scope="col">Reserved Date</th>
+                    <th class="text-white text-center" scope="col">✖</th>
                 </tr>
                 </thead>
                 <tbody class="table-light" id="tblReservations" style="overflow-y:auto;">

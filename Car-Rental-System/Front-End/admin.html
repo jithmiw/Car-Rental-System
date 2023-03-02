@@ -281,7 +281,10 @@
         <div class="container-fluid mt-5 mb-5 pt-4">
             <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between"
                  style="background-color: #e3e3e3">
-                <div class="navbar-brand ms-2">Reservations</div>
+                <div class="fs-5 ms-2 d-flex flex-row">
+                    <div>Reservations</div>
+                    <div class="ms-2" id="rental-status-hd"></div>
+                </div>
                 <form class="d-flex ms-2 me-2" role="search">
                     <input aria-label="Search" class="form-control me-2" id="searchRequest" placeholder="Search"
                            type="search">
@@ -352,9 +355,6 @@
                     <button class="btn btn-secondary mt-1 mb-1 me-sm-2 ms-sm-2" id="denyRequest" type="button">DENY
                         REQUEST
                     </button>
-                    <button class="btn btn-secondary mt-1 mb-1 me-sm-2 ms-sm-2" id="cancelRequest" type="button">CANCEL
-                        REQUEST
-                    </button>
                 </div>
             </form>
             <div class="d-flex flex-column mb-4">
@@ -371,6 +371,9 @@
                 </button>
                 <button class="btn btn-outline-dark mt-1 mb-1 me-sm-2 ms-sm-2" id="btnDenied" style="border-radius: 50px"
                         type="button">Denied
+                </button>
+                <button class="btn btn-outline-dark mt-1 mb-1 me-sm-2 ms-sm-2" id="btnCancelled" style="border-radius: 50px"
+                        type="button">Cancelled
                 </button>
                 <button class="btn btn-outline-dark mt-1 mb-1 me-sm-2 ms-sm-2" id="btnClosed" style="border-radius: 50px"
                         type="button">Closed
@@ -601,7 +604,7 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="driver-fee">Driver Fee(Rs.)</label>
-                            <input class="form-control" id="driver-fee" name="driver_fee" type="number">
+                            <input class="form-control" id="driver-fee" name="driver_fee" readonly type="number">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="extra-km">Extra km</label>

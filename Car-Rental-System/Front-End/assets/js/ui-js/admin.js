@@ -45,6 +45,7 @@ function setDashboard() {
 let rental = [];
 let accepted = [];
 let closed = [];
+let cancelled = [];
 let denied = [];
 
 // get rental requests
@@ -53,6 +54,7 @@ function getRentalRequests() {
     rental = [];
     accepted = [];
     closed = [];
+    cancelled = [];
     denied = [];
     $.ajax({
         url: baseUrl + "rentalDetail/getRentalRequests",
@@ -74,6 +76,8 @@ function getRentalRequests() {
                         accepted.push(r);
                     } else if (rentalStatus === "Closed") {
                         closed.push(r);
+                    } else if (rentalStatus === "Cancelled") {
+                        cancelled.push(r);
                     } else {
                         denied.push(r);
                     }
@@ -98,6 +102,10 @@ $('#btnAccepted').click(function () {
 
 $('#btnDenied').click(function () {
     setTableRows(denied);
+});
+
+$('#btnCancelled').click(function () {
+    setTableRows(cancelled);
 });
 
 $('#btnClosed').click(function () {
@@ -161,10 +169,12 @@ function bindClickEventsToRows() {
         $("#displayBankSlip").attr("src", baseUrl + bankSlipImg);
         clearPaymentForm();
 
-        if (rentalStatus !== "Rental" && rentalStatus !== "Accepted" && rentalStatus !== "Closed") {
+        if (rentalStatus !== "Rental" && rentalStatus !== "Accepted" && rentalStatus !== "Cancelled" && rentalStatus !== "Closed") {
             $('#rental-status').val(rentalStatus);
+            $('#rental-status-hd').text('(Denied)');
         } else {
             $('#rental-status').val('');
+            $('#rental-status-hd').text('(' + rentalStatus + ')');
         }
         if (driverStatus === "Yes") {
             $("#selectDriverNic").empty();
@@ -656,6 +666,7 @@ function generateNewId() {
 }
 
 let extraKmPrice;
+let ldwPayment;
 
 function calculateRates(noOfDays) {
     let regNo = $('#reg-no').val();
@@ -664,10 +675,10 @@ function calculateRates(noOfDays) {
         success: function (res) {
             let dailyRate = res.data.daily_rate;
             let monthlyRate = res.data.monthly_rate;
-            let ldwPayment = res.data.ldw_payment;
+            ldwPayment = res.data.ldw_payment;
             extraKmPrice = res.data.extra_km_price;
 
-            if ($('#rental-status').val() !== '') {
+            if ($('#rental-status-hd').text() === '(Denied)' || $('#rental-status-hd').text() === '(Cancelled)') {
                 $('#returned-amount').val(ldwPayment);
                 $('#rental-fee, #extra-km, #extra-km-fee, #driver-fee, #damage-fee, #total-payment').val(0);
             } else {
@@ -676,7 +687,11 @@ function calculateRates(noOfDays) {
                 } else if (noOfDays >= 30) {
                     $('#rental-fee').val(monthlyRate * (noOfDays / 30));
                 }
-                $('#returned-amount').val(0);
+                if ($('#selectDriverNic').val()!='No'){
+                    $('#driver-fee').val(1000);
+                }
+                $('#returned-amount').val(ldwPayment);
+                $('#driver-fee').val(0);
             }
         },
         error: function (error) {
@@ -686,16 +701,21 @@ function calculateRates(noOfDays) {
 }
 
 function clearPaymentForm() {
-    $('#rental-fee, #extra-km, #extra-km-fee, #driver-fee, #damage-fee, #total-payment').val('');
+    $('#rental-status-hd, #rental-fee, #extra-km, #extra-km-fee, #driver-fee, #damage-fee, #total-payment').val('');
 }
 
-$('#driver-fee, #damage-fee').on('keyup', function (event) {
-    calculateTotalPayment()
+$('#driver-fee').on('keyup', function (event) {
+    calculateTotalPayment();
+});
+
+$('#damage-fee').on('keyup', function (event) {
+    $('#returned-amount').val(ldwPayment - parseInt($('#damage-fee').val()));
+    calculateTotalPayment();
 });
 
 $('#extra-km').on('keyup', function (event) {
     $('#extra-km-fee').val($('#extra-km').val() * extraKmPrice);
-    calculateTotalPayment()
+    calculateTotalPayment();
 });
 
 function calculateTotalPayment() {
@@ -703,9 +723,8 @@ function calculateTotalPayment() {
     let driverFee = $('#driver-fee').val() === "" ? 0 : parseInt($('#driver-fee').val());
     let extraKmFee = $('#extra-km-fee').val() === "" ? 0 : parseInt($('#extra-km-fee').val());
     let damageFee = $('#damage-fee').val() === "" ? 0 : parseInt($('#damage-fee').val());
-    let returnedAmount = $('#returned-amount').val() === "" ? 0 : parseInt($('#returned-amount').val());
 
-    let totalPayment = rentalFee + driverFee + extraKmFee + damageFee - returnedAmount;
+    let totalPayment = rentalFee + driverFee + extraKmFee + damageFee;
     $('#total-payment').val(totalPayment);
 }
 

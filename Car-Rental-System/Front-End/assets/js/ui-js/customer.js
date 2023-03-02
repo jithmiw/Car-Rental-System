@@ -66,13 +66,18 @@ function getAllReservations() {
                     let rentalStatus = r.rental_status;
                     let reservedDate = r.reserved_date;
 
+                    let button = ``;
+                    if (rentalStatus === "Rental" || rentalStatus === "Accepted") {
+                        button = `<button type='button' class='btn btn-outline-secondary'>Cancel Request</button>`;
+                    }
                     if (rentalStatus === "Rental") {
                         rentalStatus = "Pending";
                     }
                     let row = "<tr><td>" + rentalId + "</td><td>" + carRegNo + "</td><td>" + pickUpDate + "</td>" +
                         "<td>" + returnDate + "</td><td>" + pickUpTime + "</td><td>" + returnTime + "</td>" +
                         "<td>" + pickUpVenue + "</td><td>" + returnVenue + "</td><td>" + driverStatus + "</td><td>" + rentalStatus + "</td>" +
-                        "<td>" + reservedDate + "</td></tr>";
+                        "<td>" + reservedDate + "</td><td>" + button + "</td></tr>";
+
                     $('#tblReservations').append(row);
                 }
             }
@@ -96,6 +101,7 @@ function loadDriverInfo() {
                 url: baseUrl + "driver/rentalId/" + rentalId,
                 success: function (res) {
                     let nic = res.data;
+                    $('#rental-id').val(rentalId);
                     getDriver(nic);
                 },
                 error: function (error) {
@@ -103,9 +109,25 @@ function loadDriverInfo() {
                 }
             });
         } else {
-            $('#driver-name').val("");
-            $('#contact-no').val("");
-            $('#email').val("");
+            $('#rental-id, #driver-name, #contact-no, #email').val("");
+        }
+    });
+    $('#tblReservations > tr > td:nth-child(12) > button').on('click', function () {
+        let rentalId = $(this).parent().parent().children(':eq(0)').text();
+
+        if (confirm('Are sure you want to cancel the reservation in ' + rentalId + '?')) {
+            $.ajax({
+                url: baseUrl + "rentalDetail/cancelRequest?rental_id=" + rentalId,
+                method: "put",
+                success: function (res) {
+                    alert(res.message);
+                    getAllReservations();
+                    $('#driver-name, #contact-no, #email').val("");
+                },
+                error: function (error) {
+                    alert(JSON.parse(error.responseText).message);
+                }
+            });
         }
     });
 }

@@ -44,19 +44,27 @@ public class RentalDetailController {
     }
 
     @PutMapping(params = {"rental_id"})
-    public ResponseUtil AcceptRentalRequest(@RequestParam String rental_id) {
+    public ResponseUtil acceptRentalRequest(@RequestParam String rental_id) {
         RentalDetailDTO rental = rentalDetailService.getRentalDetailByRentalId(rental_id);
         rental.setRental_status("Accepted");
         rentalDetailService.updateRentalDetail(rental);
-        return new ResponseUtil(200, "Rental id: " + rental_id + " accepted", null);
+        return new ResponseUtil(200, "Rental request " + rental_id + " accepted", null);
     }
 
     @PutMapping(params = {"rental_id", "reason"})
-    public ResponseUtil DenyRentalRequest(@RequestParam String rental_id, @RequestParam String reason) {
+    public ResponseUtil denyRentalRequest(@RequestParam String rental_id, @RequestParam String reason) {
         RentalDetailDTO rental = rentalDetailService.getRentalDetailByRentalId(rental_id);
         rental.setRental_status("Denied, " + reason);
         rentalDetailService.updateRentalDetail(rental);
-        return new ResponseUtil(200, "Rental id: " + rental_id + " denied", null);
+        return new ResponseUtil(200, "Rental request " + rental_id + " denied", null);
+    }
+
+    @PutMapping(path = "/cancelRequest", params = {"rental_id"})
+    public ResponseUtil cancelRentalRequest(@RequestParam String rental_id) {
+        RentalDetailDTO rental = rentalDetailService.getRentalDetailByRentalId(rental_id);
+        rental.setRental_status("Cancelled");
+        rentalDetailService.updateRentalDetail(rental);
+        return new ResponseUtil(200, "Rental request " + rental_id + " cancelled", null);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)

@@ -141,7 +141,7 @@ public class RentalDetailServiceImpl implements RentalDetailService {
 
     @Override
     public ArrayList<RentalDetailDTO> getRentalRequestsByCustomerNic(String nic) {
-        List<RentalDetail> requests = rentalDetailRepo.findRentalDetailByCustomer_nic(nic, "Closed");
+        List<RentalDetail> requests = rentalDetailRepo.findRentalDetailByCustomer_nic(nic, "Closed", "Cancelled");
         ArrayList<RentalDetailDTO> reservations = new ArrayList<>();
         if (requests.size() != 0) {
             for (RentalDetail rental : requests) {
