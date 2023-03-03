@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,12 +106,16 @@ public class DriverServiceImpl implements DriverService {
     public ArrayList<DriverScheduleDTO> getDriverSchedulesByDriverNic(String nic) {
         List<DriverSchedule> driverSchedules = driverScheduleRepo.findDriverScheduleByDriver_nic(nic);
         ArrayList<DriverScheduleDTO> schedules = new ArrayList<>();
+        LocalDate date = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String text = date.format(formatter);
+        LocalDate today = LocalDate.parse(text, formatter);
+
         if (driverSchedules.size() != 0) {
             for (DriverSchedule schedule : driverSchedules) {
-                if (!schedule.getRentalDetail().getRental_status().equals("Closed")) {
+                if ((!schedule.getRentalDetail().getRental_status().equals("Closed")) && (ChronoUnit.DAYS.between(today, schedule.getStart_date()) <= 7)) {
                     schedules.add(new DriverScheduleDTO(schedule.getSchedule_id(), schedule.getStart_date(), schedule.getStart_time(),
                             schedule.getEnd_date(), schedule.getEnd_time(), schedule.getDriver().getNic_no(), schedule.getRentalDetail().getRental_id()));
-
                 }
             }
             return schedules;
