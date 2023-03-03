@@ -687,11 +687,12 @@ function calculateRates(noOfDays) {
                 } else if (noOfDays >= 30) {
                     $('#rental-fee').val(monthlyRate * (noOfDays / 30));
                 }
-                if ($('#selectDriverNic').val()!='No'){
+                if ($('#selectDriverNic').val()!=='No'){
                     $('#driver-fee').val(1000);
+                } else {
+                    $('#driver-fee').val(0);
                 }
                 $('#returned-amount').val(ldwPayment);
-                $('#driver-fee').val(0);
             }
         },
         error: function (error) {
@@ -701,7 +702,8 @@ function calculateRates(noOfDays) {
 }
 
 function clearPaymentForm() {
-    $('#rental-status-hd, #rental-fee, #extra-km, #extra-km-fee, #driver-fee, #damage-fee, #total-payment').val('');
+    $('#rental-status-hd, #rental-fee, #extra-km, #extra-km-fee, #driver-fee, #damage-fee, #returned-amount, #total-payment').val('');
+    $("#calculatePaymentModal .btn-close").click();
 }
 
 $('#driver-fee').on('keyup', function (event) {
@@ -723,8 +725,9 @@ function calculateTotalPayment() {
     let driverFee = $('#driver-fee').val() === "" ? 0 : parseInt($('#driver-fee').val());
     let extraKmFee = $('#extra-km-fee').val() === "" ? 0 : parseInt($('#extra-km-fee').val());
     let damageFee = $('#damage-fee').val() === "" ? 0 : parseInt($('#damage-fee').val());
+    let returnedAmount = $('#returned-amount').val() === "" ? 0 : parseInt($('#returned-amount').val());
 
-    let totalPayment = rentalFee + driverFee + extraKmFee + damageFee;
+    let totalPayment = rentalFee + driverFee + extraKmFee + damageFee - returnedAmount;
     $('#total-payment').val(totalPayment);
 }
 

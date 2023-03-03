@@ -11,7 +11,7 @@ $("#toggleLoginPassword").click(function () {
 function togglePassword(value) {
     const type = value.attr("type") === "password" ? "text" : "password";
     value.prop("type", type);
-    $(this).toggleClass("bi-eye");
+    $('#toggleSignupPassword').toggleClass("bi bi-eye");
 }
 
 // login user

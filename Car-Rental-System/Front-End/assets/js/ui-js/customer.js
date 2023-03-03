@@ -22,7 +22,7 @@ $("#toggleUpdatePassword").click(function () {
 function togglePassword(value) {
     const type = value.attr("type") === "password" ? "text" : "password";
     value.prop("type", type);
-    $(this).toggleClass("bi-eye");
+    $('#toggleUpdatePassword').toggleClass("bi bi-eye");
 }
 
 let nic = localStorage.getItem("nicValue");
