@@ -6,32 +6,39 @@ $(document).ready(function () {
 
 $('#home').click(function () {
     $('#dashboard').css('display', 'block');
-    $('#reservations, #customers, #drivers, #payments').css('display', 'none');
+    $('#reservations, #cars, #customers, #drivers, #payments, #cars').css('display', 'none');
     setDashboard();
 });
 
 $('#manage-reservations').click(function () {
     $('#reservations').css('display', 'block');
-    $('#dashboard, #customers, #payments, #drivers').css('display', 'none');
+    $('#dashboard, #cars, #customers, #payments, #drivers').css('display', 'none');
+    getRentalRequests();
+    $('#btnRental').click();
+});
+
+$('#manage-cars').click(function () {
+    $('#cars').css('display', 'block');
+    $('#dashboard, #customers, #drivers, #payments, #reservations').css('display', 'none');
     getRentalRequests();
     $('#btnRental').click();
 });
 
 $('#manage-drivers').click(function () {
     $('#drivers').css('display', 'block');
-    $('#dashboard, #customers, #reservations, #payments').css('display', 'none');
+    $('#dashboard, #cars, #customers, #reservations, #payments').css('display', 'none');
     getAllDrivers();
 });
 
 $('#view-customers').click(function () {
     $('#customers').css('display', 'block');
-    $('#dashboard, #reservations, #drivers, #payments').css('display', 'none');
+    $('#dashboard, #reservations, #cars, #drivers, #payments').css('display', 'none');
     getAllCustomers();
 });
 
 $('#view-payments').click(function () {
     $('#payments').css('display', 'block');
-    $('#dashboard, #reservations, #drivers, #customers').css('display', 'none');
+    $('#dashboard, #reservations, #cars, #drivers, #customers').css('display', 'none');
     getAllPayments();
 });
 
@@ -214,6 +221,113 @@ function loadAllDrivers(driverNic) {
     });
 }
 
+$('#viewCars').click(function (){
+    getAllCars();
+    $('#inputStatus').val('');
+});
+
+// get cars
+function getAllCars() {
+    let availableCars = 0;
+    let reservedCars = 0;
+    $('#tblCars').empty();
+    $.ajax({
+        url: baseUrl + "car",
+        success: function (res) {
+            if (res.data != null) {
+                for (let c of res.data) {
+                    let regNo = c.reg_no;
+                    let brand = c.brand;
+                    let type = c.type;
+                    let transmissionType = c.transmission_type;
+                    let color = c.color;
+                    let noOfPassengers = c.no_of_passengers;
+                    let fuelType = c.fuel_type;
+                    let dailyRate = c.daily_rate;
+                    let monthlyRate = c.monthly_rate;
+                    let extraKmPrice = c.extra_km_price;
+                    let freeKmDay = c.free_km_day;
+                    let freeKmMonth = c.free_km_month;
+                    let ldwPayment = c.ldw_payment;
+                    let status = c.status;
+
+                    if (status === "Available") {
+                        availableCars++;
+                    } else if (status === "Reserved") {
+                        reservedCars++;
+                    }
+
+                    let row = "<tr><td>" + regNo + "</td><td>" + brand + "</td><td>" + type + "</td>" +
+                        "<td>" + transmissionType + "</td><td>" + color + "</td><td>" + noOfPassengers + "</td>" +
+                        "<td>" + fuelType + "</td><td>" + dailyRate + "</td><td>" + monthlyRate + "</td>" +
+                        "<td>" + extraKmPrice + "</td><td>" + freeKmDay + "</td><td>" + freeKmMonth + "</td>" +
+                        "<td>" + ldwPayment + "</td><td>" + status + "</td></tr>";
+                    $('#tblCars').append(row);
+                }
+                bindClickEventsToCarRows();
+            }
+            clearManageCarsForm();
+            $('#availableCars').text(availableCars);
+            $('#reservedCars').text(reservedCars);
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+// bind events for the car table rows
+function bindClickEventsToCarRows() {
+    $('#tblCars > tr').on('click', function () {
+        let regNo = $(this).children(':eq(0)').text();
+        let brand = $(this).children(':eq(1)').text();
+        let type = $(this).children(':eq(2)').text();
+        let transType = $(this).children(':eq(3)').text();
+        let color = $(this).children(':eq(4)').text();
+        let noOfPassengers = $(this).children(':eq(5)').text();
+        let fuelType = $(this).children(':eq(6)').text();
+        let dailyRate = $(this).children(':eq(7)').text();
+        let monthlyRate = $(this).children(':eq(8)').text();
+        let extraKmPrice = $(this).children(':eq(9)').text();
+        let freeKmDay = $(this).children(':eq(10)').text();
+        let freeKmMonth = $(this).children(':eq(11)').text();
+        let ldwPayment = $(this).children(':eq(12)').text();
+        let status = $(this).children(':eq(13)').text();
+        let imgOne = $(this).children(':eq(14)').text();
+        let imgTwo = $(this).children(':eq(15)').text();
+        let imgThree = $(this).children(':eq(16)').text();
+        let imgFour = $(this).children(':eq(17)').text();
+
+        $('#inputRegNo').val(regNo);
+        $('#inputBrand').val(brand);
+        $('#inputType').val(type);
+        $('#inputTransType').val(transType);
+        $('#inputColor').val(color);
+        $('#inputNoOfPassengers').val(noOfPassengers);
+        $('#inputFuelType').val(fuelType);
+        $('#inputDailyRate').val(dailyRate);
+        $('#inputMonthlyRate').val(monthlyRate);
+        $('#inputExtraKmPrice').val(extraKmPrice);
+        $('#inputFreeKmDay').val(freeKmDay);
+        $('#inputFreeKmMonth').val(freeKmMonth);
+        $('#inputLdwPayment').val(ldwPayment);
+        $('#inputFrontView').val(imgOne);
+        $('#inputBackView').val(imgTwo);
+        $('#inputSideView').val(imgThree);
+        $('#inputInterior').val(imgFour);
+
+        $('#inputStatus option').each(function () {
+            if (status === "Available") {
+                $("#inputStatus option[value=1]").attr('selected', 'selected');
+            } if (status === "Not Available") {
+                $("#inputStatus option[value=2]").attr('selected', 'selected');
+            } else {
+                $("#inputStatus option[value=3]").attr('selected', 'selected');
+            }
+        });
+    });
+}
+
 // get customers
 function getAllCustomers() {
     $('#tblCustomers').empty();
@@ -239,32 +353,6 @@ function getAllCustomers() {
                 bindClickEventsToCustomerRows();
             }
             $('#registeredUsers').text(registeredUsers);
-        },
-        error: function (error) {
-            alert(JSON.parse(error.responseText).message);
-        }
-    });
-}
-
-// get cars
-function getAllCars() {
-    let availableCars = 0;
-    let reservedCars = 0;
-    $.ajax({
-        url: baseUrl + "car",
-        success: function (res) {
-            if (res.data != null) {
-                for (let c of res.data) {
-                    let status = c.status;
-                    if (status === "Available") {
-                        availableCars++;
-                    } else {
-                        reservedCars++;
-                    }
-                }
-            }
-            $('#availableCars').text(availableCars);
-            $('#reservedCars').text(reservedCars);
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -391,7 +479,6 @@ $("#saveDriver").click(function () {
         success: function (res) {
             alert(res.message);
             getAllDrivers();
-            clearManageDriversForm();
         },
         error: function (error) {
             console.log(JSON.parse(error.responseText));
@@ -402,56 +489,63 @@ $("#saveDriver").click(function () {
 
 // update driver
 $('#updateDriver').click(function () {
-    let name = $('#inputName').val();
     let nicNo = $('#inputNicNo').val();
-    let address = $('#inputAddress').val();
-    let email = $('#inputEmail').val();
-    let contactNo = $('#inputContactNo').val();
-    let licenseNo = $('#inputLicenseNo').val();
-    let username = $('#inputUsername').val();
-    let password = $('#inputPassword').val();
 
-    var driverDTO = {
-        nic_no: nicNo,
-        driver_name: name,
-        license_no: licenseNo,
-        address: address,
-        contact_no: contactNo,
-        email: email,
-        username: username,
-        password: password
-    }
-    $.ajax({
-        url: baseUrl + "driver",
-        method: "put",
-        contentType: "application/json",
-        dataType: "json",
-        data: JSON.stringify(driverDTO),
-        success: function (res) {
-            alert(res.message);
-            clearManageDriversForm();
-        },
-        error: function (error) {
-            alert(JSON.parse(error.responseText).message);
+    if (confirm('Are sure you want to update the driver in ' + nicNo + '?')) {
+        let name = $('#inputName').val();
+        let address = $('#inputAddress').val();
+        let email = $('#inputEmail').val();
+        let contactNo = $('#inputContactNo').val();
+        let licenseNo = $('#inputLicenseNo').val();
+        let username = $('#inputUsername').val();
+        let password = $('#inputPassword').val();
+        let regDate = $('#regDate').val();
+
+        var driverDTO = {
+            nic_no: nicNo,
+            driver_name: name,
+            license_no: licenseNo,
+            address: address,
+            contact_no: contactNo,
+            email: email,
+            username: username,
+            password: password,
+            reg_date: regDate,
         }
-    });
+        $.ajax({
+            url: baseUrl + "driver",
+            method: "put",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(driverDTO),
+            success: function (res) {
+                alert(res.message);
+                getAllDrivers();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    }
 });
 
 // delete driver
 $('#deleteDriver').click(function () {
     let nicNo = $('#inputNicNo').val();
 
-    $.ajax({
-        url: baseUrl + "driver?nic_no=" + nicNo,
-        method: "delete",
-        success: function (res) {
-            alert(res.message);
-            clearManageDriversForm();
-        },
-        error: function (error) {
-            alert(JSON.parse(error.responseText).message);
-        }
-    });
+    if (confirm('Are sure you want to delete the driver in ' + nicNo + '?')) {
+        $.ajax({
+            url: baseUrl + "driver?nic_no=" + nicNo,
+            method: "delete",
+            success: function (res) {
+                alert(res.message);
+                getAllDrivers();
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    }
 });
 
 function clearManageDriversForm() {
@@ -483,7 +577,7 @@ function getAllDrivers() {
                 }
                 bindClickEventsToDriverRows();
             }
-            // clearAll();
+            clearManageDriversForm();
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -512,7 +606,7 @@ function bindClickEventsToDriverRows() {
         $('#inputContactNo').val(contactNo);
         $('#inputUsername').val(username);
         $('#inputPassword').val(password);
-        $('#registered-date').val(regDate);
+        $('#regDate').val(regDate);
     });
 }
 
@@ -528,7 +622,7 @@ $("#saveCar").click(function () {
             console.log(res);
             if (res.status === 200) {
                 uploadCarImages();
-                clearManageCarsForm();
+                getAllCars();
             }
             alert(res.message);
         },
@@ -572,76 +666,84 @@ function uploadCarImages() {
 // update car
 $('#updateCar').click(function () {
     let regNo = $('#inputRegNo').val();
-    let brand = $('#inputBrand').val();
-    let type = $('#inputType').val();
-    let transType = $('#inputTransType').val();
-    let color = $('#inputColor').val();
-    let passengers = $('#inputNoOfPassengers').val();
-    let fuelType = $('#inputFuelType').val();
-    let dailyRate = $('#inputDailyRate').val();
-    let monthlyRate = $('#inputMonthlyRate').val();
-    let extraKmPrice = $('#inputExtraKmPrice').val();
-    let freeKmDay = $('#inputFreeKmDay').val();
-    let freeKmMonth = $('#inputFreeKmMonth').val();
-    let ldwPayment = $('#inputLdwPayment').val();
-    let status = $('#inputStatus').val();
 
-    var carOb = {
-        reg_no: regNo,
-        brand: brand,
-        type: type,
-        transmission_type: transType,
-        color: color,
-        no_of_passengers: passengers,
-        fuel_type: fuelType,
-        daily_rate: dailyRate,
-        monthly_rate: monthlyRate,
-        free_km_day: freeKmDay,
-        free_km_month: freeKmMonth,
-        extra_km_price: extraKmPrice,
-        ldw_payment: ldwPayment,
-        status: status
-    }
-    $.ajax({
-        url: baseUrl + "car",
-        method: "put",
-        contentType: "application/json",
-        dataType: "json",
-        data: JSON.stringify(carOb),
-        success: function (res) {
-            if (res.status === 200) {
-                uploadCarImages();
-                clearManageCarsForm();
-            }
-            alert(res.message);
-        },
-        error: function (error) {
-            alert(JSON.parse(error.responseText).message);
+    if (confirm('Are sure you want to update the car in ' + regNo + '?')) {
+        let brand = $('#inputBrand').val();
+        let type = $('#inputType').val();
+        let transType = $('#inputTransType').val();
+        let color = $('#inputColor').val();
+        let passengers = $('#inputNoOfPassengers').val();
+        let fuelType = $('#inputFuelType').val();
+        let dailyRate = $('#inputDailyRate').val();
+        let monthlyRate = $('#inputMonthlyRate').val();
+        let extraKmPrice = $('#inputExtraKmPrice').val();
+        let freeKmDay = $('#inputFreeKmDay').val();
+        let freeKmMonth = $('#inputFreeKmMonth').val();
+        let ldwPayment = $('#inputLdwPayment').val();
+        let status = $('#inputStatus').val();
+
+        var carOb = {
+            reg_no: regNo,
+            brand: brand,
+            type: type,
+            transmission_type: transType,
+            color: color,
+            no_of_passengers: passengers,
+            fuel_type: fuelType,
+            daily_rate: dailyRate,
+            monthly_rate: monthlyRate,
+            free_km_day: freeKmDay,
+            free_km_month: freeKmMonth,
+            extra_km_price: extraKmPrice,
+            ldw_payment: ldwPayment,
+            status: status
         }
-    });
+        $.ajax({
+            url: baseUrl + "car",
+            method: "put",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(carOb),
+            success: function (res) {
+                if (res.status === 200) {
+                    uploadCarImages();
+                    getAllCars();
+                    $('#inputStatus').val('');
+                }
+                alert(res.message);
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    }
 });
 
 // delete car
 $('#deleteCar').click(function () {
     let regNo = $('#inputRegNo').val();
 
-    $.ajax({
-        url: baseUrl + "car?reg_no=" + regNo,
-        method: "delete",
-        success: function (res) {
-            alert(res.message);
-            clearManageCarsForm()
-        },
-        error: function (error) {
-            alert(JSON.parse(error.responseText).message);
-        }
-    });
+    if (confirm('Are sure you want to delete the car in ' + regNo + '?')) {
+        $.ajax({
+            url: baseUrl + "car?reg_no=" + regNo,
+            method: "delete",
+            success: function (res) {
+                alert(res.message);
+                getAllCars();
+                $('#inputStatus').val('');
+            },
+            error: function (error) {
+                alert(JSON.parse(error.responseText).message);
+            }
+        });
+    }
 });
 
 function clearManageCarsForm() {
     $('#inputRegNo ,#inputBrand, #inputType, #inputTransType, #inputColor, #inputNoOfPassengers, #inputFuelType, ' +
         '#inputDailyRate, #inputMonthlyRate, #inputExtraKmPrice, #inputFreeKmDay, #inputFreeKmMonth, #inputLdwPayment, ' +
-        '#inputStatus, #inputFrontView, #inputBackView, #inputSideView, #inputInterior').val("");
+        '#inputFrontView, #inputBackView, #inputSideView, #inputInterior').val("");
+    $('#inputStatus option[value=0]').attr('selected', 'selected');
 }
 
 $(document).on('show.bs.modal', '#calculatePaymentModal', function (e) {
@@ -687,7 +789,7 @@ function calculateRates(noOfDays) {
                 } else if (noOfDays >= 30) {
                     $('#rental-fee').val(monthlyRate * (noOfDays / 30));
                 }
-                if ($('#selectDriverNic').val()!=='No'){
+                if ($('#selectDriverNic').val() !== 'No') {
                     $('#driver-fee').val(1000);
                 } else {
                     $('#driver-fee').val(0);
@@ -792,7 +894,6 @@ function getAllPayments() {
                 }
                 $('#dailyIncome').text(dailyIncome);
             }
-            // clearAll();
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);

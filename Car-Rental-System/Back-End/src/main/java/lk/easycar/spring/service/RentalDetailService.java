@@ -19,4 +19,6 @@ public interface RentalDetailService {
     ArrayList<RentalDetailDTO> getRentalRequests();
 
     ArrayList<RentalDetailDTO> getRentalRequestsByCustomerNic(String nic);
+
+    int countRentalRequestsByCustomerNic(String nic);
 }

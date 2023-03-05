@@ -43,6 +43,11 @@ public class RentalDetailController {
         return new ResponseUtil(200, "Successfully Loaded", rentalDetailService.getRentalRequestsByCustomerNic(customer_nic));
     }
 
+    @GetMapping(path = "/countRequests", params = {"customer_nic"})
+    public ResponseUtil countRentalRequestsByCustomerNic(@RequestParam String customer_nic) {
+        return new ResponseUtil(200, "Successful", rentalDetailService.countRentalRequestsByCustomerNic(customer_nic));
+    }
+
     @PutMapping(params = {"rental_id"})
     public ResponseUtil acceptRentalRequest(@RequestParam String rental_id) {
         RentalDetailDTO rental = rentalDetailService.getRentalDetailByRentalId(rental_id);

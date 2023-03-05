@@ -44,6 +44,13 @@ $("#loginUser").click(function () {
     });
 });
 
+$("#enterPassword").keydown(function (event) {
+    if (event.which === 13) {
+        event.preventDefault();
+        $('#loginUser').click();
+    }
+});
+
 // add customer
 $("#saveCustomer").click(function () {
     let formData = $('#customerForm').serialize();

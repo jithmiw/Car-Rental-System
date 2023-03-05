@@ -15,7 +15,7 @@
 <body>
 <header>
     <!--NAVIGATION BAR-->
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-white">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-white shadow">
         <div class="container-fluid">
             <a class="navbar-brand text-black fw-bolder">
                 <img alt="Logo" class="d-inline-block align-text-top" height="30" src="assets/img/easycar-logo.png"
@@ -116,8 +116,12 @@
                             <label class="form-label" for="updateLicenseFile">License Image</label>
                             <input class="form-control" id="updateLicenseFile" type="file">
                         </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="updateRegDate">Registered Date</label>
+                            <input class="form-control" id="updateRegDate" type="date">
+                        </div>
                         <div class="modal-footer col-12 me-auto pe-2">
-                            <button class="btn btn-dark me-0" type="button">UPDATE</button>
+                            <button id="updateCustomer" class="btn btn-dark me-0" type="button">UPDATE</button>
                         </div>
                     </form>
                 </div>

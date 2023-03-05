@@ -28,6 +28,17 @@ public class CarServiceImpl implements CarService {
         if (carRepo.existsById(dto.getReg_no())) {
             throw new RuntimeException("Car already registered");
         }
+        switch (dto.getStatus()) {
+            case "1":
+                dto.setStatus("Available");
+                break;
+            case "2":
+                dto.setStatus("Not Available");
+                break;
+            case "3":
+                dto.setStatus("Reserved");
+                break;
+        }
         carRepo.save(mapper.map(dto, Car.class));
     }
 
@@ -35,6 +46,17 @@ public class CarServiceImpl implements CarService {
     public void updateCar(CarDTO dto) {
         if (!carRepo.existsById(dto.getReg_no())) {
             throw new RuntimeException("No such a car, Please enter valid registration no");
+        }
+        switch (dto.getStatus()) {
+            case "1":
+                dto.setStatus("Available");
+                break;
+            case "2":
+                dto.setStatus("Not Available");
+                break;
+            case "3":
+                dto.setStatus("Reserved");
+                break;
         }
         carRepo.save(mapper.map(dto, Car.class));
     }

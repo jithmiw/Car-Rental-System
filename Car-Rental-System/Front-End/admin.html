@@ -14,7 +14,7 @@
 <body>
 <header>
     <!--NAVIGATION BAR-->
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-white">
+    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-white shadow">
         <div class="container-fluid">
             <a class="navbar-brand text-black fw-bolder">
                 <img alt="Logo" class="d-inline-block align-text-top" height="30" src="assets/img/easycar-logo.png"
@@ -41,11 +41,9 @@
                         </button>
                     </li>
                     <li class="nav-item">
-                        <!-- Manage Cars Button trigger modal -->
                         <button class="btn btn-link text-decoration-none nav-link active text-black fw-semibold"
-                                data-bs-target="#manageCarModal"
-                                data-bs-toggle="modal" id="manage-cars" type="button">
-                            Cars
+                                id="manage-cars"
+                                type="button">Cars
                         </button>
                     </li>
                     <li class="nav-item">
@@ -75,128 +73,11 @@
             </div>
         </div>
     </nav>
-    <!-- Manage Car Modal -->
-    <div aria-hidden="true" aria-labelledby="manageCarModalLabel" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
-         id="manageCarModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="d-flex flex-column">
-                        <h1 class="modal-title fs-5 fw-bold" id="manageCarModalLabel">Manage Cars</h1>
-                    </div>
-                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="row g-3" id="carForm">
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputRegNo">Registration Number</label>
-                            <input class="form-control" id="inputRegNo" name="reg_no" type="text">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputBrand">Brand</label>
-                            <input class="form-control" id="inputBrand" name="brand" type="text">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputType">Type</label>
-                            <select class="form-select" id="inputType" name="type">
-                                <option selected>Choose Type</option>
-                                <option>General</option>
-                                <option>Premium</option>
-                                <option>Luxury</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputTransType">Transmission Type</label>
-                            <select class="form-select" id="inputTransType" name="transmission_type">
-                                <option selected>Choose Transmission Type</option>
-                                <option>Manual</option>
-                                <option>Auto</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputColor">Color</label>
-                            <input class="form-control" id="inputColor" name="color" type="text">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputNoOfPassengers">No of Passengers</label>
-                            <input class="form-control" id="inputNoOfPassengers" name="no_of_passengers" type="number">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputFuelType">Fuel Type</label>
-                            <select class="form-select" id="inputFuelType" name="fuel_type">
-                                <option selected>Choose Fuel Type</option>
-                                <option>Petrol</option>
-                                <option>Diesel</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputDailyRate">Daily Rate(Rs.)</label>
-                            <input class="form-control" id="inputDailyRate" name="daily_rate" type="number">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputMonthlyRate">Monthly Rate(Rs.)</label>
-                            <input class="form-control" id="inputMonthlyRate" name="monthly_rate" type="number">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputExtraKmPrice">Price per Extra km(Rs.)</label>
-                            <input class="form-control" id="inputExtraKmPrice" name="extra_km_price" type="number">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputFreeKmDay">Free km for a Day</label>
-                            <input class="form-control" id="inputFreeKmDay" name="free_km_day" type="number">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputFreeKmMonth">Free km for a Month</label>
-                            <input class="form-control" id="inputFreeKmMonth" name="free_km_month" type="number">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputLdwPayment">Loss Damage Waiver Payment(Rs.)</label>
-                            <input class="form-control" id="inputLdwPayment" name="ldw_payment" type="number">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputStatus">Available or Not Available?</label>
-                            <select class="form-select" id="inputStatus" name="status">
-                                <option selected>Choose Available or Not Available?</option>
-                                <option>Available</option>
-                                <option>Not Available</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputFrontView">Front View Image</label>
-                            <input class="form-control" id="inputFrontView" name="image_one" type="file">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputBackView">Back View Image</label>
-                            <input class="form-control" id="inputBackView" name="image_two" type="file">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputSideView">Side View Image</label>
-                            <input class="form-control" id="inputSideView" name="image_three" type="file">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="inputInterior">Interior Image</label>
-                            <input class="form-control" id="inputInterior" name="image_four" type="file">
-                        </div>
-                        <div class="modal-footer col-12 me-auto pe-2">
-                            <button class="btn btn-dark" id="saveCar" type="button">ADD</button>
-                            <button class="btn text-white" id="updateCar" style="background-color: #7f7f7f;"
-                                    type="button">UPDATE
-                            </button>
-                            <button class="btn" id="deleteCar" style="background-color: #c2c2c2;" type="button">DELETE
-                            </button>
-                            <a class="btn me-0" href="car.html" style="background-color: #f3f3f3;" target="_blank"
-                               type="button">VIEW CARS</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </header>
 <main>
     <!--HOME SECTION-->
     <section id="dashboard">
-        <div class="container-fluid mt-5 mb-5 pt-4">
+        <div class="container mb-5 pt-4" style="margin-top: 70px;">
             <div class="d-flex flex-column flex-sm-row">
                 <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
                     <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between"
@@ -235,7 +116,9 @@
                     </div>
                 </div>
             </div>
-            <!--INCOME SUMMARY-->
+        </div>
+        <!--INCOME SUMMARY-->
+        <div class="container mb-5 pt-4">
             <div class="d-flex flex-column flex-sm-row">
                 <div class="bg-white ms-sm-2 me-sm-2 mb-3 shadow" style="width: 100%; border-radius: 30px">
                     <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between"
@@ -402,6 +285,143 @@
             </table>
         </div>
     </section>
+    <!--CARS SECTION-->
+    <section id="cars">
+        <div class="container-fluid mt-5 mb-5 pt-4">
+            <div class="navbar navbar-expand-lg d-flex flex-column flex-sm-row justify-content-between"
+                 style="background-color: #e3e3e3">
+                <div class="navbar-brand ms-2">Cars</div>
+                <form class="d-flex ms-2 me-2" role="search">
+                    <input aria-label="Search" class="form-control me-2" id="searchCar" placeholder="Search"
+                           type="search">
+                    <button class="btn btn-outline-secondary" id="btnSearchCar" type="button">Search</button>
+                </form>
+            </div>
+            <form class="row g-3 mt-0 me-0 ms-0 mb-5 bg-white" id="carForm">
+                <div class="col-md-3">
+                    <label class="form-label" for="inputRegNo">Registration Number</label>
+                    <input class="form-control" id="inputRegNo" name="reg_no" type="text">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputBrand">Brand</label>
+                    <input class="form-control" id="inputBrand" name="brand" type="text">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputType">Type</label>
+                    <select class="form-select" id="inputType" name="type">
+                        <option selected>Choose Type</option>
+                        <option>General</option>
+                        <option>Premium</option>
+                        <option>Luxury</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputTransType">Transmission Type</label>
+                    <select class="form-select" id="inputTransType" name="transmission_type">
+                        <option selected>Choose Transmission Type</option>
+                        <option>Manual</option>
+                        <option>Auto</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputColor">Color</label>
+                    <input class="form-control" id="inputColor" name="color" type="text">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputNoOfPassengers">No of Passengers</label>
+                    <input class="form-control" id="inputNoOfPassengers" name="no_of_passengers" type="number">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputFuelType">Fuel Type</label>
+                    <select class="form-select" id="inputFuelType" name="fuel_type">
+                        <option selected>Choose Fuel Type</option>
+                        <option>Petrol</option>
+                        <option>Diesel</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputDailyRate">Daily Rate(Rs.)</label>
+                    <input class="form-control" id="inputDailyRate" name="daily_rate" type="number">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputMonthlyRate">Monthly Rate(Rs.)</label>
+                    <input class="form-control" id="inputMonthlyRate" name="monthly_rate" type="number">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputExtraKmPrice">Price per Extra km(Rs.)</label>
+                    <input class="form-control" id="inputExtraKmPrice" name="extra_km_price" type="number">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputFreeKmDay">Free km for a Day</label>
+                    <input class="form-control" id="inputFreeKmDay" name="free_km_day" type="number">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputFreeKmMonth">Free km for a Month</label>
+                    <input class="form-control" id="inputFreeKmMonth" name="free_km_month" type="number">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputLdwPayment">Loss Damage Waiver Payment(Rs.)</label>
+                    <input class="form-control" id="inputLdwPayment" name="ldw_payment" type="number">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputStatus">Available or Not Available?</label>
+                    <select class="form-select" id="inputStatus" name="status">
+                        <option value="0">Choose Available or Not Available?</option>
+                        <option value="1">Available</option>
+                        <option value="2">Not Available</option>
+                        <option value="3">Reserved</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputFrontView">Front View Image</label>
+                    <input class="form-control" id="inputFrontView" name="image_one" type="file">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputBackView">Back View Image</label>
+                    <input class="form-control" id="inputBackView" name="image_two" type="file">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputSideView">Side View Image</label>
+                    <input class="form-control" id="inputSideView" name="image_three" type="file">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label" for="inputInterior">Interior Image</label>
+                    <input class="form-control" id="inputInterior" name="image_four" type="file">
+                </div>
+                <div class="d-flex flex-column flex-sm-row justify-content-center mt-4">
+                    <button class="btn btn-dark mt-1 mb-1 me-sm-2 ms-sm-2" id="saveCar" type="button">ADD</button>
+                    <button class="btn text-white mt-1 mb-1 me-sm-2 ms-sm-2" id="updateCar" style="background-color: #7f7f7f;"
+                            type="button">UPDATE
+                    </button>
+                    <button class="btn mt-1 mb-1 me-sm-2 ms-sm-2" id="deleteCar" style="background-color: #c2c2c2;" type="button">DELETE
+                    </button>
+                    <button class="btn mt-1 mb-1 me-sm-2 ms-sm-2" id="viewCars" style="background-color: #e7e7e7;" type="button">VIEW ALL CARS</button>
+                </div>
+            </form>
+            <table class="table table-bordered table-hover mt-4">
+                <thead class="bg-dark">
+                <tr>
+                    <th class="text-white" scope="col">Reg No</th>
+                    <th class="text-white" scope="col">Brand</th>
+                    <th class="text-white" scope="col">Type</th>
+                    <th class="text-white" scope="col">Trans. Type</th>
+                    <th class="text-white" scope="col">Color</th>
+                    <th class="text-white" scope="col">Passengers</th>
+                    <th class="text-white" scope="col">Fuel Type</th>
+                    <th class="text-white" scope="col">Daily Rate(Rs.)</th>
+                    <th class="text-white" scope="col">Monthly Rate(Rs.)</th>
+                    <th class="text-white" scope="col">Price per Extra km(Rs.)</th>
+                    <th class="text-white" scope="col">Free km Day</th>
+                    <th class="text-white" scope="col">Free km Month</th>
+                    <th class="text-white" scope="col">LDW Payment(Rs.)</th>
+                    <th class="text-white" scope="col">Status</th>
+                </tr>
+                </thead>
+                <tbody class="table-light" id="tblCars" style="overflow-y:auto;">
+                </tbody>
+            </table>
+        </div>
+    </section>
     <!--CUSTOMERS SECTION-->
     <section id="customers">
         <div class="container-fluid mt-5 mb-5 pt-4">
@@ -515,6 +535,10 @@
                         <input class="form-control me-2" id="inputPassword" name="password" type="password">
                         <i class="bi bi-eye-slash" id="toggleSignupPassword" style="cursor: pointer"></i>
                     </div>
+                </div>
+                <div class="col-md-3 d-none">
+                    <label class="form-label" for="regDate">Registered Date</label>
+                    <input class="form-control" id="regDate" type="date">
                 </div>
                 <div class="d-flex flex-column flex-sm-row justify-content-center mt-5 mb-3">
                     <button class="btn btn-dark mt-1 mb-1 me-sm-2 ms-sm-2" id="saveDriver" type="button">ADD</button>

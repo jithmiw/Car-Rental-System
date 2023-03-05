@@ -157,4 +157,12 @@ public class RentalDetailServiceImpl implements RentalDetailService {
         }
         return null;
     }
+
+    @Override
+    public int countRentalRequestsByCustomerNic(String nic) {
+        int rental = rentalDetailRepo.countRentalDetailByCustomer_nic(nic, "Rental");
+        int accepted = rentalDetailRepo.countRentalDetailByCustomer_nic(nic, "Accepted");
+
+        return rental + accepted;
+    }
 }

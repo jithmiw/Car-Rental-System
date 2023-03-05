@@ -39,6 +39,60 @@ $('#my-profile').click(function () {
             $("#updateLicenseNo").val(res.data.license_no);
             $("#updateUsername").val(res.data.username);
             $("#updatePassword").val(res.data.password);
+            $("#updateRegDate").val(res.data.reg_date);
+        },
+        error: function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+});
+
+// update customer
+$('#updateCustomer').click(function () {
+    let nicNo = $('#updateNicNo').val();
+
+    $.ajax({
+        url: baseUrl + "rentalDetail/countRequests?customer_nic=" + nic,
+        success: function (res) {
+            if (res.data === 0) {
+                if (confirm('Are sure you want to update your profile?')) {
+                    let name = $('#updateName').val();
+                    let address = $('#inputAddress').val();
+                    let email = $('#updateEmail').val();
+                    let contactNo = $('#updateContactNo').val();
+                    let licenseNo = $('#updateLicenseNo').val();
+                    let username = $('#updateUsername').val();
+                    let password = $('#updatePassword').val();
+                    let regDate = $('#updateRegDate').val();
+
+                    var customerDTO = {
+                        nic_no: nicNo,
+                        driver_name: name,
+                        license_no: licenseNo,
+                        address: address,
+                        contact_no: contactNo,
+                        email: email,
+                        username: username,
+                        password: password,
+                        reg_date: regDate,
+                    }
+                    $.ajax({
+                        url: baseUrl + "customer",
+                        method: "put",
+                        contentType: "application/json",
+                        dataType: "json",
+                        data: JSON.stringify(customerDTO),
+                        success: function (res) {
+                            alert(res.message);
+                        },
+                        error: function (error) {
+                            alert(JSON.parse(error.responseText).message);
+                        }
+                    });
+                }
+            } else {
+                alert('Sorry, you are not allowed to update your profile while there is an ongoing rental');
+            }
         },
         error: function (error) {
             alert(JSON.parse(error.responseText).message);
@@ -50,7 +104,7 @@ $('#my-profile').click(function () {
 function getAllReservations() {
     $('#tblReservations').empty();
     $.ajax({
-        url: baseUrl + "rentalDetail?customer_nic=" + nic,
+        url: baseUrl + "rentalDetail/?customer_nic=" + nic,
         success: function (res) {
             if (res.data != null) {
                 for (let r of res.data) {
