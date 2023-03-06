@@ -325,38 +325,42 @@ function bindClickEventsToButtons() {
                 rentalId = dataArray[i].value;
             }
         }
-        $.ajax({
-            url: baseUrl + "rentalDetail",
-            method: "post",
-            contentType: "application/json",
-            data: JSON.stringify(rentalDTO),
-            success: function (res) {
-                if (res.status === 200) {
-                    let data = new FormData();
-                    data.append("bankSlipImage", bankSlip, bankSlip.name);
-                    data.append("rentalId", rentalId);
+        if (bankSlip === undefined) {
+            alert('Please input bank slip image of loss damage waiver payment');
+        } else {
+            $.ajax({
+                url: baseUrl + "rentalDetail",
+                method: "post",
+                contentType: "application/json",
+                data: JSON.stringify(rentalDTO),
+                success: function (res) {
+                    if (res.status === 200) {
+                        let data = new FormData();
+                        data.append("bankSlipImage", bankSlip, bankSlip.name);
+                        data.append("rentalId", rentalId);
 
-                    $.ajax({
-                        url: baseUrl + "files/upload/bankSlipImages",
-                        method: "post",
-                        async: true,
-                        contentType: false,
-                        processData: false,
-                        data: data,
-                        success: function () {
-                            clearReservationForm();
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        }
-                    });
+                        $.ajax({
+                            url: baseUrl + "files/upload/bankSlipImages",
+                            method: "post",
+                            async: true,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function () {
+                                clearReservationForm();
+                            },
+                            error: function (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                    alert(res.message);
+                },
+                error: function (error) {
+                    alert(JSON.parse(error.responseText).message);
                 }
-                alert(res.message);
-            },
-            error: function (error) {
-                alert(JSON.parse(error.responseText).message);
-            }
-        });
+            });
+        }
     });
 }
 
@@ -377,8 +381,9 @@ function disableBackButton() {
     function disableBack() {
         window.history.forward()
     }
+
     window.onload = disableBack();
-    window.onpageshow = function(e) {
+    window.onpageshow = function (e) {
         if (e.persisted)
             disableBack();
     }

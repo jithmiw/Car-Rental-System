@@ -1,7 +1,6 @@
 let baseUrl = "http://localhost:8080/easycar-rental/";
 
 // validations
-$('#enterUsername').focus();
 
 // regular expressions
 const usernameRegEx = /^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
