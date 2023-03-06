@@ -34,11 +34,20 @@
                     </li>
                     <li class="nav-item">
                         <a aria-current="page" class="nav-link active text-black fw-semibold" href="car.html"
-                           target="_blank">Cars</a>
+                           target="_blank">Vehicle Fleet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a aria-current="page" class="nav-link active text-black fw-semibold"
+                           href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a aria-current="page" class="nav-link active text-black fw-semibold"
+                           href="#contact-us">Contact</a>
                     </li>
                     <li class="nav-item">
                         <!-- Login Button trigger modal -->
-                        <a class="nav-link active text-black fw-semibold" data-bs-target="#staticBackdrop1" data-bs-toggle="modal"
+                        <a class="nav-link active text-black fw-semibold" data-bs-target="#staticBackdrop1"
+                           data-bs-toggle="modal"
                            style="cursor: pointer">
                             Login
                         </a>
@@ -53,7 +62,8 @@
         </div>
     </nav>
     <!-- Login Modal -->
-    <div aria-hidden="true" aria-labelledby="staticBackdropLabel1" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+    <div aria-hidden="true" aria-labelledby="staticBackdropLabel1" class="modal fade" data-bs-backdrop="static"
+         data-bs-keyboard="false"
          id="staticBackdrop1" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -62,7 +72,7 @@
                         <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel1">Login</h1>
                         <span style="color: #aaaaaa">Don't have an account?
                             <button class="btn btn-link text-decoration-none pt-0" data-bs-target="#signup-modal"
-                                data-bs-toggle="modal">Sign Up</button>
+                                    data-bs-toggle="modal">Sign Up</button>
                         </span>
                     </div>
                     <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
@@ -90,7 +100,8 @@
         </div>
     </div>
     <!-- Sign Up Modal -->
-    <div aria-hidden="true" aria-labelledby="staticBackdropLabel" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false"
+    <div aria-hidden="true" aria-labelledby="staticBackdropLabel" class="modal fade" data-bs-backdrop="static"
+         data-bs-keyboard="false"
          id="signup-modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -143,11 +154,11 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="nicFile">NIC Image</label>
-                            <input class="form-control" id="nicFile" type="file" required>
+                            <input class="form-control" id="nicFile" required type="file">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="licenseFile">License Image</label>
-                            <input class="form-control" id="licenseFile" type="file" required>
+                            <input class="form-control" id="licenseFile" required type="file">
                         </div>
                         <div class="modal-footer col-12 me-auto pe-2">
                             <button class="btn btn-dark me-0" id="saveCustomer" type="button">SIGN UP</button>
@@ -160,22 +171,103 @@
 </header>
 <main>
     <!--HOME SECTION-->
-    <section id="home" style="margin-top: 60px">
+    <section id="home" style="margin-top: 60px;">
         <div class="container-fluid">
             <div class="d-flex flex-column flex-md-row mt-5">
-                <div class="d-flex flex-column justify-content-center ps-md-5">
-                    <p class="fs-1 fw-bold">DRIVE THE CAR <br>YOU WANT</p>
-                    <p class="mb-0">Don't deny yourself the pleasure of driving best cars.</p>
-                    <p class="mb-0">Rent a car just from your fingertip.</p>
-                    <p class="mb-0">We provide awesome cars at great prices. Rent a car, anytime, anywhere.</p>
+                <div class="d-flex flex-column justify-content-center ps-md-5 w-50">
+                    <p class="fs-1 fw-bold">WELCOME TO EASY CAR</p>
+                    <p>With 5 years of experience in the industry, we strive to offer
+                        the highest levels of customer service and a highly personalised service to all our customers
+                        who are on
+                        the lookout for Sri Lanka car rental opportunities. Easy car is an ISO 9001:2008 Certified
+                        Vehicle Rental
+                        Company in Sri Lanka.</p>
                 </div>
                 <div>
-                    <img alt="car img" class="img-fluid" src="assets/img/background.png">
+                    <img alt="car-img" class="img-fluid" src="assets/img/background.png">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!------ SERVICES SECTION ------>
+    <section id="services">
+        <div class="container">
+            <div>
+                <h3 class="text-center">SERVICES</h3>
+                <h5 class="text-center fw-normal fs-6">Easy Car offers a wide range of transportation services on
+                    chauffeur driven or self drive basis.</h5>
+            </div>
+            <div class="d-flex flex-row justify-content-center mt-5 mb-5">
+                <!------ SERVICE ONE ------>
+                <div class="card me-4">
+                    <img alt="img-1" class="card-img-top" src="assets/img/self-drive-rental.jpg">
+                    <div class="card-body">
+                        <h5 class="card-title">SELF DRIVE RENTAL</h5>
+                        <p class="card-text">A wide range of self drive cars in Sri Lanka from economical to luxury on
+                            daily and monthly terms</p>
+                    </div>
+                </div>
+                <!------ SERVICE TWO ------>
+                <div class="card">
+                    <img alt="img-2" class="card-img-top" src="assets/img/chauffeur-driven.jpg">
+                    <div class="card-body">
+                        <h5 class="card-title">TOURS / CHAUFFEUR DRIVEN</h5>
+                        <p class="card-text">A unique range of chauffeur driven cars that exceedingly surpass the
+                            norm.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
+<!-- FOOTER -->
+<footer class="text-center text-lg-start text-dark" style="background-color: #ECEFF1">
+    <!-- SOCIAL MEDIA -->
+    <section class="bg-dark d-flex justify-content-between p-4 text-white">
+        <div class="me-5">
+            <span>Get connected with us on social networks:</span>
+        </div>
+        <div class="d-flex flex-row align-items-center">
+            <a class="text-white fs-5 me-4" href="">
+                <i class="bi bi-facebook"></i>
+            </a>
+            <a class="text-white fs-5 me-4" href="">
+                <i class="bi bi-instagram"></i>
+            </a>
+            <a class="text-white fs-5 me-4" href="">
+                <i class="bi bi-twitter"></i>
+            </a>
+        </div>
+    </section>
+    <!-- CONTACT  -->
+    <section id="contact-us">
+        <div class="container text-center text-md-start mt-5 mb-5">
+            <div class="row mt-3">
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold">Features</h6>
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                        style="width: 60px; background-color: #828282; height: 2px"/>
+                    <p class="fw-semibold"><i class="bi bi-clock"></i> 24-Hour Car Delivery</p>
+                    <p class="fw-semibold"><i class="bi bi-car-front"></i> From General to Luxury Cars</p>
+                    <p class="fw-semibold"><i class="bi bi-phone"></i> Convenient Online Booking</p>
+                </div>
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- LINKS -->
+                    <h6 class="text-uppercase fw-bold">Contact</h6>
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                        style="width: 60px; background-color: #828282; height: 2px"/>
+                    <p><i class="bi bi-geo-alt-fill"></i> No. 200, Galle Road, Panadura, Sri Lanka</p>
+                    <p><i class="bi bi-telephone-fill"></i> +94 11 520 6803</p>
+                    <p><i class="bi bi-envelope-fill"></i> easycar@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- COPYRIGHT -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); font-size: 13px;">
+        Copyright &copy; 2023. All rights reserved | Designed & Developed by Jithmi Wannakukorala
+    </div>
+</footer>
 <script src="assets/js/jquery-3.6.1.min.js"></script>
 <script src="./assets/js/ui-js/index.js"></script>
 <script src="./assets/js/ui-js/util/validations.js"></script>
