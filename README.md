@@ -1,5 +1,7 @@
 # Car-Rental-System
 
+![img.png](Resources/easycar-screenshot.png)
+
 ## Business Process
 
 1. A customer comes to the website and register.
