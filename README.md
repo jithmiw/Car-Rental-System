@@ -8,8 +8,7 @@
 3. Then, the customer can select a car, Pick up time and date, and other required details.
 4. The customer has to make the Loss Damage Waiver payment to the given bank account
    information of the car rental and upload the bank slip or the bank confirmation to the
-   dedicated field in the renting view. (Loss Damage Waiver payment for is 10,000.00 LKR for
-   general cars, 15,000.00 LKR for Premium cars, and 20,000.00 LKR for Luxury cars)
+   dedicated field in the renting view.
 5. If a driver is requested by the customer, a driver is randomly assigned to accommodate the
    customer. (Drivers can view their weekly schedule from the website.)
 6. After the customer completed the above steps, the admin can confirm or deny the rental
